@@ -1,0 +1,192 @@
+{
+  
+  "info": {
+    
+    "name": "DOBU - Sprint 4 - Automação QA",
+    
+    "description": "Quatro casos automatizados de sistema para a entrega de Compliance, Quality Assurance & Tests.",
+    
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    
+  },
+  
+  "variable": [
+    
+    { "key": "baseUrl", "value": "http://localhost:5070" },
+    
+    { "key": "email", "value": "qa-sprint4@dobu.com" },
+    
+    { "key": "senha", "value": "Senha123" },
+    
+    { "key": "token", "value": "" }
+    
+  ],
+  
+  "item": [
+    
+    {
+      
+      "name": "01 - Registrar usuário válido",
+      
+      "request": {
+        
+        "method": "POST",
+        
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        
+        "body": { "mode": "raw", "raw": "{\n  \"nome\": \"QA Sprint 4\",\n  \"email\": \"{{email}}\",\n  \"senha\": \"{{senha}}\",\n  \"tipoUsuario\": \"Responsavel\"\n}" },
+        
+        "url": "{{baseUrl}}/api/auth/register"
+        
+      },
+      
+      "event": [{ "listen": "test", "script": { "exec": [
+        
+        "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+        
+        "pm.test('retorna token', () => pm.expect(pm.response.json().token).to.be.a('string').and.not.empty);",
+        
+        "pm.collectionVariables.set('token', pm.response.json().token);"
+        
+      ] } }]
+      
+    },
+    
+    {
+      
+      "name": "02 - Login com senha inválida",
+      
+      "request": {
+        
+        "method": "POST",
+        
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        
+        "body": { "mode": "raw", "raw": "{\n  \"email\": \"{{email}}\",\n  \"senha\": \"SenhaErrada\"\n}" },
+        
+        "url": "{{baseUrl}}/api/auth/login"
+        
+      },
+      
+      "event": [{ "listen": "test", "script": { "exec": [
+        
+        "pm.test('HTTP 401', () => pm.response.to.have.status(401));"
+        
+      ] } }]
+      
+    },
+    
+    {
+      
+      "name": "03 - Registro inválido",
+      
+      "request": {
+        
+        "method": "POST",
+        
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        
+        "body": { "mode": "raw", "raw": "{\n  \"nome\": \"A\",\n  \"email\": \"invalido\",\n  \"senha\": \"123\",\n  \"tipoUsuario\": \"Responsavel\"\n}" },
+        
+        "url": "{{baseUrl}}/api/auth/register"
+        
+      },
+      
+      "event": [{ "listen": "test", "script": { "exec": [
+        
+        "pm.test('HTTP 400', () => pm.response.to.have.status(400));"
+        
+      ] } }]
+      
+    },
+    
+    {
+      
+      "name": "04 - Endpoint protegido após autenticação",
+      
+      "request": {
+        
+        "method": "GET",
+        
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        
+        "url": "{{baseUrl}}/api/pets"
+        
+      },
+      
+      "event": [{ "listen": "test", "script": { "exec": [
+        
+        "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+        
+        "pm.test('resposta é lista JSON', () => pm.expect(pm.response.json()).to.be.an('array'));"
+        
+      ] } }]
+      
+    }
+    
+  ]
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
