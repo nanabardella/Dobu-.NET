@@ -4,7 +4,7 @@
 
 [Plano manual, casos no Azure Boards, automação e roteiro de vídeo](docs/compliance-sprint4/README.md).
 
-Validação em 03/11/2026: 31 testes aprovados (7 unitários e 24 de integração) e 33 chamadas HTTP verificadas. [Vídeo legendado em MP4](https://raw.githubusercontent.com/nanabardella/Dobu-.NET/develop/docs/compliance-sprint4/evidencias/sprint4-evidencias-legendado.mp4). Plano manual cadastrado no Azure Boards; resultados de execução assistida/automatizada. Integração WhatsApp permanece pendente, conforme o plano. [Links para entrega](docs/compliance-sprint4/ENTREGA.txt).
+Validação em 03/11/2026: 31 testes aprovados (7 unitários e 24 de integração) e 33 chamadas HTTP verificadas. [Vídeo legendado em MP4](https://raw.githubusercontent.com/nanabardella/Dobu-.NET/develop/docs/compliance-sprint4/evidencias/sprint4-execucao-ao-vivo.mp4). Plano manual cadastrado no Azure Boards; resultados de execução assistida/automatizada. Integração WhatsApp permanece pendente, conforme o plano. [Links para entrega](docs/compliance-sprint4/ENTREGA.txt).
 
 # Sprint 3 Challenge | DOBU
 

@@ -1,0 +1,150 @@
+﻿[
+    {
+        "text":  "Preparacao: vamos conferir a versao e executar os testes reais desta branch.",
+        "seconds":  0.37033689999999997
+    },
+    {
+        "text":  "Automacao de integracao: os testes executam agora com banco temporario.",
+        "seconds":  11.103067
+    },
+    {
+        "text":  "Teste de sistema por HTTP: vamos acompanhar preparacao, entradas e respostas reais.",
+        "seconds":  29.843401099999998
+    },
+    {
+        "text":  "Preparacao real: contas de teste, especie, raca e pet Thor. Os IDs retornados alimentam os casos.",
+        "seconds":  32.6902599
+    },
+    {
+        "text":  "Preparacao real: contas de teste, especie, raca e pet Thor. Os IDs retornados alimentam os casos.",
+        "seconds":  37.1048634
+    },
+    {
+        "text":  "Preparacao real: contas de teste, especie, raca e pet Thor. Os IDs retornados alimentam os casos.",
+        "seconds":  41.0048138
+    },
+    {
+        "text":  "Preparacao real: contas de teste, especie, raca e pet Thor. Os IDs retornados alimentam os casos.",
+        "seconds":  44.5364839
+    },
+    {
+        "text":  "Preparacao real: contas de teste, especie, raca e pet Thor. Os IDs retornados alimentam os casos.",
+        "seconds":  48.3832084
+    },
+    {
+        "text":  "Caso 66: registrar V10 e consultar novamente para verificar a persistencia na carteira de Thor.",
+        "seconds":  51.9622397
+    },
+    {
+        "text":  "Caso 66: registrar V10 e consultar novamente para verificar a persistencia na carteira de Thor.",
+        "seconds":  55.5232506
+    },
+    {
+        "text":  "Caso 66: registrar V10 e consultar novamente para verificar a persistencia na carteira de Thor.",
+        "seconds":  59.3764052
+    },
+    {
+        "text":  "Caso 67: validar inclusao no limite da proxima dose e exclusao apos a data informada.",
+        "seconds":  62.9636138
+    },
+    {
+        "text":  "Caso 67: validar inclusao no limite da proxima dose e exclusao apos a data informada.",
+        "seconds":  66.5318372
+    },
+    {
+        "text":  "Caso 67: validar inclusao no limite da proxima dose e exclusao apos a data informada.",
+        "seconds":  70.1261971
+    },
+    {
+        "text":  "Caso 67: validar inclusao no limite da proxima dose e exclusao apos a data informada.",
+        "seconds":  73.721810699999992
+    },
+    {
+        "text":  "Caso 68: reagendar a consulta e confirmar que data e vinculos foram persistidos.",
+        "seconds":  77.3439387
+    },
+    {
+        "text":  "Caso 68: reagendar a consulta e confirmar que data e vinculos foram persistidos.",
+        "seconds":  80.9446253
+    },
+    {
+        "text":  "Caso 68: reagendar a consulta e confirmar que data e vinculos foram persistidos.",
+        "seconds":  84.5483405
+    },
+    {
+        "text":  "Caso 69: cadastrar e consultar o lembrete PENDENTE. Este cadastro nao envia WhatsApp.",
+        "seconds":  88.4075646
+    },
+    {
+        "text":  "Caso 69: cadastrar e consultar o lembrete PENDENTE. Este cadastro nao envia WhatsApp.",
+        "seconds":  92.0032452
+    },
+    {
+        "text":  "Caso 69: cadastrar e consultar o lembrete PENDENTE. Este cadastro nao envia WhatsApp.",
+        "seconds":  95.656665199999992
+    },
+    {
+        "text":  "Caso 70: recusar vacina para um pet inexistente com HTTP 400.",
+        "seconds":  99.2476775
+    },
+    {
+        "text":  "Caso 70: recusar vacina para um pet inexistente com HTTP 400.",
+        "seconds":  102.81278739999999
+    },
+    {
+        "text":  "Caso 71: recusar descricao invalida e verificar que ela nao foi persistida.",
+        "seconds":  106.42114269999999
+    },
+    {
+        "text":  "Caso 71: recusar descricao invalida e verificar que ela nao foi persistida.",
+        "seconds":  110.076348
+    },
+    {
+        "text":  "Preparacao real: contas de teste, especie, raca e pet Thor. Os IDs retornados alimentam os casos.",
+        "seconds":  113.62560979999999
+    },
+    {
+        "text":  "Caso 72: impedir acesso de outro tutor e bloquear acesso sem autenticacao.",
+        "seconds":  117.26646989999999
+    },
+    {
+        "text":  "Caso 72: impedir acesso de outro tutor e bloquear acesso sem autenticacao.",
+        "seconds":  120.859579
+    },
+    {
+        "text":  "Caso 72: impedir acesso de outro tutor e bloquear acesso sem autenticacao.",
+        "seconds":  124.5021936
+    },
+    {
+        "text":  "Caso 73: gerar alertas internos com relogio controlado, sem duplicar nem expor outro tutor.",
+        "seconds":  128.1119759
+    },
+    {
+        "text":  "Caso 73: gerar alertas internos com relogio controlado, sem duplicar nem expor outro tutor.",
+        "seconds":  131.7157002
+    },
+    {
+        "text":  "Caso 73: gerar alertas internos com relogio controlado, sem duplicar nem expor outro tutor.",
+        "seconds":  135.3390551
+    },
+    {
+        "text":  "Caso 73: gerar alertas internos com relogio controlado, sem duplicar nem expor outro tutor.",
+        "seconds":  138.9642184
+    },
+    {
+        "text":  "Caso 74: recusar horario ocupado com HTTP 409 e preservar a consulta anterior.",
+        "seconds":  142.5959457
+    },
+    {
+        "text":  "Caso 74: recusar horario ocupado com HTTP 409 e preservar a consulta anterior.",
+        "seconds":  146.1983649
+    },
+    {
+        "text":  "Caso 74: recusar horario ocupado com HTTP 409 e preservar a consulta anterior.",
+        "seconds":  149.787367
+    },
+    {
+        "text":  "Execucao encerrada: confira o resumo real abaixo e os arquivos de evidencia.",
+        "seconds":  153.5916085
+    }
+]

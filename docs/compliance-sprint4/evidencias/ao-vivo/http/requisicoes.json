@@ -1,0 +1,864 @@
+[
+  {
+    "case": "PREP",
+    "label": "Cadastrar tutor QA",
+    "timestamp": "2026-11-03T20:17:02.726333+00:00",
+    "method": "POST",
+    "url": "/api/auth/register",
+    "request": {
+      "nome": "Tutor QA",
+      "email": "tutor-20261103T201658Z@example.test",
+      "senha": "[REDACTED]",
+      "tipoUsuario": "Responsavel"
+    },
+    "status": 200,
+    "expectedStatus": 200,
+    "response": {
+      "token": "[REDACTED]",
+      "usuarioId": "00a15965-d6cc-4e93-ad45-96549b872d21",
+      "nome": "Tutor QA",
+      "email": "tutor-20261103t201658z@example.test",
+      "tipoUsuario": "RESPONSAVEL"
+    },
+    "passed": true,
+    "durationMs": 710
+  },
+  {
+    "case": "PREP",
+    "label": "Cadastrar veterinario QA",
+    "timestamp": "2026-11-03T20:17:06.580939+00:00",
+    "method": "POST",
+    "url": "/api/auth/register",
+    "request": {
+      "nome": "Veterinario QA",
+      "email": "vet-20261103T201658Z@example.test",
+      "senha": "[REDACTED]",
+      "tipoUsuario": "Veterinario"
+    },
+    "status": 200,
+    "expectedStatus": 200,
+    "response": {
+      "token": "[REDACTED]",
+      "usuarioId": "48763920-1c22-42d7-bf9f-9878b4920c44",
+      "nome": "Veterinario QA",
+      "email": "vet-20261103t201658z@example.test",
+      "tipoUsuario": "VETERINARIO"
+    },
+    "passed": true,
+    "durationMs": 252
+  },
+  {
+    "case": "PREP",
+    "label": "Criar especie",
+    "timestamp": "2026-11-03T20:17:10.267606+00:00",
+    "method": "POST",
+    "url": "/api/especies",
+    "request": {
+      "nome": "Cachorro QA",
+      "descricao": "Animal domestico"
+    },
+    "status": 201,
+    "expectedStatus": 201,
+    "response": {
+      "nome": "Cachorro QA",
+      "descricao": "Animal domestico",
+      "racas": [],
+      "id": "e68b7c0d-a007-42c3-96de-313de9c30fcc",
+      "createdAt": "2026-11-03T17:17:10.1959559-03:00",
+      "active": true
+    },
+    "passed": true,
+    "durationMs": 84
+  },
+  {
+    "case": "PREP",
+    "label": "Criar raca",
+    "timestamp": "2026-11-03T20:17:13.941846+00:00",
+    "method": "POST",
+    "url": "/api/racas",
+    "request": {
+      "nome": "Vira-lata QA",
+      "porte": "Medio",
+      "expectativaVida": 12,
+      "descricao": "Raca de teste",
+      "cuidados": "Banho e passeio",
+      "especieId": "e68b7c0d-a007-42c3-96de-313de9c30fcc"
+    },
+    "status": 201,
+    "expectedStatus": 201,
+    "response": {
+      "nome": "Vira-lata QA",
+      "porte": "Medio",
+      "expectativaVida": 12,
+      "descricao": "Raca de teste",
+      "cuidados": "Banho e passeio",
+      "especieId": "e68b7c0d-a007-42c3-96de-313de9c30fcc",
+      "especie": null,
+      "pets": [],
+      "id": "88cd5559-7f41-40bc-8b04-ae13596355c2",
+      "createdAt": "2026-11-03T17:17:13.911818-03:00",
+      "active": true
+    },
+    "passed": true,
+    "durationMs": 72
+  },
+  {
+    "case": "PREP",
+    "label": "Criar Thor",
+    "timestamp": "2026-11-03T20:17:17.624397+00:00",
+    "method": "POST",
+    "url": "/api/pets",
+    "request": {
+      "nome": "Thor",
+      "idade": 4,
+      "racaId": "88cd5559-7f41-40bc-8b04-ae13596355c2",
+      "responsavelId": "00a15965-d6cc-4e93-ad45-96549b872d21"
+    },
+    "status": 201,
+    "expectedStatus": 201,
+    "response": {
+      "nome": "Thor",
+      "idade": 4,
+      "racaId": "88cd5559-7f41-40bc-8b04-ae13596355c2",
+      "raca": null,
+      "responsavelId": "00a15965-d6cc-4e93-ad45-96549b872d21",
+      "responsavel": {
+        "nome": "Tutor QA",
+        "email": "tutor-20261103t201658z@example.test",
+        "tipoUsuario": "RESPONSAVEL",
+        "petsResponsavel": [
+          null
+        ],
+        "consultasVeterinario": [],
+        "agendamentosVeterinario": [],
+        "logsErro": [],
+        "id": "00a15965-d6cc-4e93-ad45-96549b872d21",
+        "createdAt": "2026-11-03T17:17:02.4526656",
+        "active": true
+      },
+      "consultas": [],
+      "agendamentos": [],
+      "vacinas": [],
+      "lembretes": [],
+      "dobuCams": [],
+      "informacoesCuidado": [],
+      "id": "1379570f-acff-4979-98be-f8b96ea21ada",
+      "createdAt": "2026-11-03T17:17:17.5758939-03:00",
+      "active": true
+    },
+    "passed": true,
+    "durationMs": 79
+  },
+  {
+    "case": 66,
+    "label": "Registrar V10",
+    "timestamp": "2026-11-03T20:17:21.298320+00:00",
+    "method": "POST",
+    "url": "/api/vacinas",
+    "request": {
+      "nome": "V10",
+      "dataAplicacao": "2026-10-19T10:00:00Z",
+      "dataProximaDose": "2026-10-25T10:00:00Z",
+      "petId": "1379570f-acff-4979-98be-f8b96ea21ada"
+    },
+    "status": 201,
+    "expectedStatus": 201,
+    "response": {
+      "nome": "V10",
+      "dataAplicacao": "2026-10-19T10:00:00Z",
+      "dataProximaDose": "2026-10-25T10:00:00Z",
+      "petId": "1379570f-acff-4979-98be-f8b96ea21ada",
+      "pet": null,
+      "id": "3229033e-83df-4c95-b417-af4f7a320f58",
+      "createdAt": "2026-11-03T17:17:21.2690874-03:00",
+      "active": true
+    },
+    "passed": true,
+    "durationMs": 71
+  },
+  {
+    "case": 66,
+    "label": "Confirmar persistencia",
+    "timestamp": "2026-11-03T20:17:24.946512+00:00",
+    "method": "GET",
+    "url": "/api/vacinas/3229033e-83df-4c95-b417-af4f7a320f58",
+    "request": null,
+    "status": 200,
+    "expectedStatus": 200,
+    "response": {
+      "nome": "V10",
+      "dataAplicacao": "2026-10-19T10:00:00",
+      "dataProximaDose": "2026-10-25T10:00:00",
+      "petId": "1379570f-acff-4979-98be-f8b96ea21ada",
+      "pet": null,
+      "id": "3229033e-83df-4c95-b417-af4f7a320f58",
+      "createdAt": "2026-11-03T17:17:21.2690874",
+      "active": true
+    },
+    "passed": true,
+    "durationMs": 46
+  },
+  {
+    "case": 66,
+    "label": "Consultar carteira de Thor",
+    "timestamp": "2026-11-03T20:17:28.572225+00:00",
+    "method": "GET",
+    "url": "/api/vacinas/pet/1379570f-acff-4979-98be-f8b96ea21ada",
+    "request": null,
+    "status": 200,
+    "expectedStatus": 200,
+    "response": [
+      {
+        "nome": "V10",
+        "dataAplicacao": "2026-10-19T10:00:00",
+        "dataProximaDose": "2026-10-25T10:00:00",
+        "petId": "1379570f-acff-4979-98be-f8b96ea21ada",
+        "pet": null,
+        "id": "3229033e-83df-4c95-b417-af4f7a320f58",
+        "createdAt": "2026-11-03T17:17:21.2690874",
+        "active": true
+      }
+    ],
+    "passed": true,
+    "durationMs": 23
+  },
+  {
+    "case": 67,
+    "label": "Preparar vacina fora do limite",
+    "timestamp": "2026-11-03T20:17:32.183382+00:00",
+    "method": "POST",
+    "url": "/api/vacinas",
+    "request": {
+      "nome": "Controle QA",
+      "dataAplicacao": "2026-10-19T10:00:00Z",
+      "dataProximaDose": "2026-11-15T10:00:00Z",
+      "petId": "1379570f-acff-4979-98be-f8b96ea21ada"
+    },
+    "status": 201,
+    "expectedStatus": 201,
+    "response": {
+      "nome": "Controle QA",
+      "dataAplicacao": "2026-10-19T10:00:00Z",
+      "dataProximaDose": "2026-11-15T10:00:00Z",
+      "petId": "1379570f-acff-4979-98be-f8b96ea21ada",
+      "pet": null,
+      "id": "483f8e24-8010-4be5-b74a-fe6ef7f7f542",
+      "createdAt": "2026-11-03T17:17:32.179631-03:00",
+      "active": true
+    },
+    "passed": true,
+    "durationMs": 9
+  },
+  {
+    "case": 67,
+    "label": "Aplicar limite controlado",
+    "timestamp": "2026-11-03T20:17:35.807650+00:00",
+    "method": "GET",
+    "url": "/api/vacinas/proxima-dose?ate=2026-10-30T23:59:59Z",
+    "request": null,
+    "status": 200,
+    "expectedStatus": 200,
+    "response": [
+      {
+        "nome": "V10",
+        "dataAplicacao": "2026-10-19T10:00:00",
+        "dataProximaDose": "2026-10-25T10:00:00",
+        "petId": "1379570f-acff-4979-98be-f8b96ea21ada",
+        "pet": null,
+        "id": "3229033e-83df-4c95-b417-af4f7a320f58",
+        "createdAt": "2026-11-03T17:17:21.2690874",
+        "active": true
+      }
+    ],
+    "passed": true,
+    "durationMs": 22
+  },
+  {
+    "case": 67,
+    "label": "Incluir exatamente no limite",
+    "timestamp": "2026-11-03T20:17:39.415603+00:00",
+    "method": "GET",
+    "url": "/api/vacinas/proxima-dose?ate=2026-10-25T10:00:00Z",
+    "request": null,
+    "status": 200,
+    "expectedStatus": 200,
+    "response": [
+      {
+        "nome": "V10",
+        "dataAplicacao": "2026-10-19T10:00:00",
+        "dataProximaDose": "2026-10-25T10:00:00",
+        "petId": "1379570f-acff-4979-98be-f8b96ea21ada",
+        "pet": null,
+        "id": "3229033e-83df-4c95-b417-af4f7a320f58",
+        "createdAt": "2026-11-03T17:17:21.2690874",
+        "active": true
+      }
+    ],
+    "passed": true,
+    "durationMs": 5
+  },
+  {
+    "case": 67,
+    "label": "Excluir um segundo antes",
+    "timestamp": "2026-11-03T20:17:43.025052+00:00",
+    "method": "GET",
+    "url": "/api/vacinas/proxima-dose?ate=2026-10-25T09:59:59Z",
+    "request": null,
+    "status": 200,
+    "expectedStatus": 200,
+    "response": [],
+    "passed": true,
+    "durationMs": 7
+  },
+  {
+    "case": 68,
+    "label": "Criar C-100",
+    "timestamp": "2026-11-03T20:17:46.689877+00:00",
+    "method": "POST",
+    "url": "/api/consultas",
+    "request": {
+      "dataConsulta": "2026-10-22T14:00:00Z",
+      "descricao": "C-100 consulta anual",
+      "valor": 150,
+      "petId": "1379570f-acff-4979-98be-f8b96ea21ada",
+      "veterinarioId": "48763920-1c22-42d7-bf9f-9878b4920c44"
+    },
+    "status": 201,
+    "expectedStatus": 201,
+    "response": {
+      "dataConsulta": "2026-10-22T14:00:00Z",
+      "descricao": "C-100 consulta anual",
+      "valor": 150,
+      "petId": "1379570f-acff-4979-98be-f8b96ea21ada",
+      "pet": null,
+      "veterinarioId": "48763920-1c22-42d7-bf9f-9878b4920c44",
+      "veterinario": {
+        "nome": "Veterinario QA",
+        "email": "vet-20261103t201658z@example.test",
+        "tipoUsuario": "VETERINARIO",
+        "petsResponsavel": [],
+        "consultasVeterinario": [
+          null
+        ],
+        "agendamentosVeterinario": [],
+        "logsErro": [],
+        "id": "48763920-1c22-42d7-bf9f-9878b4920c44",
+        "createdAt": "2026-11-03T17:17:06.4691599",
+        "active": true
+      },
+      "prontuario": null,
+      "pagamento": null,
+      "id": "8c2cdcdf-636c-405d-87c3-d756df0cbfd6",
+      "createdAt": "2026-11-03T17:17:46.6536048-03:00",
+      "active": true
+    },
+    "passed": true,
+    "durationMs": 62
+  },
+  {
+    "case": 68,
+    "label": "Reagendar",
+    "timestamp": "2026-11-03T20:17:50.327394+00:00",
+    "method": "PUT",
+    "url": "/api/consultas/8c2cdcdf-636c-405d-87c3-d756df0cbfd6",
+    "request": {
+      "dataConsulta": "2026-10-24T10:00:00Z",
+      "descricao": "C-100 reagendada",
+      "valor": 150,
+      "petId": "1379570f-acff-4979-98be-f8b96ea21ada",
+      "veterinarioId": "48763920-1c22-42d7-bf9f-9878b4920c44"
+    },
+    "status": 200,
+    "expectedStatus": 200,
+    "response": {
+      "dataConsulta": "2026-10-24T10:00:00Z",
+      "descricao": "C-100 reagendada",
+      "valor": 150,
+      "petId": "1379570f-acff-4979-98be-f8b96ea21ada",
+      "pet": null,
+      "veterinarioId": "48763920-1c22-42d7-bf9f-9878b4920c44",
+      "veterinario": {
+        "nome": "Veterinario QA",
+        "email": "vet-20261103t201658z@example.test",
+        "tipoUsuario": "VETERINARIO",
+        "petsResponsavel": [],
+        "consultasVeterinario": [
+          null
+        ],
+        "agendamentosVeterinario": [],
+        "logsErro": [],
+        "id": "48763920-1c22-42d7-bf9f-9878b4920c44",
+        "createdAt": "2026-11-03T17:17:06.4691599",
+        "active": true
+      },
+      "prontuario": null,
+      "pagamento": null,
+      "id": "8c2cdcdf-636c-405d-87c3-d756df0cbfd6",
+      "createdAt": "2026-11-03T17:17:46.6536048",
+      "active": true
+    },
+    "passed": true,
+    "durationMs": 35
+  },
+  {
+    "case": 68,
+    "label": "Confirmar nova data persistida",
+    "timestamp": "2026-11-03T20:17:53.969936+00:00",
+    "method": "GET",
+    "url": "/api/consultas/8c2cdcdf-636c-405d-87c3-d756df0cbfd6",
+    "request": null,
+    "status": 200,
+    "expectedStatus": 200,
+    "response": {
+      "dataConsulta": "2026-10-24T10:00:00",
+      "descricao": "C-100 reagendada",
+      "valor": 150,
+      "petId": "1379570f-acff-4979-98be-f8b96ea21ada",
+      "pet": {
+        "nome": "Thor",
+        "idade": 4,
+        "racaId": "88cd5559-7f41-40bc-8b04-ae13596355c2",
+        "raca": null,
+        "responsavelId": "00a15965-d6cc-4e93-ad45-96549b872d21",
+        "responsavel": null,
+        "consultas": [
+          null
+        ],
+        "agendamentos": [],
+        "vacinas": [],
+        "lembretes": [],
+        "dobuCams": [],
+        "informacoesCuidado": [],
+        "id": "1379570f-acff-4979-98be-f8b96ea21ada",
+        "createdAt": "2026-11-03T17:17:17.5758939",
+        "active": true
+      },
+      "veterinarioId": "48763920-1c22-42d7-bf9f-9878b4920c44",
+      "veterinario": {
+        "nome": "Veterinario QA",
+        "email": "vet-20261103t201658z@example.test",
+        "tipoUsuario": "VETERINARIO",
+        "petsResponsavel": [],
+        "consultasVeterinario": [
+          null
+        ],
+        "agendamentosVeterinario": [],
+        "logsErro": [],
+        "id": "48763920-1c22-42d7-bf9f-9878b4920c44",
+        "createdAt": "2026-11-03T17:17:06.4691599",
+        "active": true
+      },
+      "prontuario": null,
+      "pagamento": null,
+      "id": "8c2cdcdf-636c-405d-87c3-d756df0cbfd6",
+      "createdAt": "2026-11-03T17:17:46.6536048",
+      "active": true
+    },
+    "passed": true,
+    "durationMs": 39
+  },
+  {
+    "case": 69,
+    "label": "Cadastrar lembrete",
+    "timestamp": "2026-11-03T20:17:57.606462+00:00",
+    "method": "POST",
+    "url": "/api/lembretes",
+    "request": {
+      "descricao": "Lembrete controlado QA",
+      "dataLembrete": "2026-10-21T14:00:00Z",
+      "status": "PENDENTE",
+      "petId": "1379570f-acff-4979-98be-f8b96ea21ada"
+    },
+    "status": 201,
+    "expectedStatus": 201,
+    "response": {
+      "descricao": "Lembrete controlado QA",
+      "dataLembrete": "2026-10-21T14:00:00Z",
+      "status": "PENDENTE",
+      "petId": "1379570f-acff-4979-98be-f8b96ea21ada",
+      "pet": null,
+      "id": "04e4c56a-854f-459f-a60f-2f63956f70f1",
+      "createdAt": "2026-11-03T17:17:57.5877471-03:00",
+      "active": true
+    },
+    "passed": true,
+    "durationMs": 33
+  },
+  {
+    "case": 69,
+    "label": "Confirmar lembrete persistido",
+    "timestamp": "2026-11-03T20:18:01.228030+00:00",
+    "method": "GET",
+    "url": "/api/lembretes/04e4c56a-854f-459f-a60f-2f63956f70f1",
+    "request": null,
+    "status": 200,
+    "expectedStatus": 200,
+    "response": {
+      "descricao": "Lembrete controlado QA",
+      "dataLembrete": "2026-10-21T14:00:00",
+      "status": "PENDENTE",
+      "petId": "1379570f-acff-4979-98be-f8b96ea21ada",
+      "pet": null,
+      "id": "04e4c56a-854f-459f-a60f-2f63956f70f1",
+      "createdAt": "2026-11-03T17:17:57.5877471",
+      "active": true
+    },
+    "passed": true,
+    "durationMs": 19
+  },
+  {
+    "case": 69,
+    "label": "Consultar lembretes do pet",
+    "timestamp": "2026-11-03T20:18:04.849261+00:00",
+    "method": "GET",
+    "url": "/api/lembretes/pet/1379570f-acff-4979-98be-f8b96ea21ada",
+    "request": null,
+    "status": 200,
+    "expectedStatus": 200,
+    "response": [
+      {
+        "descricao": "Lembrete controlado QA",
+        "dataLembrete": "2026-10-21T14:00:00",
+        "status": "PENDENTE",
+        "petId": "1379570f-acff-4979-98be-f8b96ea21ada",
+        "pet": null,
+        "id": "04e4c56a-854f-459f-a60f-2f63956f70f1",
+        "createdAt": "2026-11-03T17:17:57.5877471",
+        "active": true
+      }
+    ],
+    "passed": true,
+    "durationMs": 18
+  },
+  {
+    "case": 70,
+    "label": "Confirmar pet inexistente",
+    "timestamp": "2026-11-03T20:18:08.492277+00:00",
+    "method": "GET",
+    "url": "/api/pets/00000000-0000-0000-0000-000000000001",
+    "request": null,
+    "status": 404,
+    "expectedStatus": 404,
+    "response": {
+      "type": "https://tools.ietf.org/html/rfc9110#section-15.5.5",
+      "title": "Not Found",
+      "status": 404,
+      "traceId": "00-8e3a5f6234e08266f22930e419082ac3-fdfde5eb7af0533e-01"
+    },
+    "passed": true,
+    "durationMs": 40
+  },
+  {
+    "case": 70,
+    "label": "Recusar vacina sem pet",
+    "timestamp": "2026-11-03T20:18:12.101787+00:00",
+    "method": "POST",
+    "url": "/api/vacinas",
+    "request": {
+      "nome": "V10",
+      "dataAplicacao": "2026-10-19T10:00:00Z",
+      "dataProximaDose": "2026-10-25T10:00:00Z",
+      "petId": "00000000-0000-0000-0000-000000000001"
+    },
+    "status": 400,
+    "expectedStatus": 400,
+    "response": "Pet informado nao existe.",
+    "passed": true,
+    "durationMs": 6
+  },
+  {
+    "case": 71,
+    "label": "Recusar descricao curta",
+    "timestamp": "2026-11-03T20:18:15.712356+00:00",
+    "method": "POST",
+    "url": "/api/lembretes",
+    "request": {
+      "descricao": "abc",
+      "dataLembrete": "2026-10-21T14:00:00Z",
+      "status": "PENDENTE",
+      "petId": "1379570f-acff-4979-98be-f8b96ea21ada"
+    },
+    "status": 400,
+    "expectedStatus": 400,
+    "response": "Descricao do lembrete invalida",
+    "passed": true,
+    "durationMs": 8
+  },
+  {
+    "case": 71,
+    "label": "Confirmar ausencia do lembrete invalido",
+    "timestamp": "2026-11-03T20:18:19.322627+00:00",
+    "method": "GET",
+    "url": "/api/lembretes/pet/1379570f-acff-4979-98be-f8b96ea21ada",
+    "request": null,
+    "status": 200,
+    "expectedStatus": 200,
+    "response": [
+      {
+        "descricao": "Lembrete controlado QA",
+        "dataLembrete": "2026-10-21T14:00:00",
+        "status": "PENDENTE",
+        "petId": "1379570f-acff-4979-98be-f8b96ea21ada",
+        "pet": null,
+        "id": "04e4c56a-854f-459f-a60f-2f63956f70f1",
+        "createdAt": "2026-11-03T17:17:57.5877471",
+        "active": true
+      }
+    ],
+    "passed": true,
+    "durationMs": 8
+  },
+  {
+    "case": "PREP",
+    "label": "Cadastrar outro tutor",
+    "timestamp": "2026-11-03T20:18:23.021802+00:00",
+    "method": "POST",
+    "url": "/api/auth/register",
+    "request": {
+      "nome": "Outro Tutor",
+      "email": "outro-20261103T201658Z@example.test",
+      "senha": "[REDACTED]",
+      "tipoUsuario": "Responsavel"
+    },
+    "status": 200,
+    "expectedStatus": 200,
+    "response": {
+      "token": "[REDACTED]",
+      "usuarioId": "0386fcc4-57e9-4914-bc21-0159b37c8e44",
+      "nome": "Outro Tutor",
+      "email": "outro-20261103t201658z@example.test",
+      "tipoUsuario": "RESPONSAVEL"
+    },
+    "passed": true,
+    "durationMs": 96
+  },
+  {
+    "case": 72,
+    "label": "Bloquear carteira de outro tutor",
+    "timestamp": "2026-11-03T20:18:26.631796+00:00",
+    "method": "GET",
+    "url": "/api/vacinas/pet/1379570f-acff-4979-98be-f8b96ea21ada",
+    "request": null,
+    "status": 404,
+    "expectedStatus": 404,
+    "response": {
+      "type": "https://tools.ietf.org/html/rfc9110#section-15.5.5",
+      "title": "Not Found",
+      "status": 404,
+      "traceId": "00-71e060e2d10cc44e0dbaeabdfef0e75b-aeb4c583900b3bf5-01"
+    },
+    "passed": true,
+    "durationMs": 7
+  },
+  {
+    "case": 72,
+    "label": "Isolar listagem geral",
+    "timestamp": "2026-11-03T20:18:30.247642+00:00",
+    "method": "GET",
+    "url": "/api/vacinas",
+    "request": null,
+    "status": 200,
+    "expectedStatus": 200,
+    "response": [],
+    "passed": true,
+    "durationMs": 13
+  },
+  {
+    "case": 72,
+    "label": "Bloquear acesso anonimo",
+    "timestamp": "2026-11-03T20:18:33.856614+00:00",
+    "method": "GET",
+    "url": "/api/vacinas/pet/1379570f-acff-4979-98be-f8b96ea21ada",
+    "request": null,
+    "status": 401,
+    "expectedStatus": 401,
+    "response": "",
+    "passed": true,
+    "durationMs": 6
+  },
+  {
+    "case": 73,
+    "label": "Gerar alertas no relogio controlado",
+    "timestamp": "2026-11-03T20:18:37.486949+00:00",
+    "method": "POST",
+    "url": "/api/alertas-vacina/gerar?referencia=2026-10-19T10:00:00Z",
+    "request": null,
+    "status": 200,
+    "expectedStatus": 200,
+    "response": {
+      "criados": 1
+    },
+    "passed": true,
+    "durationMs": 28
+  },
+  {
+    "case": 73,
+    "label": "Consultar alerta interno",
+    "timestamp": "2026-11-03T20:18:41.116936+00:00",
+    "method": "GET",
+    "url": "/api/alertas-vacina",
+    "request": null,
+    "status": 200,
+    "expectedStatus": 200,
+    "response": [
+      {
+        "id": "74c64dcf-4ece-421b-ac46-c4ef4506a2e5",
+        "descricao": "Vacina V10 de Thor: proxima dose em 2026-10-25.",
+        "dataLembrete": "2026-10-25T10:00:00",
+        "status": "PENDENTE",
+        "petId": "1379570f-acff-4979-98be-f8b96ea21ada"
+      }
+    ],
+    "passed": true,
+    "durationMs": 28
+  },
+  {
+    "case": 73,
+    "label": "Nao duplicar na reexecucao",
+    "timestamp": "2026-11-03T20:18:44.727531+00:00",
+    "method": "POST",
+    "url": "/api/alertas-vacina/gerar?referencia=2026-10-19T10:00:00Z",
+    "request": null,
+    "status": 200,
+    "expectedStatus": 200,
+    "response": {
+      "criados": 0
+    },
+    "passed": true,
+    "durationMs": 8
+  },
+  {
+    "case": 73,
+    "label": "Nao expor alerta a outro tutor",
+    "timestamp": "2026-11-03T20:18:48.336544+00:00",
+    "method": "GET",
+    "url": "/api/alertas-vacina",
+    "request": null,
+    "status": 200,
+    "expectedStatus": 200,
+    "response": [],
+    "passed": true,
+    "durationMs": 6
+  },
+  {
+    "case": 74,
+    "label": "Reservar horario com C-200",
+    "timestamp": "2026-11-03T20:18:51.949661+00:00",
+    "method": "POST",
+    "url": "/api/consultas",
+    "request": {
+      "dataConsulta": "2026-10-25T10:00:00Z",
+      "descricao": "C-200 ocupada",
+      "valor": 150,
+      "petId": "1379570f-acff-4979-98be-f8b96ea21ada",
+      "veterinarioId": "48763920-1c22-42d7-bf9f-9878b4920c44"
+    },
+    "status": 201,
+    "expectedStatus": 201,
+    "response": {
+      "dataConsulta": "2026-10-25T10:00:00Z",
+      "descricao": "C-200 ocupada",
+      "valor": 150,
+      "petId": "1379570f-acff-4979-98be-f8b96ea21ada",
+      "pet": null,
+      "veterinarioId": "48763920-1c22-42d7-bf9f-9878b4920c44",
+      "veterinario": {
+        "nome": "Veterinario QA",
+        "email": "vet-20261103t201658z@example.test",
+        "tipoUsuario": "VETERINARIO",
+        "petsResponsavel": [],
+        "consultasVeterinario": [
+          null
+        ],
+        "agendamentosVeterinario": [],
+        "logsErro": [],
+        "id": "48763920-1c22-42d7-bf9f-9878b4920c44",
+        "createdAt": "2026-11-03T17:17:06.4691599",
+        "active": true
+      },
+      "prontuario": null,
+      "pagamento": null,
+      "id": "3156405e-d218-4584-8500-1b96ba6763c2",
+      "createdAt": "2026-11-03T17:18:51.9451816-03:00",
+      "active": true
+    },
+    "passed": true,
+    "durationMs": 11
+  },
+  {
+    "case": 74,
+    "label": "Recusar reagendamento ocupado",
+    "timestamp": "2026-11-03T20:18:55.561771+00:00",
+    "method": "PUT",
+    "url": "/api/consultas/8c2cdcdf-636c-405d-87c3-d756df0cbfd6",
+    "request": {
+      "dataConsulta": "2026-10-25T10:00:00Z",
+      "descricao": "C-100 reagendada",
+      "valor": 150,
+      "petId": "1379570f-acff-4979-98be-f8b96ea21ada",
+      "veterinarioId": "48763920-1c22-42d7-bf9f-9878b4920c44"
+    },
+    "status": 409,
+    "expectedStatus": 409,
+    "response": "Horario indisponivel para o veterinario informado.",
+    "passed": true,
+    "durationMs": 9
+  },
+  {
+    "case": 74,
+    "label": "Preservar C-100 apos conflito",
+    "timestamp": "2026-11-03T20:18:59.170566+00:00",
+    "method": "GET",
+    "url": "/api/consultas/8c2cdcdf-636c-405d-87c3-d756df0cbfd6",
+    "request": null,
+    "status": 200,
+    "expectedStatus": 200,
+    "response": {
+      "dataConsulta": "2026-10-24T10:00:00",
+      "descricao": "C-100 reagendada",
+      "valor": 150,
+      "petId": "1379570f-acff-4979-98be-f8b96ea21ada",
+      "pet": {
+        "nome": "Thor",
+        "idade": 4,
+        "racaId": "88cd5559-7f41-40bc-8b04-ae13596355c2",
+        "raca": null,
+        "responsavelId": "00a15965-d6cc-4e93-ad45-96549b872d21",
+        "responsavel": null,
+        "consultas": [
+          null
+        ],
+        "agendamentos": [],
+        "vacinas": [],
+        "lembretes": [],
+        "dobuCams": [],
+        "informacoesCuidado": [],
+        "id": "1379570f-acff-4979-98be-f8b96ea21ada",
+        "createdAt": "2026-11-03T17:17:17.5758939",
+        "active": true
+      },
+      "veterinarioId": "48763920-1c22-42d7-bf9f-9878b4920c44",
+      "veterinario": {
+        "nome": "Veterinario QA",
+        "email": "vet-20261103t201658z@example.test",
+        "tipoUsuario": "VETERINARIO",
+        "petsResponsavel": [],
+        "consultasVeterinario": [
+          null
+        ],
+        "agendamentosVeterinario": [],
+        "logsErro": [],
+        "id": "48763920-1c22-42d7-bf9f-9878b4920c44",
+        "createdAt": "2026-11-03T17:17:06.4691599",
+        "active": true
+      },
+      "prontuario": null,
+      "pagamento": null,
+      "id": "8c2cdcdf-636c-405d-87c3-d756df0cbfd6",
+      "createdAt": "2026-11-03T17:17:46.6536048",
+      "active": true
+    },
+    "passed": true,
+    "durationMs": 6
+  }
+]

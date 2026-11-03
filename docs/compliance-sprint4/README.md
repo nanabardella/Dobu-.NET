@@ -5,13 +5,13 @@
 ## Links para correção
 
 - [Repositório público — branch develop](https://github.com/nanabardella/Dobu-.NET/tree/develop).
-- [Vídeo legendado em MP4 — abrir ou baixar](https://raw.githubusercontent.com/nanabardella/Dobu-.NET/develop/docs/compliance-sprint4/evidencias/sprint4-evidencias-legendado.mp4).
-- [Arquivo do vídeo no GitHub](evidencias/sprint4-evidencias-legendado.mp4).
+- [Vídeo legendado em MP4 — abrir ou baixar](https://raw.githubusercontent.com/nanabardella/Dobu-.NET/develop/docs/compliance-sprint4/evidencias/sprint4-execucao-ao-vivo.mp4).
+- [Arquivo do vídeo no GitHub](evidencias/sprint4-execucao-ao-vivo.mp4).
 - [Plano de testes no Azure Boards](https://dev.azure.com/RM561439/DOBU/_workitems).
 - [Relatório navegável das chamadas reais](evidencias/relatorio.html) — baixar e abrir no navegador; o GitHub exibe o código HTML.
 - [Resultados do replay HTTP](evidencias/http/resumo.json) e [requisições/respostas completas](evidencias/http/requisicoes.json).
 
-O vídeo tem legendas incorporadas, sem narração, e apresenta configuração, preparação e respostas reais registradas. É uma apresentação das evidências de execução do roteiro HTTP, não uma captura de tela do Postman ou uma execução manual humana. Trechos de corpos longos aparecem resumidos no vídeo; os JSONs completos estão publicados. Tokens e senhas foram ocultados.
+O vídeo principal é uma **captura contínua de janela durante execução real**, com legendas e sem narração. Mostra a branch, a revisão de base, a versão .NET, os comandos executados, nove testes de integração aprovados e as 33 chamadas HTTP, com entradas, respostas e verificações aparecendo enquanto a API executa. Usa uma janela dedicada ao roteiro de automação HTTP equivalente; não é Postman. Tokens e senhas são ocultados antes de aparecer. O vídeo anterior de apresentação dos registros foi mantido como material complementar, mas não é mais o link principal.
 
 ## Parte A — Plano de sistema no Azure Boards
 
@@ -75,3 +75,9 @@ O replay desativa o worker para manter a fixture determinística e usa o hook De
 Professor Orlando Clinio Patriarcha (`pf1997@fiap.com.br`, e-mail `proforlando.patriarcha@fiap.com.br`) confirmado com Basic e membro de Project Administrators do DOBU. Repositório público, arquivos na branch develop.
 
 Entregar o link desta branch no portal da atividade. Este README contém os links do Azure Boards e do vídeo; o enunciado de Compliance não exige PDF nem uma plataforma específica para o vídeo. Para apresentar no YouTube, a equipe pode baixar o MP4, enviá-lo como não listado e atualizar o link. O envio no portal acadêmico não foi realizado.
+
+## Gravação ao vivo
+
+A nova gravação executou novamente nove testes de integração (9 aprovados, zero falhas) e 33 chamadas HTTP verificadas. [Transcrição da execução](evidencias/ao-vivo/runner-completo.txt), [relatório TRX](evidencias/ao-vivo/testes/filmagem.trx) e [JSON desta rodada](evidencias/ao-vivo/http/resumo.json). O vídeo grava os quadros da janela gráfica do executor enquanto os comandos rodam; não reconstrói a execução a partir de logs anteriores. Os quadros da janela são enviados ao FFmpeg durante a execução, com legendas incorporadas. A captura intermediária MKV é mantida localmente; o MP4 preserva a sequência, com recompressão e sem cortes.
+
+Para reproduzir no Windows: `DOBU/postman/gravar-ao-vivo.ps1 -EncoderPath <caminho-do-ffmpeg.exe> -PythonPath <caminho-do-python.exe>`. Necessita FFmpeg, Python 3, .NET 9 e dependências restauradas. O script executa `execucao-filmada.py`, que lança os comandos reais e alimenta a janela com suas saídas. Não é uma captura do Swagger ou do Postman.

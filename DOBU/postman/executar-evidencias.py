@@ -9,9 +9,15 @@ import subprocess
 import time
 import urllib.request
 import urllib.error
+import argparse
+
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--live', action='store_true', help='Mostra preparacao e respostas em tempo real, com pausas de leitura.')
+parser.add_argument('--output', help='Diretorio de evidencias, relativo a raiz do repositorio.')
+args = parser.parse_args()
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / 'docs/compliance-sprint4/evidencias/http'
+OUT = ROOT / (args.output or 'docs/compliance-sprint4/evidencias/http')
 OUT.mkdir(parents=True, exist_ok=True)
 API = ROOT / 'DOBU/Dobu.Api'
 RUN = dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%SZ')
@@ -29,6 +35,13 @@ def redact(value):
     return value
 
 def call(case, label, method, path, data=None, expected=200, check=None):
+    if args.live:
+        print(f'@@STEP|{case}|{label}', flush=True)
+        print(f'\n>>> {method} {path}', flush=True)
+        if data is not None:
+            print('ENTRADA: '+json.dumps(redact(data),ensure_ascii=False),flush=True)
+        print(f'Esperado: HTTP {expected}. Executando requisicao...',flush=True)
+        time.sleep(.6)
     body = json.dumps(data).encode() if data is not None else None
     headers = {'Content-Type': 'application/json'}
     if token: headers['Authorization'] = 'Bearer '+token
@@ -47,9 +60,13 @@ def call(case, label, method, path, data=None, expected=200, check=None):
              'expectedStatus':expected,'response':redact(result),'passed':bool(passed),
              'durationMs':round((time.perf_counter()-start)*1000)}
     events.append(event)
+    if args.live:
+        output=json.dumps(redact(result),ensure_ascii=False,indent=2)
+        print('RESPOSTA REAL: HTTP '+str(status)+'\n'+(output[:1600]+'\n[trecho; resposta completa no JSON]' if len(output)>1600 else output),flush=True)
     print(f'{"PASS" if passed else "FAIL"} | {case} | {label} | {method} {path} -> {status}', flush=True)
     (OUT/'requisicoes.json').write_text(json.dumps(events,ensure_ascii=False,indent=2),encoding='utf-8')
     if not passed: raise AssertionError(label)
+    if args.live: time.sleep(3)
     return result
 
 env = os.environ.copy()
@@ -126,4 +143,4 @@ finally:
              'mode':'Execucao assistida de passos do plano de sistema via HTTP; sem declaracao de execucao manual humana',
              'cases':cases,'requests':len(events),'passed':sum(event['passed'] for event in events)}
     (OUT/'resumo.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2),encoding='utf-8')
-print(json.dumps(summary,ensure_ascii=True),flush=True)
+print(json.dumps(summary,ensure_ascii=False,indent=2 if args.live else None),flush=True)

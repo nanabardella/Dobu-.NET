@@ -1,0 +1,35 @@
+{
+  "run": "20261103T201658Z",
+  "integrationTests": {
+    "total": "9",
+    "executed": "9",
+    "passed": "9",
+    "failed": "0",
+    "error": "0",
+    "timeout": "0",
+    "aborted": "0",
+    "inconclusive": "0",
+    "passedButRunAborted": "0",
+    "notRunnable": "0",
+    "notExecuted": "0",
+    "disconnected": "0",
+    "warning": "0",
+    "completed": "0",
+    "inProgress": "0",
+    "pending": "0"
+  },
+  "httpRequests": 33,
+  "httpPassed": 33,
+  "capture": "Quadros da janela WinForms gerados enquanto os comandos reais executam, enviados ao FFmpeg em tempo real; sem cortes; legendas incorporadas; sem audio",
+  "videoSha256": "8646904c075874f27ae9c924bfcb5101e7e6d7b5745775d2a0bb9ba5b84715a2",
+  "files": {
+    "captura-log.txt": "f01a374e9c81e3db89b3a42940c4d6a5447684986a1296e42bf13f196eed6295",
+    "execucao-console.txt": "82eb1d7dfffe9b39a29ed8985222f3b5666040111d1256575cca415afce70685",
+    "legendas-tempos.json": "cb3396e39de756a5b25459d80c1b5ddfb98fe0338c77e2ee22f383a283d6dc59",
+    "quadro-execucao.png": "ad44f0b76b5e134afed087c2e38dfc7b56fbd4a14185b19fc04d9bf30bd713a8",
+    "runner-completo.txt": "82eb1d7dfffe9b39a29ed8985222f3b5666040111d1256575cca415afce70685",
+    "http/requisicoes.json": "535dfc421c10f40b55ad9b4243bcf5cddc54058b6323e1846bf51a0f192c6a4c",
+    "http/resumo.json": "4bc06f321529e65d0fd80a98142151c4abab915e4301ef90efaa463b8f822ba4",
+    "testes/filmagem.trx": "33b802d81692a1c7d65647e9fc72812a6eed87b0aca8e9ef1905941b339c8ea5"
+  }
+}

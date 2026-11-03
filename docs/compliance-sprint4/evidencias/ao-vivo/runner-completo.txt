@@ -1,0 +1,716 @@
+@@CAPTION|Preparacao: vamos conferir a versao e executar os testes reais desta branch.
+DOBU - COMPLIANCE SPRINT 4 - EXECUCAO REAL GRAVADA
+Ferramentas: .NET 9 / xUnit e roteiro de automacao HTTP Python.
+Ambiente: Development; SQLite temporario isolado; sem dados de producao.
+Este processo executa os comandos agora; nao reproduz resultados anteriores.
+
+$ git branch --show-current
+develop
+
+Codigo de saida: 0
+
+$ git rev-parse --short HEAD
+4354f0b
+
+Codigo de saida: 0
+
+$ dotnet --version
+9.0.318
+
+Codigo de saida: 0
+Configuracao: fixtures Thor/V10, datas fixas de outubro de 2026 em UTC.
+A API sera iniciada na porta 5077 e encerrada automaticamente no final.
+Tokens e senhas sao ocultados pelo roteiro antes de aparecerem na janela.
+@@CAPTION|Automacao de integracao: os testes executam agora com banco temporario.
+
+$ dotnet test DOBU/tests/Dobu.IntegrationTests/Dobu.IntegrationTests.csproj --no-restore -m:1 --filter FullyQualifiedName~Sprint4ComplianceTests --logger trx;LogFileName=filmagem.trx --results-directory docs/compliance-sprint4/evidencias/ao-vivo/testes --verbosity minimal --logger console;verbosity=minimal
+  Dobu.Domain -> C:\Users\nanab\Downloads\Compliance_Challenge\Dobu.NET\DOBU\Dobu.Domain\bin\Debug\net9.0\Dobu.Domain.dll
+  Dobu.Application -> C:\Users\nanab\Downloads\Compliance_Challenge\Dobu.NET\DOBU\Dobu.Application\bin\Debug\net9.0\Dobu.Application.dll
+  Dobu.Infrastructure -> C:\Users\nanab\Downloads\Compliance_Challenge\Dobu.NET\DOBU\Dobu.Infrastructure\bin\Debug\net9.0\Dobu.Infrastructure.dll
+  Dobu.Api -> C:\Users\nanab\Downloads\Compliance_Challenge\Dobu.NET\DOBU\Dobu.Api\bin\Debug\net9.0\Dobu.Api.dll
+  Dobu.IntegrationTests -> C:\Users\nanab\Downloads\Compliance_Challenge\Dobu.NET\DOBU\tests\Dobu.IntegrationTests\bin\Debug\net9.0\Dobu.IntegrationTests.dll
+Execução de teste para C:\Users\nanab\Downloads\Compliance_Challenge\Dobu.NET\DOBU\tests\Dobu.IntegrationTests\bin\Debug\net9.0\Dobu.IntegrationTests.dll (.NETCoreApp,Version=v9.0)
+Versão do VSTest 17.14.1 (x64)
+
+Iniciando execução de teste, espere...
+1 arquivos de teste no total corresponderam ao padrão especificado.
+AVISO: sobrescrevendo o arquivo de resultados: C:\Users\nanab\Downloads\Compliance_Challenge\Dobu.NET\docs\compliance-sprint4\evidencias\ao-vivo\testes\filmagem.trx
+Arquivo de resultados: C:\Users\nanab\Downloads\Compliance_Challenge\Dobu.NET\docs\compliance-sprint4\evidencias\ao-vivo\testes\filmagem.trx
+
+Aprovado!  – Com falha:     0, Aprovado:     9, Ignorado:     0, Total:     9, Duração: 5 s - Dobu.IntegrationTests.dll (net9.0)
+
+Codigo de saida: 0
+@@CAPTION|Teste de sistema por HTTP: vamos acompanhar preparacao, entradas e respostas reais.
+
+$ C:\Program Files\Microsoft SDKs\Azure\CLI2\python.exe -u DOBU/postman/executar-evidencias.py --live --output docs/compliance-sprint4/evidencias/ao-vivo/http
+@@STEP|PREP|Cadastrar tutor QA
+
+>>> POST /api/auth/register
+ENTRADA: {"nome": "Tutor QA", "email": "tutor-20261103T201658Z@example.test", "senha": "[REDACTED]", "tipoUsuario": "Responsavel"}
+Esperado: HTTP 200. Executando requisicao...
+RESPOSTA REAL: HTTP 200
+{
+  "token": "[REDACTED]",
+  "usuarioId": "00a15965-d6cc-4e93-ad45-96549b872d21",
+  "nome": "Tutor QA",
+  "email": "tutor-20261103t201658z@example.test",
+  "tipoUsuario": "RESPONSAVEL"
+}
+PASS | PREP | Cadastrar tutor QA | POST /api/auth/register -> 200
+@@STEP|PREP|Cadastrar veterinario QA
+
+>>> POST /api/auth/register
+ENTRADA: {"nome": "Veterinario QA", "email": "vet-20261103T201658Z@example.test", "senha": "[REDACTED]", "tipoUsuario": "Veterinario"}
+Esperado: HTTP 200. Executando requisicao...
+RESPOSTA REAL: HTTP 200
+{
+  "token": "[REDACTED]",
+  "usuarioId": "48763920-1c22-42d7-bf9f-9878b4920c44",
+  "nome": "Veterinario QA",
+  "email": "vet-20261103t201658z@example.test",
+  "tipoUsuario": "VETERINARIO"
+}
+PASS | PREP | Cadastrar veterinario QA | POST /api/auth/register -> 200
+@@STEP|PREP|Criar especie
+
+>>> POST /api/especies
+ENTRADA: {"nome": "Cachorro QA", "descricao": "Animal domestico"}
+Esperado: HTTP 201. Executando requisicao...
+RESPOSTA REAL: HTTP 201
+{
+  "nome": "Cachorro QA",
+  "descricao": "Animal domestico",
+  "racas": [],
+  "id": "e68b7c0d-a007-42c3-96de-313de9c30fcc",
+  "createdAt": "2026-11-03T17:17:10.1959559-03:00",
+  "active": true
+}
+PASS | PREP | Criar especie | POST /api/especies -> 201
+@@STEP|PREP|Criar raca
+
+>>> POST /api/racas
+ENTRADA: {"nome": "Vira-lata QA", "porte": "Medio", "expectativaVida": 12, "descricao": "Raca de teste", "cuidados": "Banho e passeio", "especieId": "e68b7c0d-a007-42c3-96de-313de9c30fcc"}
+Esperado: HTTP 201. Executando requisicao...
+RESPOSTA REAL: HTTP 201
+{
+  "nome": "Vira-lata QA",
+  "porte": "Medio",
+  "expectativaVida": 12,
+  "descricao": "Raca de teste",
+  "cuidados": "Banho e passeio",
+  "especieId": "e68b7c0d-a007-42c3-96de-313de9c30fcc",
+  "especie": null,
+  "pets": [],
+  "id": "88cd5559-7f41-40bc-8b04-ae13596355c2",
+  "createdAt": "2026-11-03T17:17:13.911818-03:00",
+  "active": true
+}
+PASS | PREP | Criar raca | POST /api/racas -> 201
+@@STEP|PREP|Criar Thor
+
+>>> POST /api/pets
+ENTRADA: {"nome": "Thor", "idade": 4, "racaId": "88cd5559-7f41-40bc-8b04-ae13596355c2", "responsavelId": "00a15965-d6cc-4e93-ad45-96549b872d21"}
+Esperado: HTTP 201. Executando requisicao...
+RESPOSTA REAL: HTTP 201
+{
+  "nome": "Thor",
+  "idade": 4,
+  "racaId": "88cd5559-7f41-40bc-8b04-ae13596355c2",
+  "raca": null,
+  "responsavelId": "00a15965-d6cc-4e93-ad45-96549b872d21",
+  "responsavel": {
+    "nome": "Tutor QA",
+    "email": "tutor-20261103t201658z@example.test",
+    "tipoUsuario": "RESPONSAVEL",
+    "petsResponsavel": [
+      null
+    ],
+    "consultasVeterinario": [],
+    "agendamentosVeterinario": [],
+    "logsErro": [],
+    "id": "00a15965-d6cc-4e93-ad45-96549b872d21",
+    "createdAt": "2026-11-03T17:17:02.4526656",
+    "active": true
+  },
+  "consultas": [],
+  "agendamentos": [],
+  "vacinas": [],
+  "lembretes": [],
+  "dobuCams": [],
+  "informacoesCuidado": [],
+  "id": "1379570f-acff-4979-98be-f8b96ea21ada",
+  "createdAt": "2026-11-03T17:17:17.5758939-03:00",
+  "active": true
+}
+PASS | PREP | Criar Thor | POST /api/pets -> 201
+@@STEP|66|Registrar V10
+
+>>> POST /api/vacinas
+ENTRADA: {"nome": "V10", "dataAplicacao": "2026-10-19T10:00:00Z", "dataProximaDose": "2026-10-25T10:00:00Z", "petId": "1379570f-acff-4979-98be-f8b96ea21ada"}
+Esperado: HTTP 201. Executando requisicao...
+RESPOSTA REAL: HTTP 201
+{
+  "nome": "V10",
+  "dataAplicacao": "2026-10-19T10:00:00Z",
+  "dataProximaDose": "2026-10-25T10:00:00Z",
+  "petId": "1379570f-acff-4979-98be-f8b96ea21ada",
+  "pet": null,
+  "id": "3229033e-83df-4c95-b417-af4f7a320f58",
+  "createdAt": "2026-11-03T17:17:21.2690874-03:00",
+  "active": true
+}
+PASS | 66 | Registrar V10 | POST /api/vacinas -> 201
+@@STEP|66|Confirmar persistencia
+
+>>> GET /api/vacinas/3229033e-83df-4c95-b417-af4f7a320f58
+Esperado: HTTP 200. Executando requisicao...
+RESPOSTA REAL: HTTP 200
+{
+  "nome": "V10",
+  "dataAplicacao": "2026-10-19T10:00:00",
+  "dataProximaDose": "2026-10-25T10:00:00",
+  "petId": "1379570f-acff-4979-98be-f8b96ea21ada",
+  "pet": null,
+  "id": "3229033e-83df-4c95-b417-af4f7a320f58",
+  "createdAt": "2026-11-03T17:17:21.2690874",
+  "active": true
+}
+PASS | 66 | Confirmar persistencia | GET /api/vacinas/3229033e-83df-4c95-b417-af4f7a320f58 -> 200
+@@STEP|66|Consultar carteira de Thor
+
+>>> GET /api/vacinas/pet/1379570f-acff-4979-98be-f8b96ea21ada
+Esperado: HTTP 200. Executando requisicao...
+RESPOSTA REAL: HTTP 200
+[
+  {
+    "nome": "V10",
+    "dataAplicacao": "2026-10-19T10:00:00",
+    "dataProximaDose": "2026-10-25T10:00:00",
+    "petId": "1379570f-acff-4979-98be-f8b96ea21ada",
+    "pet": null,
+    "id": "3229033e-83df-4c95-b417-af4f7a320f58",
+    "createdAt": "2026-11-03T17:17:21.2690874",
+    "active": true
+  }
+]
+PASS | 66 | Consultar carteira de Thor | GET /api/vacinas/pet/1379570f-acff-4979-98be-f8b96ea21ada -> 200
+@@STEP|67|Preparar vacina fora do limite
+
+>>> POST /api/vacinas
+ENTRADA: {"nome": "Controle QA", "dataAplicacao": "2026-10-19T10:00:00Z", "dataProximaDose": "2026-11-15T10:00:00Z", "petId": "1379570f-acff-4979-98be-f8b96ea21ada"}
+Esperado: HTTP 201. Executando requisicao...
+RESPOSTA REAL: HTTP 201
+{
+  "nome": "Controle QA",
+  "dataAplicacao": "2026-10-19T10:00:00Z",
+  "dataProximaDose": "2026-11-15T10:00:00Z",
+  "petId": "1379570f-acff-4979-98be-f8b96ea21ada",
+  "pet": null,
+  "id": "483f8e24-8010-4be5-b74a-fe6ef7f7f542",
+  "createdAt": "2026-11-03T17:17:32.179631-03:00",
+  "active": true
+}
+PASS | 67 | Preparar vacina fora do limite | POST /api/vacinas -> 201
+@@STEP|67|Aplicar limite controlado
+
+>>> GET /api/vacinas/proxima-dose?ate=2026-10-30T23:59:59Z
+Esperado: HTTP 200. Executando requisicao...
+RESPOSTA REAL: HTTP 200
+[
+  {
+    "nome": "V10",
+    "dataAplicacao": "2026-10-19T10:00:00",
+    "dataProximaDose": "2026-10-25T10:00:00",
+    "petId": "1379570f-acff-4979-98be-f8b96ea21ada",
+    "pet": null,
+    "id": "3229033e-83df-4c95-b417-af4f7a320f58",
+    "createdAt": "2026-11-03T17:17:21.2690874",
+    "active": true
+  }
+]
+PASS | 67 | Aplicar limite controlado | GET /api/vacinas/proxima-dose?ate=2026-10-30T23:59:59Z -> 200
+@@STEP|67|Incluir exatamente no limite
+
+>>> GET /api/vacinas/proxima-dose?ate=2026-10-25T10:00:00Z
+Esperado: HTTP 200. Executando requisicao...
+RESPOSTA REAL: HTTP 200
+[
+  {
+    "nome": "V10",
+    "dataAplicacao": "2026-10-19T10:00:00",
+    "dataProximaDose": "2026-10-25T10:00:00",
+    "petId": "1379570f-acff-4979-98be-f8b96ea21ada",
+    "pet": null,
+    "id": "3229033e-83df-4c95-b417-af4f7a320f58",
+    "createdAt": "2026-11-03T17:17:21.2690874",
+    "active": true
+  }
+]
+PASS | 67 | Incluir exatamente no limite | GET /api/vacinas/proxima-dose?ate=2026-10-25T10:00:00Z -> 200
+@@STEP|67|Excluir um segundo antes
+
+>>> GET /api/vacinas/proxima-dose?ate=2026-10-25T09:59:59Z
+Esperado: HTTP 200. Executando requisicao...
+RESPOSTA REAL: HTTP 200
+[]
+PASS | 67 | Excluir um segundo antes | GET /api/vacinas/proxima-dose?ate=2026-10-25T09:59:59Z -> 200
+@@STEP|68|Criar C-100
+
+>>> POST /api/consultas
+ENTRADA: {"dataConsulta": "2026-10-22T14:00:00Z", "descricao": "C-100 consulta anual", "valor": 150, "petId": "1379570f-acff-4979-98be-f8b96ea21ada", "veterinarioId": "48763920-1c22-42d7-bf9f-9878b4920c44"}
+Esperado: HTTP 201. Executando requisicao...
+RESPOSTA REAL: HTTP 201
+{
+  "dataConsulta": "2026-10-22T14:00:00Z",
+  "descricao": "C-100 consulta anual",
+  "valor": 150,
+  "petId": "1379570f-acff-4979-98be-f8b96ea21ada",
+  "pet": null,
+  "veterinarioId": "48763920-1c22-42d7-bf9f-9878b4920c44",
+  "veterinario": {
+    "nome": "Veterinario QA",
+    "email": "vet-20261103t201658z@example.test",
+    "tipoUsuario": "VETERINARIO",
+    "petsResponsavel": [],
+    "consultasVeterinario": [
+      null
+    ],
+    "agendamentosVeterinario": [],
+    "logsErro": [],
+    "id": "48763920-1c22-42d7-bf9f-9878b4920c44",
+    "createdAt": "2026-11-03T17:17:06.4691599",
+    "active": true
+  },
+  "prontuario": null,
+  "pagamento": null,
+  "id": "8c2cdcdf-636c-405d-87c3-d756df0cbfd6",
+  "createdAt": "2026-11-03T17:17:46.6536048-03:00",
+  "active": true
+}
+PASS | 68 | Criar C-100 | POST /api/consultas -> 201
+@@STEP|68|Reagendar
+
+>>> PUT /api/consultas/8c2cdcdf-636c-405d-87c3-d756df0cbfd6
+ENTRADA: {"dataConsulta": "2026-10-24T10:00:00Z", "descricao": "C-100 reagendada", "valor": 150, "petId": "1379570f-acff-4979-98be-f8b96ea21ada", "veterinarioId": "48763920-1c22-42d7-bf9f-9878b4920c44"}
+Esperado: HTTP 200. Executando requisicao...
+RESPOSTA REAL: HTTP 200
+{
+  "dataConsulta": "2026-10-24T10:00:00Z",
+  "descricao": "C-100 reagendada",
+  "valor": 150,
+  "petId": "1379570f-acff-4979-98be-f8b96ea21ada",
+  "pet": null,
+  "veterinarioId": "48763920-1c22-42d7-bf9f-9878b4920c44",
+  "veterinario": {
+    "nome": "Veterinario QA",
+    "email": "vet-20261103t201658z@example.test",
+    "tipoUsuario": "VETERINARIO",
+    "petsResponsavel": [],
+    "consultasVeterinario": [
+      null
+    ],
+    "agendamentosVeterinario": [],
+    "logsErro": [],
+    "id": "48763920-1c22-42d7-bf9f-9878b4920c44",
+    "createdAt": "2026-11-03T17:17:06.4691599",
+    "active": true
+  },
+  "prontuario": null,
+  "pagamento": null,
+  "id": "8c2cdcdf-636c-405d-87c3-d756df0cbfd6",
+  "createdAt": "2026-11-03T17:17:46.6536048",
+  "active": true
+}
+PASS | 68 | Reagendar | PUT /api/consultas/8c2cdcdf-636c-405d-87c3-d756df0cbfd6 -> 200
+@@STEP|68|Confirmar nova data persistida
+
+>>> GET /api/consultas/8c2cdcdf-636c-405d-87c3-d756df0cbfd6
+Esperado: HTTP 200. Executando requisicao...
+RESPOSTA REAL: HTTP 200
+{
+  "dataConsulta": "2026-10-24T10:00:00",
+  "descricao": "C-100 reagendada",
+  "valor": 150,
+  "petId": "1379570f-acff-4979-98be-f8b96ea21ada",
+  "pet": {
+    "nome": "Thor",
+    "idade": 4,
+    "racaId": "88cd5559-7f41-40bc-8b04-ae13596355c2",
+    "raca": null,
+    "responsavelId": "00a15965-d6cc-4e93-ad45-96549b872d21",
+    "responsavel": null,
+    "consultas": [
+      null
+    ],
+    "agendamentos": [],
+    "vacinas": [],
+    "lembretes": [],
+    "dobuCams": [],
+    "informacoesCuidado": [],
+    "id": "1379570f-acff-4979-98be-f8b96ea21ada",
+    "createdAt": "2026-11-03T17:17:17.5758939",
+    "active": true
+  },
+  "veterinarioId": "48763920-1c22-42d7-bf9f-9878b4920c44",
+  "veterinario": {
+    "nome": "Veterinario QA",
+    "email": "vet-20261103t201658z@example.test",
+    "tipoUsuario": "VETERINARIO",
+    "petsResponsavel": [],
+    "consultasVeterinario": [
+      null
+    ],
+    "agendamentosVeterinario": [],
+    "logsErro": [],
+    "id": "48763920-1c22-42d7-bf9f-9878b4920c44",
+    "createdAt": "2026-11-03T17:17:06.4691599",
+    "active": true
+  },
+  "prontuario": null,
+  "pagamento": null,
+  "id": "8c2cdcdf-636c-405d-87c3-d756df0cbfd6",
+  "createdAt": "2026-11-03T17:17:46.6536048",
+  "active": true
+}
+PASS | 68 | Confirmar nova data persistida | GET /api/consultas/8c2cdcdf-636c-405d-87c3-d756df0cbfd6 -> 200
+@@STEP|69|Cadastrar lembrete
+
+>>> POST /api/lembretes
+ENTRADA: {"descricao": "Lembrete controlado QA", "dataLembrete": "2026-10-21T14:00:00Z", "status": "PENDENTE", "petId": "1379570f-acff-4979-98be-f8b96ea21ada"}
+Esperado: HTTP 201. Executando requisicao...
+RESPOSTA REAL: HTTP 201
+{
+  "descricao": "Lembrete controlado QA",
+  "dataLembrete": "2026-10-21T14:00:00Z",
+  "status": "PENDENTE",
+  "petId": "1379570f-acff-4979-98be-f8b96ea21ada",
+  "pet": null,
+  "id": "04e4c56a-854f-459f-a60f-2f63956f70f1",
+  "createdAt": "2026-11-03T17:17:57.5877471-03:00",
+  "active": true
+}
+PASS | 69 | Cadastrar lembrete | POST /api/lembretes -> 201
+@@STEP|69|Confirmar lembrete persistido
+
+>>> GET /api/lembretes/04e4c56a-854f-459f-a60f-2f63956f70f1
+Esperado: HTTP 200. Executando requisicao...
+RESPOSTA REAL: HTTP 200
+{
+  "descricao": "Lembrete controlado QA",
+  "dataLembrete": "2026-10-21T14:00:00",
+  "status": "PENDENTE",
+  "petId": "1379570f-acff-4979-98be-f8b96ea21ada",
+  "pet": null,
+  "id": "04e4c56a-854f-459f-a60f-2f63956f70f1",
+  "createdAt": "2026-11-03T17:17:57.5877471",
+  "active": true
+}
+PASS | 69 | Confirmar lembrete persistido | GET /api/lembretes/04e4c56a-854f-459f-a60f-2f63956f70f1 -> 200
+@@STEP|69|Consultar lembretes do pet
+
+>>> GET /api/lembretes/pet/1379570f-acff-4979-98be-f8b96ea21ada
+Esperado: HTTP 200. Executando requisicao...
+RESPOSTA REAL: HTTP 200
+[
+  {
+    "descricao": "Lembrete controlado QA",
+    "dataLembrete": "2026-10-21T14:00:00",
+    "status": "PENDENTE",
+    "petId": "1379570f-acff-4979-98be-f8b96ea21ada",
+    "pet": null,
+    "id": "04e4c56a-854f-459f-a60f-2f63956f70f1",
+    "createdAt": "2026-11-03T17:17:57.5877471",
+    "active": true
+  }
+]
+PASS | 69 | Consultar lembretes do pet | GET /api/lembretes/pet/1379570f-acff-4979-98be-f8b96ea21ada -> 200
+@@STEP|70|Confirmar pet inexistente
+
+>>> GET /api/pets/00000000-0000-0000-0000-000000000001
+Esperado: HTTP 404. Executando requisicao...
+RESPOSTA REAL: HTTP 404
+{
+  "type": "https://tools.ietf.org/html/rfc9110#section-15.5.5",
+  "title": "Not Found",
+  "status": 404,
+  "traceId": "00-8e3a5f6234e08266f22930e419082ac3-fdfde5eb7af0533e-01"
+}
+PASS | 70 | Confirmar pet inexistente | GET /api/pets/00000000-0000-0000-0000-000000000001 -> 404
+@@STEP|70|Recusar vacina sem pet
+
+>>> POST /api/vacinas
+ENTRADA: {"nome": "V10", "dataAplicacao": "2026-10-19T10:00:00Z", "dataProximaDose": "2026-10-25T10:00:00Z", "petId": "00000000-0000-0000-0000-000000000001"}
+Esperado: HTTP 400. Executando requisicao...
+RESPOSTA REAL: HTTP 400
+"Pet informado nao existe."
+PASS | 70 | Recusar vacina sem pet | POST /api/vacinas -> 400
+@@STEP|71|Recusar descricao curta
+
+>>> POST /api/lembretes
+ENTRADA: {"descricao": "abc", "dataLembrete": "2026-10-21T14:00:00Z", "status": "PENDENTE", "petId": "1379570f-acff-4979-98be-f8b96ea21ada"}
+Esperado: HTTP 400. Executando requisicao...
+RESPOSTA REAL: HTTP 400
+"Descricao do lembrete invalida"
+PASS | 71 | Recusar descricao curta | POST /api/lembretes -> 400
+@@STEP|71|Confirmar ausencia do lembrete invalido
+
+>>> GET /api/lembretes/pet/1379570f-acff-4979-98be-f8b96ea21ada
+Esperado: HTTP 200. Executando requisicao...
+RESPOSTA REAL: HTTP 200
+[
+  {
+    "descricao": "Lembrete controlado QA",
+    "dataLembrete": "2026-10-21T14:00:00",
+    "status": "PENDENTE",
+    "petId": "1379570f-acff-4979-98be-f8b96ea21ada",
+    "pet": null,
+    "id": "04e4c56a-854f-459f-a60f-2f63956f70f1",
+    "createdAt": "2026-11-03T17:17:57.5877471",
+    "active": true
+  }
+]
+PASS | 71 | Confirmar ausencia do lembrete invalido | GET /api/lembretes/pet/1379570f-acff-4979-98be-f8b96ea21ada -> 200
+@@STEP|PREP|Cadastrar outro tutor
+
+>>> POST /api/auth/register
+ENTRADA: {"nome": "Outro Tutor", "email": "outro-20261103T201658Z@example.test", "senha": "[REDACTED]", "tipoUsuario": "Responsavel"}
+Esperado: HTTP 200. Executando requisicao...
+RESPOSTA REAL: HTTP 200
+{
+  "token": "[REDACTED]",
+  "usuarioId": "0386fcc4-57e9-4914-bc21-0159b37c8e44",
+  "nome": "Outro Tutor",
+  "email": "outro-20261103t201658z@example.test",
+  "tipoUsuario": "RESPONSAVEL"
+}
+PASS | PREP | Cadastrar outro tutor | POST /api/auth/register -> 200
+@@STEP|72|Bloquear carteira de outro tutor
+
+>>> GET /api/vacinas/pet/1379570f-acff-4979-98be-f8b96ea21ada
+Esperado: HTTP 404. Executando requisicao...
+RESPOSTA REAL: HTTP 404
+{
+  "type": "https://tools.ietf.org/html/rfc9110#section-15.5.5",
+  "title": "Not Found",
+  "status": 404,
+  "traceId": "00-71e060e2d10cc44e0dbaeabdfef0e75b-aeb4c583900b3bf5-01"
+}
+PASS | 72 | Bloquear carteira de outro tutor | GET /api/vacinas/pet/1379570f-acff-4979-98be-f8b96ea21ada -> 404
+@@STEP|72|Isolar listagem geral
+
+>>> GET /api/vacinas
+Esperado: HTTP 200. Executando requisicao...
+RESPOSTA REAL: HTTP 200
+[]
+PASS | 72 | Isolar listagem geral | GET /api/vacinas -> 200
+@@STEP|72|Bloquear acesso anonimo
+
+>>> GET /api/vacinas/pet/1379570f-acff-4979-98be-f8b96ea21ada
+Esperado: HTTP 401. Executando requisicao...
+RESPOSTA REAL: HTTP 401
+""
+PASS | 72 | Bloquear acesso anonimo | GET /api/vacinas/pet/1379570f-acff-4979-98be-f8b96ea21ada -> 401
+@@STEP|73|Gerar alertas no relogio controlado
+
+>>> POST /api/alertas-vacina/gerar?referencia=2026-10-19T10:00:00Z
+Esperado: HTTP 200. Executando requisicao...
+RESPOSTA REAL: HTTP 200
+{
+  "criados": 1
+}
+PASS | 73 | Gerar alertas no relogio controlado | POST /api/alertas-vacina/gerar?referencia=2026-10-19T10:00:00Z -> 200
+@@STEP|73|Consultar alerta interno
+
+>>> GET /api/alertas-vacina
+Esperado: HTTP 200. Executando requisicao...
+RESPOSTA REAL: HTTP 200
+[
+  {
+    "id": "74c64dcf-4ece-421b-ac46-c4ef4506a2e5",
+    "descricao": "Vacina V10 de Thor: proxima dose em 2026-10-25.",
+    "dataLembrete": "2026-10-25T10:00:00",
+    "status": "PENDENTE",
+    "petId": "1379570f-acff-4979-98be-f8b96ea21ada"
+  }
+]
+PASS | 73 | Consultar alerta interno | GET /api/alertas-vacina -> 200
+@@STEP|73|Nao duplicar na reexecucao
+
+>>> POST /api/alertas-vacina/gerar?referencia=2026-10-19T10:00:00Z
+Esperado: HTTP 200. Executando requisicao...
+RESPOSTA REAL: HTTP 200
+{
+  "criados": 0
+}
+PASS | 73 | Nao duplicar na reexecucao | POST /api/alertas-vacina/gerar?referencia=2026-10-19T10:00:00Z -> 200
+@@STEP|73|Nao expor alerta a outro tutor
+
+>>> GET /api/alertas-vacina
+Esperado: HTTP 200. Executando requisicao...
+RESPOSTA REAL: HTTP 200
+[]
+PASS | 73 | Nao expor alerta a outro tutor | GET /api/alertas-vacina -> 200
+@@STEP|74|Reservar horario com C-200
+
+>>> POST /api/consultas
+ENTRADA: {"dataConsulta": "2026-10-25T10:00:00Z", "descricao": "C-200 ocupada", "valor": 150, "petId": "1379570f-acff-4979-98be-f8b96ea21ada", "veterinarioId": "48763920-1c22-42d7-bf9f-9878b4920c44"}
+Esperado: HTTP 201. Executando requisicao...
+RESPOSTA REAL: HTTP 201
+{
+  "dataConsulta": "2026-10-25T10:00:00Z",
+  "descricao": "C-200 ocupada",
+  "valor": 150,
+  "petId": "1379570f-acff-4979-98be-f8b96ea21ada",
+  "pet": null,
+  "veterinarioId": "48763920-1c22-42d7-bf9f-9878b4920c44",
+  "veterinario": {
+    "nome": "Veterinario QA",
+    "email": "vet-20261103t201658z@example.test",
+    "tipoUsuario": "VETERINARIO",
+    "petsResponsavel": [],
+    "consultasVeterinario": [
+      null
+    ],
+    "agendamentosVeterinario": [],
+    "logsErro": [],
+    "id": "48763920-1c22-42d7-bf9f-9878b4920c44",
+    "createdAt": "2026-11-03T17:17:06.4691599",
+    "active": true
+  },
+  "prontuario": null,
+  "pagamento": null,
+  "id": "3156405e-d218-4584-8500-1b96ba6763c2",
+  "createdAt": "2026-11-03T17:18:51.9451816-03:00",
+  "active": true
+}
+PASS | 74 | Reservar horario com C-200 | POST /api/consultas -> 201
+@@STEP|74|Recusar reagendamento ocupado
+
+>>> PUT /api/consultas/8c2cdcdf-636c-405d-87c3-d756df0cbfd6
+ENTRADA: {"dataConsulta": "2026-10-25T10:00:00Z", "descricao": "C-100 reagendada", "valor": 150, "petId": "1379570f-acff-4979-98be-f8b96ea21ada", "veterinarioId": "48763920-1c22-42d7-bf9f-9878b4920c44"}
+Esperado: HTTP 409. Executando requisicao...
+RESPOSTA REAL: HTTP 409
+"Horario indisponivel para o veterinario informado."
+PASS | 74 | Recusar reagendamento ocupado | PUT /api/consultas/8c2cdcdf-636c-405d-87c3-d756df0cbfd6 -> 409
+@@STEP|74|Preservar C-100 apos conflito
+
+>>> GET /api/consultas/8c2cdcdf-636c-405d-87c3-d756df0cbfd6
+Esperado: HTTP 200. Executando requisicao...
+RESPOSTA REAL: HTTP 200
+{
+  "dataConsulta": "2026-10-24T10:00:00",
+  "descricao": "C-100 reagendada",
+  "valor": 150,
+  "petId": "1379570f-acff-4979-98be-f8b96ea21ada",
+  "pet": {
+    "nome": "Thor",
+    "idade": 4,
+    "racaId": "88cd5559-7f41-40bc-8b04-ae13596355c2",
+    "raca": null,
+    "responsavelId": "00a15965-d6cc-4e93-ad45-96549b872d21",
+    "responsavel": null,
+    "consultas": [
+      null
+    ],
+    "agendamentos": [],
+    "vacinas": [],
+    "lembretes": [],
+    "dobuCams": [],
+    "informacoesCuidado": [],
+    "id": "1379570f-acff-4979-98be-f8b96ea21ada",
+    "createdAt": "2026-11-03T17:17:17.5758939",
+    "active": true
+  },
+  "veterinarioId": "48763920-1c22-42d7-bf9f-9878b4920c44",
+  "veterinario": {
+    "nome": "Veterinario QA",
+    "email": "vet-20261103t201658z@example.test",
+    "tipoUsuario": "VETERINARIO",
+    "petsResponsavel": [],
+    "consultasVeterinario": [
+      null
+    ],
+    "agendamentosVeterinario": [],
+    "logsErro": [],
+    "id": "48763920-1c22-42d7-bf9f-9878b4920c44",
+    "createdAt": "2026-11-03T17:17:06.4691599",
+    "active": true
+  },
+  "prontuario": null,
+  "pagamento": null,
+  "id": "8c2cdcdf-636c-405d-87c3-d756df0cbfd6",
+  "createdAt": "2026-11-03T17:17:46.6536048",
+  "active": true
+}
+PASS | 74 | Preservar C-100 apos conflito | GET /api/consultas/8c2cdcdf-636c-405d-87c3-d756df0cbfd6 -> 200
+{
+  "run": "20261103T201658Z",
+  "baseUrl": "http://127.0.0.1:5077",
+  "environment": "Development; SQLite temporario isolado; worker desativado neste replay; rotina automatica validada em teste de integracao separado",
+  "mode": "Execucao assistida de passos do plano de sistema via HTTP; sem declaracao de execucao manual humana",
+  "cases": {
+    "66": {
+      "outcome": "Passed",
+      "mode": "Execucao assistida HTTP, automatizada pelo roteiro; nao substitui revisao humana",
+      "steps": 3
+    },
+    "67": {
+      "outcome": "Passed",
+      "mode": "Execucao assistida HTTP, automatizada pelo roteiro; nao substitui revisao humana",
+      "steps": 4
+    },
+    "68": {
+      "outcome": "Passed",
+      "mode": "Execucao assistida HTTP, automatizada pelo roteiro; nao substitui revisao humana",
+      "steps": 3
+    },
+    "69": {
+      "outcome": "Passed",
+      "mode": "Execucao assistida HTTP, automatizada pelo roteiro; nao substitui revisao humana",
+      "steps": 3
+    },
+    "70": {
+      "outcome": "Passed",
+      "mode": "Execucao assistida HTTP, automatizada pelo roteiro; nao substitui revisao humana",
+      "steps": 2
+    },
+    "71": {
+      "outcome": "Passed",
+      "mode": "Execucao assistida HTTP, automatizada pelo roteiro; nao substitui revisao humana",
+      "steps": 2
+    },
+    "72": {
+      "outcome": "Passed",
+      "mode": "Execucao assistida HTTP, automatizada pelo roteiro; nao substitui revisao humana",
+      "steps": 3
+    },
+    "73": {
+      "outcome": "Passed",
+      "mode": "Execucao assistida HTTP, automatizada pelo roteiro; nao substitui revisao humana",
+      "steps": 4
+    },
+    "74": {
+      "outcome": "Passed",
+      "mode": "Execucao assistida HTTP, automatizada pelo roteiro; nao substitui revisao humana",
+      "steps": 3
+    },
+    "75": {
+      "outcome": "Blocked",
+      "reason": "Sem implementacao/provedor de WhatsApp; usuario informou nao possuir conta de teste. Nenhuma mensagem enviada."
+    }
+  },
+  "requests": 33,
+  "passed": 33
+}
+
+Codigo de saida: 0
+@@CAPTION|Execucao encerrada: confira o resumo real abaixo e os arquivos de evidencia.
+
+CONCLUSAO DA EXECUCAO
+Nove testes de integracao especificos passaram se o comando acima terminou com sucesso.
+As 33 requisicoes HTTP passaram se o roteiro terminou com codigo zero.
+Fluxos principais: carteira de vacina, proximas doses, reagendamento e lembrete.
+Casos complementares: dados invalidos, isolamento, alertas internos e conflito.
+WhatsApp continua bloqueado: nao ha integracao/provedor e nenhuma mensagem foi enviada.
+Ensaios realizados em SQLite; nao validam Oracle ou implantacao de producao.
+O video mostra execucao automatizada ao vivo, sem narracao, com legendas.

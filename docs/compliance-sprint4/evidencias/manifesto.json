@@ -47,10 +47,17 @@
   "evidence": {
     "compliance.trx": "b0cb4c46ed01cde7c005f406da4645272f01d3a82915cc3dbf4e65e5610d0f43",
     "exemplo-requisicao.png": "539fc3b3f36ae3c6477f6f988f6f3f91cb1fba7d30f82e1f7e03a62f311bd115",
-    "relatorio.html": "5b0ee1b8305d65095d290526148c9c54b86bdfde9bcf47fa12f20b03f8e6774e",
+    "relatorio.html": "b4e61fd0b05602a6c61ad5734a5009b7b3fd871f336b12870a342fb4dbba4317",
     "sprint4-evidencias-legendado.mp4": "8454f76e06ca5f7d818f02a0dc01ad502939f4fc9879f088070b96948e2a5d3c",
+    "sprint4-execucao-ao-vivo.mp4": "8646904c075874f27ae9c924bfcb5101e7e6d7b5745775d2a0bb9ba5b84715a2",
     "sprint4-validacao_net9.0_20261103163402.trx": "eeb66500c63994d762bed6f905f938c373c562ff1e5a299609fe56ba1ad8e51c",
     "sprint4-validacao_net9.0_20261103163415.trx": "4c7ab5965006652b210b9e2fdda8402d6c742ae655e187a28fb2cb6335400ce3",
+    "ao-vivo/captura-log.txt": "f01a374e9c81e3db89b3a42940c4d6a5447684986a1296e42bf13f196eed6295",
+    "ao-vivo/execucao-console.txt": "82eb1d7dfffe9b39a29ed8985222f3b5666040111d1256575cca415afce70685",
+    "ao-vivo/legendas-tempos.json": "cb3396e39de756a5b25459d80c1b5ddfb98fe0338c77e2ee22f383a283d6dc59",
+    "ao-vivo/manifesto-ao-vivo.json": "c0a834417532b3f9df6957acd8c2e6dd43d71926cad85823bb1ac1f69feca16e",
+    "ao-vivo/quadro-execucao.png": "ad44f0b76b5e134afed087c2e38dfc7b56fbd4a14185b19fc04d9bf30bd713a8",
+    "ao-vivo/runner-completo.txt": "82eb1d7dfffe9b39a29ed8985222f3b5666040111d1256575cca415afce70685",
     "http/caso-66.json": "8ac1a6c4da51d95832cf66a5a11fcc4a93ee981470503ae81b0fe0c3cce1e561",
     "http/caso-66.png": "01f993002f31f33c12e828e109bbedd9679054e5c5a99e23e6af4428fb9fdd53",
     "http/caso-67.json": "bb6c7219821e76e6a899fe0dbe029bfdb555f0c9f9db946daac1c61263cea36a",
@@ -70,7 +77,10 @@
     "http/caso-74.json": "127c9fabd350caed89a03401ad87a9a578c2ab3e5d06a17e11370a52c37c8f00",
     "http/caso-74.png": "db6e609eb9d6541290d542b6fa2b07a4e1371fbce6ca6afec4ef16693aac7652",
     "http/requisicoes.json": "944379cca29e96bc14e49dfbf92a2045c73bb5528ae7f10f9a9b0df9fc062482",
-    "http/resumo.json": "fda605f9a3900fc789d346fb9c5b1a06f115954d49b493937af885c178dc2f0a"
+    "http/resumo.json": "fda605f9a3900fc789d346fb9c5b1a06f115954d49b493937af885c178dc2f0a",
+    "ao-vivo/http/requisicoes.json": "535dfc421c10f40b55ad9b4243bcf5cddc54058b6323e1846bf51a0f192c6a4c",
+    "ao-vivo/http/resumo.json": "4bc06f321529e65d0fd80a98142151c4abab915e4301ef90efaa463b8f822ba4",
+    "ao-vivo/testes/filmagem.trx": "33b802d81692a1c7d65647e9fc72812a6eed87b0aca8e9ef1905941b339c8ea5"
   },
   "sources": {
     "DOBU/Dobu.Api/Program.cs": "dcedfeefc33d4f2c9e669d721e2f00e129b09f4b0fdfe04e25161b08e0c9db5c",

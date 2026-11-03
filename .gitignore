@@ -11,3 +11,6 @@
 # Test results and coverage
 **/TestResults/
 **/coverage/
+
+# Local intermediate recording; publish the MP4 and evidence only.
+docs/compliance-sprint4/evidencias/ao-vivo/captura-original.mkv
