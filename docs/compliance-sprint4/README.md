@@ -53,7 +53,7 @@ Para Postman: iniciar a API em Development, com SQLite isolado e chave JWT de de
 - [x] Quatro cenários executados: 4 aprovados, 0 falhas, 0 ignorados em 03/11/2026. Suíte completa: 26 aprovados (7 unitários + 19 integração).
 - [ ] Registrar execuções manuais e evidências.
 - [ ] Resolver ou justificar lacunas de cobertura dos critérios de aceite.
-- [ ] Publicar os arquivos revisados na branch develop do repositório público.
+- [x] Arquivos revisados publicados na [branch develop do repositório público](https://github.com/nanabardella/Dobu-.NET/tree/develop); implementação e relatório no commit `a6e2e96`.
 - [ ] Gravar e publicar vídeo de configuração, execução e resultados.
 - [ ] Inserir link do vídeo: **PENDENTE**.
 - [x] Professor Orlando Clinio Patriarcha (`pf1997@fiap.com.br`, e-mail `proforlando.patriarcha@fiap.com.br`) confirmado com Basic (`express` no CLI) e membro de Project Administrators no DOBU.
