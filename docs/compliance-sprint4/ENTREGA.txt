@@ -1,0 +1,32 @@
+COMPLIANCE, QUALITY ASSURANCE & TESTS — SPRINT 4
+Projeto DOBU
+
+LINK PRINCIPAL PARA ENTREGAR NO PORTAL:
+https://github.com/nanabardella/Dobu-.NET/tree/develop
+
+PLANO DE TESTES NO AZURE BOARDS:
+https://dev.azure.com/RM561439/DOBU/_workitems
+Casos 66 a 75, com objetivos, entradas controladas, passos e saídas esperadas.
+
+VÍDEO LEGENDADO (SEM NARRAÇÃO):
+https://raw.githubusercontent.com/nanabardella/Dobu-.NET/develop/docs/compliance-sprint4/evidencias/sprint4-evidencias-legendado.mp4
+
+DOCUMENTAÇÃO E RESULTADOS:
+https://github.com/nanabardella/Dobu-.NET/blob/develop/docs/compliance-sprint4/README.md
+
+RESULTADOS:
+31 testes automatizados aprovados (7 unitários e 24 de integração).
+33 chamadas HTTP verificadas; nove casos disponíveis passaram no replay.
+Evidências JSON e PNG anexadas aos casos 66 a 74.
+Professor confirmado com acesso Basic e Project Administrators.
+
+LIMITAÇÃO:
+Caso 75 (WhatsApp/consentimento) bloqueado: sem implementação e sem conta de provedor.
+Não houve envio de mensagens. Resultados publicados são de execução assistida/automatizada.
+O vídeo apresenta as requisições e respostas registradas; não é captura do Postman.
+
+A Parte A do enunciado pede o plano de testes manuais, sem exigir expressamente
+a execução humana de todos os casos. O plano está cadastrado no Azure Boards.
+
+O envio no portal acadêmico NÃO foi realizado. Prazo no PDF: 04/11/2026;
+conferir o horário limite no portal.

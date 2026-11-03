@@ -32,7 +32,7 @@ Os dez casos possuem objetivo, entradas controladas, passos com saídas esperada
 
 As datas de outubro são fixtures fixas em UTC; não representam a data atual. `C-100` é uma descrição; os IDs reais são UUIDs capturados das respostas. Executar a preparação e os casos em ordem: a C-100 termina o caso 68 em 24/10/2026 às 10:00; no caso 74, a C-200 ocupa 25/10/2026 às 10:00. O roteiro usa banco novo a cada execução.
 
-O enunciado exige um plano de testes manuais. Para registrar execução manual humana, revisar os casos no Boards, realizar os passos e registrar executor, data, versão, saída real e resultado. As evidências assistidas ajudam nessa revisão, mas não devem ser apresentadas como um teste feito por uma pessoa.
+O enunciado exige um **plano de testes manuais** no Azure Boards, com objetivos, entradas, saídas e procedimentos. Não exige expressamente executar todos os casos manualmente. O plano está cadastrado. A revisão humana adicional é opcional para esta conferência de requisitos; as evidências publicadas são assistidas e não devem ser apresentadas como um teste feito por uma pessoa.
 
 ## Parte B — Automação e reprodução
 
@@ -65,7 +65,7 @@ O replay desativa o worker para manter a fixture determinística e usa o hook De
 ## Limites e pendências
 
 - **WhatsApp bloqueado:** a equipe informou não possuir conta de teste. Não há integração de envio nem gestão de consentimento; nenhuma mensagem foi enviada. Cadastro de lembrete não comprova envio. O critério do PBI-16 permanece pendente e pode reduzir a avaliação.
-- **Revisão manual humana pendente:** resultados publicados são de execução assistida/automatizada.
+- Resultados publicados são de execução assistida/automatizada. Não foi realizada execução manual humana; ela não está expressamente exigida como entregável no enunciado fornecido.
 - Ensaios usam SQLite. Oracle não foi validado nesta rodada. Não houve deploy em produção.
 - Conflito cobre o mesmo instante, sem duração de consulta ou teste de corrida entre processos; a checagem não garante exclusão em concorrência distribuída.
 - Deduplicação de alertas vale para mesma descrição, pet e data na rotina sequencial. Atualizar vacina não invalida automaticamente lembretes já emitidos; múltiplas instâncias do worker exigem coordenação adicional. Esta versão acadêmica não é uma validação de produção.
