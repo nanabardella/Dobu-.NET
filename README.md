@@ -4,7 +4,7 @@
 
 [Plano manual, casos no Azure Boards, automação e roteiro de vídeo](docs/compliance-sprint4/README.md).
 
-Validação em 03/11/2026: 26 testes aprovados (7 unitários e 19 de integração), incluindo quatro cenários específicos de Compliance. A execução separada dos quatro cenários também passou. Execução manual e vídeo ainda pendentes. As lacunas em relação aos critérios dos PBIs estão documentadas no plano.
+Validação em 03/11/2026: 31 testes aprovados (7 unitários e 24 de integração) e 33 chamadas HTTP verificadas. [Vídeo legendado em MP4](https://raw.githubusercontent.com/nanabardella/Dobu-.NET/develop/docs/compliance-sprint4/evidencias/sprint4-evidencias-legendado.mp4). Resultados de execução assistida/automatizada; revisão manual humana e integração WhatsApp permanecem pendentes, conforme o plano.
 
 # Sprint 3 Challenge | DOBU
 

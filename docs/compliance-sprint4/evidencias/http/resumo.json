@@ -1,0 +1,59 @@
+{
+  "run": "20261103T193516Z",
+  "baseUrl": "http://127.0.0.1:5077",
+  "environment": "Development; SQLite temporario isolado; worker desativado neste replay; rotina automatica validada em teste de integracao separado",
+  "mode": "Execucao assistida de passos do plano de sistema via HTTP; sem declaracao de execucao manual humana",
+  "cases": {
+    "66": {
+      "outcome": "Passed",
+      "mode": "Execucao assistida HTTP, automatizada pelo roteiro; nao substitui revisao humana",
+      "steps": 3
+    },
+    "67": {
+      "outcome": "Passed",
+      "mode": "Execucao assistida HTTP, automatizada pelo roteiro; nao substitui revisao humana",
+      "steps": 4
+    },
+    "68": {
+      "outcome": "Passed",
+      "mode": "Execucao assistida HTTP, automatizada pelo roteiro; nao substitui revisao humana",
+      "steps": 3
+    },
+    "69": {
+      "outcome": "Passed",
+      "mode": "Execucao assistida HTTP, automatizada pelo roteiro; nao substitui revisao humana",
+      "steps": 3
+    },
+    "70": {
+      "outcome": "Passed",
+      "mode": "Execucao assistida HTTP, automatizada pelo roteiro; nao substitui revisao humana",
+      "steps": 2
+    },
+    "71": {
+      "outcome": "Passed",
+      "mode": "Execucao assistida HTTP, automatizada pelo roteiro; nao substitui revisao humana",
+      "steps": 2
+    },
+    "72": {
+      "outcome": "Passed",
+      "mode": "Execucao assistida HTTP, automatizada pelo roteiro; nao substitui revisao humana",
+      "steps": 3
+    },
+    "73": {
+      "outcome": "Passed",
+      "mode": "Execucao assistida HTTP, automatizada pelo roteiro; nao substitui revisao humana",
+      "steps": 4
+    },
+    "74": {
+      "outcome": "Passed",
+      "mode": "Execucao assistida HTTP, automatizada pelo roteiro; nao substitui revisao humana",
+      "steps": 3
+    },
+    "75": {
+      "outcome": "Blocked",
+      "reason": "Sem implementacao/provedor de WhatsApp; usuario informou nao possuir conta de teste. Nenhuma mensagem enviada."
+    }
+  },
+  "requests": 33,
+  "passed": 33
+}

@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
+using Dobu.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var jwtSigningKey = builder.Configuration["Jwt:Key"];
@@ -40,6 +41,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         ValidateIssuer = false, ValidateAudience = false, ValidateLifetime = true
     });
 builder.Services.AddAuthorization();
+builder.Services.AddSingleton(TimeProvider.System);
+builder.Services.AddScoped<VaccineAlerts>();
+builder.Services.AddHostedService<VaccineAlertWorker>();
 builder.Services.AddHttpClient();
 builder.Services.AddHttpClient("ExternalServiceHealthCheck", client =>
 {

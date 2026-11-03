@@ -1,0 +1,46 @@
+[
+  {
+    "case": 72,
+    "label": "Bloquear carteira de outro tutor",
+    "timestamp": "2026-11-03T19:35:22.934978+00:00",
+    "method": "GET",
+    "url": "/api/vacinas/pet/5c0b4979-c221-44d9-be5b-18245546b3ed",
+    "request": null,
+    "status": 404,
+    "expectedStatus": 404,
+    "response": {
+      "type": "https://tools.ietf.org/html/rfc9110#section-15.5.5",
+      "title": "Not Found",
+      "status": 404,
+      "traceId": "00-d0bd91c357adc7791205ad794eb1cea5-7fa93ab4d7143bbb-01"
+    },
+    "passed": true,
+    "durationMs": 6
+  },
+  {
+    "case": 72,
+    "label": "Isolar listagem geral",
+    "timestamp": "2026-11-03T19:35:22.949786+00:00",
+    "method": "GET",
+    "url": "/api/vacinas",
+    "request": null,
+    "status": 200,
+    "expectedStatus": 200,
+    "response": [],
+    "passed": true,
+    "durationMs": 12
+  },
+  {
+    "case": 72,
+    "label": "Bloquear acesso anonimo",
+    "timestamp": "2026-11-03T19:35:22.960229+00:00",
+    "method": "GET",
+    "url": "/api/vacinas/pet/5c0b4979-c221-44d9-be5b-18245546b3ed",
+    "request": null,
+    "status": 401,
+    "expectedStatus": 401,
+    "response": "",
+    "passed": true,
+    "durationMs": 8
+  }
+]

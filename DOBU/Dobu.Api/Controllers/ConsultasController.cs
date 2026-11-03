@@ -62,6 +62,9 @@ public class ConsultasController(DobuDbContext context) : ControllerBase
         if (veterinario is null || veterinario.TipoUsuario != "VETERINARIO")
             return BadRequest("Veterinario informado nao existe ou nao possui perfil VETERINARIO.");
 
+        if (await context.Consultas.AnyAsync(x => x.VeterinarioId == request.VeterinarioId && x.DataConsulta == request.DataConsulta))
+            return Conflict("Horario indisponivel para o veterinario informado.");
+
         try
         {
             var consulta = new Consulta(request.DataConsulta, request.Descricao, request.Valor, request.PetId, request.VeterinarioId);
@@ -88,6 +91,9 @@ public class ConsultasController(DobuDbContext context) : ControllerBase
         var veterinario = await context.Usuarios.FirstOrDefaultAsync(x => x.Id == request.VeterinarioId);
         if (veterinario is null || veterinario.TipoUsuario != "VETERINARIO")
             return BadRequest("Veterinario informado nao existe ou nao possui perfil VETERINARIO.");
+
+        if (await context.Consultas.AnyAsync(x => x.Id != id && x.VeterinarioId == request.VeterinarioId && x.DataConsulta == request.DataConsulta))
+            return Conflict("Horario indisponivel para o veterinario informado.");
 
         try
         {

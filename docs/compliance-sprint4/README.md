@@ -1,61 +1,77 @@
 # Compliance, Quality Assurance & Tests — Sprint 4
 
-Projeto: [DOBU no Azure Boards](https://dev.azure.com/RM561439/DOBU).
-Entrega prevista no enunciado: 04/11/2026.
+**Projeto:** [DOBU no Azure Boards](https://dev.azure.com/RM561439/DOBU). **Entrega prevista:** 04/11/2026, no horário definido no portal.
 
-## Parte A — Plano manual
+## Links para correção
 
-Os casos possuem objetivos, entradas controladas, procedimentos e saídas esperadas no campo Steps, com vínculo Tests ao PBI correspondente. Iteração: `DOBU\Sprint 4`.
+- [Repositório público — branch develop](https://github.com/nanabardella/Dobu-.NET/tree/develop).
+- [Vídeo legendado em MP4 — abrir ou baixar](https://raw.githubusercontent.com/nanabardella/Dobu-.NET/develop/docs/compliance-sprint4/evidencias/sprint4-evidencias-legendado.mp4).
+- [Arquivo do vídeo no GitHub](evidencias/sprint4-evidencias-legendado.mp4).
+- [Plano de testes no Azure Boards](https://dev.azure.com/RM561439/DOBU/_workitems).
+- [Relatório navegável das chamadas reais](evidencias/relatorio.html) — baixar e abrir no navegador; o GitHub exibe o código HTML.
+- [Resultados do replay HTTP](evidencias/http/resumo.json) e [requisições/respostas completas](evidencias/http/requisicoes.json).
 
-| Caso | Funcionalidade | PBI | Cobertura |
+O vídeo tem legendas incorporadas, sem narração, e apresenta configuração, preparação e respostas reais registradas. É uma apresentação das evidências de execução do roteiro HTTP, não uma captura de tela do Postman ou uma execução manual humana. Trechos de corpos longos aparecem resumidos no vídeo; os JSONs completos estão publicados. Tokens e senhas foram ocultados.
+
+## Parte A — Plano de sistema no Azure Boards
+
+Os dez casos possuem objetivo, entradas controladas, passos com saídas esperadas e vínculo Tests ao PBI. Iteração: `DOBU\Sprint 4`. Os casos 66 a 74 têm anexos JSON e PNG derivados das respostas reais, além do histórico da execução assistida. A revisão humana/manual permanece pendente; não foram declaradas execuções humanas inexistentes.
+
+| Caso | Funcionalidade | PBI | Resultado da execução assistida |
 |---|---|---|---|
-| [66](https://dev.azure.com/RM561439/DOBU/_workitems/edit/66) | Carteira e persistência de vacina | 22 / PBI-10 | Implementado; execução manual pendente |
-| [67](https://dev.azure.com/RM561439/DOBU/_workitems/edit/67) | Próximas doses e limites de data | 23 / PBI-11 | Consulta implementada; alerta automático pendente |
-| [68](https://dev.azure.com/RM561439/DOBU/_workitems/edit/68) | Alteração de data da consulta | 25 / PBI-13 | Atualização implementada; conflito pendente |
-| [69](https://dev.azure.com/RM561439/DOBU/_workitems/edit/69) | Cadastro de lembrete | 29 / PBI-16 | Cadastro implementado; WhatsApp pendente |
-| [70](https://dev.azure.com/RM561439/DOBU/_workitems/edit/70) | Vacina para pet inexistente | 22 | Cenário negativo |
-| [71](https://dev.azure.com/RM561439/DOBU/_workitems/edit/71) | Descrição inválida no lembrete | 29 | Cenário negativo |
-| [72](https://dev.azure.com/RM561439/DOBU/_workitems/edit/72) | Carteira de outro tutor | 22 | Lacuna de autorização por inspeção |
-| [73](https://dev.azure.com/RM561439/DOBU/_workitems/edit/73) | Alerta automático | 23 | Bloqueado por implementação ausente |
-| [74](https://dev.azure.com/RM561439/DOBU/_workitems/edit/74) | Horário ocupado | 25 | Lacuna de conflito por inspeção |
-| [75](https://dev.azure.com/RM561439/DOBU/_workitems/edit/75) | WhatsApp e consentimento | 29 | Bloqueado por implementação ausente |
+| [66](https://dev.azure.com/RM561439/DOBU/_workitems/edit/66) | Carteira e persistência de vacina | 22 / PBI-10 | PASS |
+| [67](https://dev.azure.com/RM561439/DOBU/_workitems/edit/67) | Próximas doses, limite exato e exclusão | 23 / PBI-11 | PASS |
+| [68](https://dev.azure.com/RM561439/DOBU/_workitems/edit/68) | Reagendamento e persistência | 25 / PBI-13 | PASS |
+| [69](https://dev.azure.com/RM561439/DOBU/_workitems/edit/69) | Cadastro e consulta de lembrete | 29 / PBI-16 | PASS; cobertura parcial de WhatsApp |
+| [70](https://dev.azure.com/RM561439/DOBU/_workitems/edit/70) | Vacina para pet inexistente | 22 | PASS — HTTP 400 |
+| [71](https://dev.azure.com/RM561439/DOBU/_workitems/edit/71) | Descrição inválida de lembrete | 29 | PASS — HTTP 400 |
+| [72](https://dev.azure.com/RM561439/DOBU/_workitems/edit/72) | Acesso por outro tutor ou anônimo | 22 | PASS — HTTP 404/401 |
+| [73](https://dev.azure.com/RM561439/DOBU/_workitems/edit/73) | Alertas internos, repetição e isolamento | 23 | PASS; worker validado separadamente |
+| [74](https://dev.azure.com/RM561439/DOBU/_workitems/edit/74) | Reagendamento em horário ocupado | 25 | PASS — HTTP 409 e data preservada |
+| [75](https://dev.azure.com/RM561439/DOBU/_workitems/edit/75) | WhatsApp e consentimento | 29 | BLOCKED — sem implementação/provedor |
 
-As datas de outubro são fixtures fixas; não representam a data atual. `C-100` é uma descrição; os IDs reais são UUIDs capturados das respostas. Preparar os cadastros auxiliares da collection antes dos casos. Usar banco QA isolado. Ao repetir, recriar as fixtures. Nunca usar telefone real para ensaio de envio.
+As datas de outubro são fixtures fixas em UTC; não representam a data atual. `C-100` é uma descrição; os IDs reais são UUIDs capturados das respostas. Executar a preparação e os casos em ordem: a C-100 termina o caso 68 em 24/10/2026 às 10:00; no caso 74, a C-200 ocupa 25/10/2026 às 10:00. O roteiro usa banco novo a cada execução.
 
-Registrar por caso: versão/commit, ambiente, executor, data, saída real, resultado e evidência. Os casos estão em Design; nenhum resultado manual foi declarado aprovado sem execução. Os critérios completos dos PBIs continuam válidos, inclusive os ainda não implementados. É necessário resolver ou justificar as lacunas antes da entrega final.
+O enunciado exige um plano de testes manuais. Para registrar execução manual humana, revisar os casos no Boards, realizar os passos e registrar executor, data, versão, saída real e resultado. As evidências assistidas ajudam nessa revisão, mas não devem ser apresentadas como um teste feito por uma pessoa.
 
-## Parte B — Automação
+## Parte B — Automação e reprodução
 
-Collection: `DOBU/postman/Sprint4-automacao.postman_collection.json`.
-Testes HTTP de integração: `DOBU/tests/Dobu.IntegrationTests/Sprint4ComplianceTests.cs`.
+Validação em 03/11/2026: **31 testes aprovados — 7 unitários e 24 de integração, zero falhas**. A classe `Sprint4ComplianceTests` contém nove testes, incluindo os quatro fluxos principais e cenários complementares. O replay externo realizou **33 chamadas HTTP verificadas**, cobrindo nove casos disponíveis. Relatórios TRX completos na pasta [evidencias](evidencias).
 
-Quatro testes independentes verificam carteira/persistência, filtro de próximas doses, alteração/persistência da consulta e cadastro/persistência do lembrete. Usam a API real em WebApplicationFactory e banco SQLite temporário; não validam Oracle, entrega de notificações, WhatsApp ou concorrência de agenda.
+Requisitos: .NET 9 SDK e Python 3. Executar na raiz do repositório:
 
 ```powershell
-dotnet test DOBU/tests/Dobu.IntegrationTests/Dobu.IntegrationTests.csproj --filter FullyQualifiedName~Sprint4ComplianceTests --logger "trx;LogFileName=compliance.trx" --results-directory TestResults/Compliance
+dotnet test DOBU/Dobu.sln -m:1 --logger "trx;LogFilePrefix=sprint4" --results-directory TestResults/Validacao
+python DOBU/postman/executar-evidencias.py
 ```
 
-Para Postman: iniciar a API em Development, com SQLite isolado e chave JWT de desenvolvimento; configurar `baseUrl` (padrão `http://localhost:5070`) e executar a collection inteira no Runner, incluindo a pasta de preparação. Limpar `qaEmail` e `qaVetEmail` antes de cada execução para gerar novos usuários. Não expor tokens na gravação. A collection foi preparada; seu resultado deve ser registrado após executar o Runner.
+O segundo comando inicia a API compilada na porta local 5077 em Development, configura SQLite temporário isolado, executa os casos e encerra a API. Não iniciar outra instância nessa porta. É necessário compilar primeiro com `dotnet test` ou `dotnet build DOBU/Dobu.sln -m:1`. Para executar somente os testes específicos:
 
-## Roteiro do vídeo obrigatório
+```powershell
+dotnet test DOBU/tests/Dobu.IntegrationTests/Dobu.IntegrationTests.csproj --filter FullyQualifiedName~Sprint4ComplianceTests
+```
 
-1. Mostrar a branch develop e o commit da versão testada.
-2. Mostrar os quatro casos principais no Boards, entradas, saídas e vínculo aos PBIs.
-3. Mostrar a configuração do ambiente, banco isolado e ferramenta de automação.
-4. Executar os quatro testes com o comando acima; expandir os quatro nomes e mostrar os resultados. Se usar Postman, executar a collection e mostrar as verificações de persistência.
-5. Mostrar o relatório e explicar o alcance dos testes e as lacunas. Não apresentar cadastro de lembrete como envio WhatsApp.
-6. Publicar o vídeo e inserir o link no repositório público, na branch develop.
+O roteiro é uma ferramenta equivalente de automação HTTP, com verificações de status, corpo, vínculos e consultas posteriores de persistência. Também existe a collection `DOBU/postman/Sprint4-automacao.postman_collection.json`; ela herda autenticação Bearer do token do tutor. Para Postman, iniciar a API, configurar `baseUrl`, limpar `qaEmail`/`qaVetEmail` antes de uma nova execução e executar a collection inteira com preparação. O Runner do Postman não foi executado nesta validação; o vídeo mostra o roteiro HTTP equivalente.
 
-## Conferência final
+## Mudanças da aplicação
 
-- [x] Plano manual publicado no Azure Boards com dez casos e rastreabilidade.
-- [x] Quatro cenários automatizados adicionados à cópia local da branch develop.
-- [x] Quatro cenários executados: 4 aprovados, 0 falhas, 0 ignorados em 03/11/2026. Suíte completa: 26 aprovados (7 unitários + 19 integração).
-- [ ] Registrar execuções manuais e evidências.
-- [ ] Resolver ou justificar lacunas de cobertura dos critérios de aceite.
-- [x] Arquivos revisados publicados na [branch develop do repositório público](https://github.com/nanabardella/Dobu-.NET/tree/develop); implementação e relatório no commit `a6e2e96`.
-- [ ] Gravar e publicar vídeo de configuração, execução e resultados.
-- [ ] Inserir link do vídeo: **PENDENTE**.
-- [x] Professor Orlando Clinio Patriarcha (`pf1997@fiap.com.br`, e-mail `proforlando.patriarcha@fiap.com.br`) confirmado com Basic (`express` no CLI) e membro de Project Administrators no DOBU.
+- Carteira de vacinação e lembretes exigem autenticação e restringem dados ao tutor responsável, inclusive por ID, pet, listagem e operações de escrita.
+- Criação e reagendamento de consulta recusam o mesmo instante para o mesmo veterinário, retornando HTTP 409 e preservando a consulta anterior.
+- Worker consulta vacinas a cada minuto e gera lembretes internos PENDENTE do dia atual até sete dias à frente, inclusive, em UTC. Janela configurável em `VaccineAlerts:WindowDays`; desligar com `VaccineAlerts:Enabled=false`.
+- Para QA, `POST /api/alertas-vacina/gerar?referencia=2026-10-19T10:00:00Z` chama a mesma rotina em Development, somente para o tutor autenticado. Em Production esse hook retorna 404. `GET /api/alertas-vacina` consulta os lembretes de vacina do próprio tutor.
 
-Este documento substitui as afirmações do PDF antigo sobre resultados e WhatsApp: esses resultados não foram assumidos como evidência desta execução.
+O replay desativa o worker para manter a fixture determinística e usa o hook Development. O teste `Alertas_RotinaEmSegundoPlano_GeraSemRequisicaoManual` inicia o worker real com TimeProvider fixo e verifica criação sem requisição de geração. A implementação segue o [uso de escopo em BackgroundService documentado pela Microsoft](https://learn.microsoft.com/en-us/dotnet/core/extensions/scoped-service).
+
+## Limites e pendências
+
+- **WhatsApp bloqueado:** a equipe informou não possuir conta de teste. Não há integração de envio nem gestão de consentimento; nenhuma mensagem foi enviada. Cadastro de lembrete não comprova envio. O critério do PBI-16 permanece pendente e pode reduzir a avaliação.
+- **Revisão manual humana pendente:** resultados publicados são de execução assistida/automatizada.
+- Ensaios usam SQLite. Oracle não foi validado nesta rodada. Não houve deploy em produção.
+- Conflito cobre o mesmo instante, sem duração de consulta ou teste de corrida entre processos; a checagem não garante exclusão em concorrência distribuída.
+- Deduplicação de alertas vale para mesma descrição, pet e data na rotina sequencial. Atualizar vacina não invalida automaticamente lembretes já emitidos; múltiplas instâncias do worker exigem coordenação adicional. Esta versão acadêmica não é uma validação de produção.
+
+## Entrega
+
+Professor Orlando Clinio Patriarcha (`pf1997@fiap.com.br`, e-mail `proforlando.patriarcha@fiap.com.br`) confirmado com Basic e membro de Project Administrators do DOBU. Repositório público, arquivos na branch develop.
+
+Entregar o link desta branch no portal da atividade. Este README contém os links do Azure Boards e do vídeo; o enunciado de Compliance não exige PDF nem uma plataforma específica para o vídeo. Para apresentar no YouTube, a equipe pode baixar o MP4, enviá-lo como não listado e atualizar o link. O envio no portal acadêmico não foi realizado.

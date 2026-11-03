@@ -1,0 +1,38 @@
+[
+  {
+    "case": 70,
+    "label": "Confirmar pet inexistente",
+    "timestamp": "2026-11-03T19:35:22.821340+00:00",
+    "method": "GET",
+    "url": "/api/pets/00000000-0000-0000-0000-000000000001",
+    "request": null,
+    "status": 404,
+    "expectedStatus": 404,
+    "response": {
+      "type": "https://tools.ietf.org/html/rfc9110#section-15.5.5",
+      "title": "Not Found",
+      "status": 404,
+      "traceId": "00-788d7edfc750e57708355dd9e9088289-6ec8e78745f90071-01"
+    },
+    "passed": true,
+    "durationMs": 42
+  },
+  {
+    "case": 70,
+    "label": "Recusar vacina sem pet",
+    "timestamp": "2026-11-03T19:35:22.829568+00:00",
+    "method": "POST",
+    "url": "/api/vacinas",
+    "request": {
+      "nome": "V10",
+      "dataAplicacao": "2026-10-19T10:00:00Z",
+      "dataProximaDose": "2026-10-25T10:00:00Z",
+      "petId": "00000000-0000-0000-0000-000000000001"
+    },
+    "status": 400,
+    "expectedStatus": 400,
+    "response": "Pet informado nao existe.",
+    "passed": true,
+    "durationMs": 6
+  }
+]

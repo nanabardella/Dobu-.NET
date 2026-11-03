@@ -1,0 +1,75 @@
+[
+  {
+    "case": 69,
+    "label": "Cadastrar lembrete",
+    "timestamp": "2026-11-03T19:35:22.706857+00:00",
+    "method": "POST",
+    "url": "/api/lembretes",
+    "request": {
+      "descricao": "Lembrete controlado QA",
+      "dataLembrete": "2026-10-21T14:00:00Z",
+      "status": "PENDENTE",
+      "petId": "5c0b4979-c221-44d9-be5b-18245546b3ed"
+    },
+    "status": 201,
+    "expectedStatus": 201,
+    "response": {
+      "descricao": "Lembrete controlado QA",
+      "dataLembrete": "2026-10-21T14:00:00Z",
+      "status": "PENDENTE",
+      "petId": "5c0b4979-c221-44d9-be5b-18245546b3ed",
+      "pet": null,
+      "id": "62a92029-39cc-40ad-b453-2fc4bad90208",
+      "createdAt": "2026-11-03T16:35:22.6818255-03:00",
+      "active": true
+    },
+    "passed": true,
+    "durationMs": 42
+  },
+  {
+    "case": 69,
+    "label": "Confirmar lembrete persistido",
+    "timestamp": "2026-11-03T19:35:22.730361+00:00",
+    "method": "GET",
+    "url": "/api/lembretes/62a92029-39cc-40ad-b453-2fc4bad90208",
+    "request": null,
+    "status": 200,
+    "expectedStatus": 200,
+    "response": {
+      "descricao": "Lembrete controlado QA",
+      "dataLembrete": "2026-10-21T14:00:00",
+      "status": "PENDENTE",
+      "petId": "5c0b4979-c221-44d9-be5b-18245546b3ed",
+      "pet": null,
+      "id": "62a92029-39cc-40ad-b453-2fc4bad90208",
+      "createdAt": "2026-11-03T16:35:22.6818255",
+      "active": true
+    },
+    "passed": true,
+    "durationMs": 21
+  },
+  {
+    "case": 69,
+    "label": "Consultar lembretes do pet",
+    "timestamp": "2026-11-03T19:35:22.777049+00:00",
+    "method": "GET",
+    "url": "/api/lembretes/pet/5c0b4979-c221-44d9-be5b-18245546b3ed",
+    "request": null,
+    "status": 200,
+    "expectedStatus": 200,
+    "response": [
+      {
+        "descricao": "Lembrete controlado QA",
+        "dataLembrete": "2026-10-21T14:00:00",
+        "status": "PENDENTE",
+        "petId": "5c0b4979-c221-44d9-be5b-18245546b3ed",
+        "pet": null,
+        "id": "62a92029-39cc-40ad-b453-2fc4bad90208",
+        "createdAt": "2026-11-03T16:35:22.6818255",
+        "active": true
+      }
+    ],
+    "passed": true,
+    "durationMs": 44
+  }
+]

@@ -1,0 +1,66 @@
+[
+  {
+    "case": 73,
+    "label": "Gerar alertas no relogio controlado",
+    "timestamp": "2026-11-03T19:35:23.003305+00:00",
+    "method": "POST",
+    "url": "/api/alertas-vacina/gerar?referencia=2026-10-19T10:00:00Z",
+    "request": null,
+    "status": 200,
+    "expectedStatus": 200,
+    "response": {
+      "criados": 1
+    },
+    "passed": true,
+    "durationMs": 41
+  },
+  {
+    "case": 73,
+    "label": "Consultar alerta interno",
+    "timestamp": "2026-11-03T19:35:23.030915+00:00",
+    "method": "GET",
+    "url": "/api/alertas-vacina",
+    "request": null,
+    "status": 200,
+    "expectedStatus": 200,
+    "response": [
+      {
+        "id": "15692ef4-f559-4fe7-9e02-c0f32dd662da",
+        "descricao": "Vacina V10 de Thor: proxima dose em 2026-10-25.",
+        "dataLembrete": "2026-10-25T10:00:00",
+        "status": "PENDENTE",
+        "petId": "5c0b4979-c221-44d9-be5b-18245546b3ed"
+      }
+    ],
+    "passed": true,
+    "durationMs": 25
+  },
+  {
+    "case": 73,
+    "label": "Nao duplicar na reexecucao",
+    "timestamp": "2026-11-03T19:35:23.043301+00:00",
+    "method": "POST",
+    "url": "/api/alertas-vacina/gerar?referencia=2026-10-19T10:00:00Z",
+    "request": null,
+    "status": 200,
+    "expectedStatus": 200,
+    "response": {
+      "criados": 0
+    },
+    "passed": true,
+    "durationMs": 10
+  },
+  {
+    "case": 73,
+    "label": "Nao expor alerta a outro tutor",
+    "timestamp": "2026-11-03T19:35:23.052156+00:00",
+    "method": "GET",
+    "url": "/api/alertas-vacina",
+    "request": null,
+    "status": 200,
+    "expectedStatus": 200,
+    "response": [],
+    "passed": true,
+    "durationMs": 7
+  }
+]

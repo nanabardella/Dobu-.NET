@@ -1,0 +1,123 @@
+[
+  {
+    "case": 74,
+    "label": "Reservar horario com C-200",
+    "timestamp": "2026-11-03T19:35:23.063829+00:00",
+    "method": "POST",
+    "url": "/api/consultas",
+    "request": {
+      "dataConsulta": "2026-10-25T10:00:00Z",
+      "descricao": "C-200 ocupada",
+      "valor": 150,
+      "petId": "5c0b4979-c221-44d9-be5b-18245546b3ed",
+      "veterinarioId": "1124574f-8144-4aaf-9d5f-c08bf2a08eb8"
+    },
+    "status": 201,
+    "expectedStatus": 201,
+    "response": {
+      "dataConsulta": "2026-10-25T10:00:00Z",
+      "descricao": "C-200 ocupada",
+      "valor": 150,
+      "petId": "5c0b4979-c221-44d9-be5b-18245546b3ed",
+      "pet": null,
+      "veterinarioId": "1124574f-8144-4aaf-9d5f-c08bf2a08eb8",
+      "veterinario": {
+        "nome": "Veterinario QA",
+        "email": "vet-20261103t193516z@example.test",
+        "tipoUsuario": "VETERINARIO",
+        "petsResponsavel": [],
+        "consultasVeterinario": [
+          null
+        ],
+        "agendamentosVeterinario": [],
+        "logsErro": [],
+        "id": "1124574f-8144-4aaf-9d5f-c08bf2a08eb8",
+        "createdAt": "2026-11-03T16:35:21.9279016",
+        "active": true
+      },
+      "prontuario": null,
+      "pagamento": null,
+      "id": "659d88dd-5c0e-468c-bf98-994a2516865d",
+      "createdAt": "2026-11-03T16:35:23.0608023-03:00",
+      "active": true
+    },
+    "passed": true,
+    "durationMs": 9
+  },
+  {
+    "case": 74,
+    "label": "Recusar reagendamento ocupado",
+    "timestamp": "2026-11-03T19:35:23.078534+00:00",
+    "method": "PUT",
+    "url": "/api/consultas/e835b121-be83-48b9-a6a1-7c80e1dba7f8",
+    "request": {
+      "dataConsulta": "2026-10-25T10:00:00Z",
+      "descricao": "C-100 reagendada",
+      "valor": 150,
+      "petId": "5c0b4979-c221-44d9-be5b-18245546b3ed",
+      "veterinarioId": "1124574f-8144-4aaf-9d5f-c08bf2a08eb8"
+    },
+    "status": 409,
+    "expectedStatus": 409,
+    "response": "Horario indisponivel para o veterinario informado.",
+    "passed": true,
+    "durationMs": 12
+  },
+  {
+    "case": 74,
+    "label": "Preservar C-100 apos conflito",
+    "timestamp": "2026-11-03T19:35:23.088405+00:00",
+    "method": "GET",
+    "url": "/api/consultas/e835b121-be83-48b9-a6a1-7c80e1dba7f8",
+    "request": null,
+    "status": 200,
+    "expectedStatus": 200,
+    "response": {
+      "dataConsulta": "2026-10-24T10:00:00",
+      "descricao": "C-100 reagendada",
+      "valor": 150,
+      "petId": "5c0b4979-c221-44d9-be5b-18245546b3ed",
+      "pet": {
+        "nome": "Thor",
+        "idade": 4,
+        "racaId": "28cbcf12-3518-47f0-b10c-fca595e577e3",
+        "raca": null,
+        "responsavelId": "2b457a47-77a3-4ee9-8052-4055ca91460b",
+        "responsavel": null,
+        "consultas": [
+          null
+        ],
+        "agendamentos": [],
+        "vacinas": [],
+        "lembretes": [],
+        "dobuCams": [],
+        "informacoesCuidado": [],
+        "id": "5c0b4979-c221-44d9-be5b-18245546b3ed",
+        "createdAt": "2026-11-03T16:35:22.2015699",
+        "active": true
+      },
+      "veterinarioId": "1124574f-8144-4aaf-9d5f-c08bf2a08eb8",
+      "veterinario": {
+        "nome": "Veterinario QA",
+        "email": "vet-20261103t193516z@example.test",
+        "tipoUsuario": "VETERINARIO",
+        "petsResponsavel": [],
+        "consultasVeterinario": [
+          null
+        ],
+        "agendamentosVeterinario": [],
+        "logsErro": [],
+        "id": "1124574f-8144-4aaf-9d5f-c08bf2a08eb8",
+        "createdAt": "2026-11-03T16:35:21.9279016",
+        "active": true
+      },
+      "prontuario": null,
+      "pagamento": null,
+      "id": "e835b121-be83-48b9-a6a1-7c80e1dba7f8",
+      "createdAt": "2026-11-03T16:35:22.4920684",
+      "active": true
+    },
+    "passed": true,
+    "durationMs": 7
+  }
+]

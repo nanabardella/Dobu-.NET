@@ -1,0 +1,538 @@
+<!doctype html><html lang="pt-BR"><meta charset="utf-8"><title>DOBU — Evidências Sprint 4</title>
+<style>body{font:17px system-ui;max-width:1050px;margin:40px auto;padding:0 20px;background:#0b1422;color:#e7edf6}a{color:#70dfba}details{background:#17263c;padding:18px;margin:12px 0;border-radius:10px}summary{cursor:pointer}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px}p{line-height:1.6}video{width:100%}</style>
+<h1>DOBU — Compliance Sprint 4</h1><p>Execução assistida HTTP de 03/11/2026. <b>33 chamadas verificadas, nove casos disponíveis aprovados; caso 75 bloqueado.</b> Não declara execução manual humana. O vídeo apresenta as evidências registradas.</p>
+<video controls preload="metadata" src="sprint4-evidencias-legendado.mp4"></video>
+<p>Suíte: 31 testes aprovados (7 unitários + 24 integração). WhatsApp não implementado, sem conta de teste e sem envio de mensagens. Ensaios em SQLite temporário; dados de negócio com datas fixas em UTC. Tokens e senhas ocultados.</p>
+<p><a href="https://dev.azure.com/RM561439/DOBU">Azure Boards</a> · <a href="http/requisicoes.json">JSON completo</a> · <a href="http/resumo.json">Resumo</a></p><details><summary><b>PASS — Caso PREP</b> | Cadastrar tutor QA | HTTP 200</summary><p>2026-11-03T19:35:21.825126+00:00 · 734 ms</p><code>POST /api/auth/register</code><pre>{
+  &quot;entrada&quot;: {
+    &quot;nome&quot;: &quot;Tutor QA&quot;,
+    &quot;email&quot;: &quot;tutor-20261103T193516Z@example.test&quot;,
+    &quot;senha&quot;: &quot;[REDACTED]&quot;,
+    &quot;tipoUsuario&quot;: &quot;Responsavel&quot;
+  },
+  &quot;saida&quot;: {
+    &quot;token&quot;: &quot;[REDACTED]&quot;,
+    &quot;usuarioId&quot;: &quot;2b457a47-77a3-4ee9-8052-4055ca91460b&quot;,
+    &quot;nome&quot;: &quot;Tutor QA&quot;,
+    &quot;email&quot;: &quot;tutor-20261103t193516z@example.test&quot;,
+    &quot;tipoUsuario&quot;: &quot;RESPONSAVEL&quot;
+  }
+}</pre></details><details><summary><b>PASS — Caso PREP</b> | Cadastrar veterinario QA | HTTP 200</summary><p>2026-11-03T19:35:22.006498+00:00 · 179 ms</p><code>POST /api/auth/register</code><pre>{
+  &quot;entrada&quot;: {
+    &quot;nome&quot;: &quot;Veterinario QA&quot;,
+    &quot;email&quot;: &quot;vet-20261103T193516Z@example.test&quot;,
+    &quot;senha&quot;: &quot;[REDACTED]&quot;,
+    &quot;tipoUsuario&quot;: &quot;Veterinario&quot;
+  },
+  &quot;saida&quot;: {
+    &quot;token&quot;: &quot;[REDACTED]&quot;,
+    &quot;usuarioId&quot;: &quot;1124574f-8144-4aaf-9d5f-c08bf2a08eb8&quot;,
+    &quot;nome&quot;: &quot;Veterinario QA&quot;,
+    &quot;email&quot;: &quot;vet-20261103t193516z@example.test&quot;,
+    &quot;tipoUsuario&quot;: &quot;VETERINARIO&quot;
+  }
+}</pre></details><details><summary><b>PASS — Caso PREP</b> | Criar especie | HTTP 201</summary><p>2026-11-03T19:35:22.087900+00:00 · 79 ms</p><code>POST /api/especies</code><pre>{
+  &quot;entrada&quot;: {
+    &quot;nome&quot;: &quot;Cachorro QA&quot;,
+    &quot;descricao&quot;: &quot;Animal domestico&quot;
+  },
+  &quot;saida&quot;: {
+    &quot;nome&quot;: &quot;Cachorro QA&quot;,
+    &quot;descricao&quot;: &quot;Animal domestico&quot;,
+    &quot;racas&quot;: [],
+    &quot;id&quot;: &quot;794cb051-18ba-48e5-9b15-a6df6d7952c0&quot;,
+    &quot;createdAt&quot;: &quot;2026-11-03T16:35:22.0194636-03:00&quot;,
+    &quot;active&quot;: true
+  }
+}</pre></details><details><summary><b>PASS — Caso PREP</b> | Criar raca | HTTP 201</summary><p>2026-11-03T19:35:22.168673+00:00 · 78 ms</p><code>POST /api/racas</code><pre>{
+  &quot;entrada&quot;: {
+    &quot;nome&quot;: &quot;Vira-lata QA&quot;,
+    &quot;porte&quot;: &quot;Medio&quot;,
+    &quot;expectativaVida&quot;: 12,
+    &quot;descricao&quot;: &quot;Raca de teste&quot;,
+    &quot;cuidados&quot;: &quot;Banho e passeio&quot;,
+    &quot;especieId&quot;: &quot;794cb051-18ba-48e5-9b15-a6df6d7952c0&quot;
+  },
+  &quot;saida&quot;: {
+    &quot;nome&quot;: &quot;Vira-lata QA&quot;,
+    &quot;porte&quot;: &quot;Medio&quot;,
+    &quot;expectativaVida&quot;: 12,
+    &quot;descricao&quot;: &quot;Raca de teste&quot;,
+    &quot;cuidados&quot;: &quot;Banho e passeio&quot;,
+    &quot;especieId&quot;: &quot;794cb051-18ba-48e5-9b15-a6df6d7952c0&quot;,
+    &quot;especie&quot;: null,
+    &quot;pets&quot;: [],
+    &quot;id&quot;: &quot;28cbcf12-3518-47f0-b10c-fca595e577e3&quot;,
+    &quot;createdAt&quot;: &quot;2026-11-03T16:35:22.1324327-03:00&quot;,
+    &quot;active&quot;: true
+  }
+}</pre></details><details><summary><b>PASS — Caso PREP</b> | Criar Thor | HTTP 201</summary><p>2026-11-03T19:35:22.251851+00:00 · 81 ms</p><code>POST /api/pets</code><pre>{
+  &quot;entrada&quot;: {
+    &quot;nome&quot;: &quot;Thor&quot;,
+    &quot;idade&quot;: 4,
+    &quot;racaId&quot;: &quot;28cbcf12-3518-47f0-b10c-fca595e577e3&quot;,
+    &quot;responsavelId&quot;: &quot;2b457a47-77a3-4ee9-8052-4055ca91460b&quot;
+  },
+  &quot;saida&quot;: {
+    &quot;nome&quot;: &quot;Thor&quot;,
+    &quot;idade&quot;: 4,
+    &quot;racaId&quot;: &quot;28cbcf12-3518-47f0-b10c-fca595e577e3&quot;,
+    &quot;raca&quot;: null,
+    &quot;responsavelId&quot;: &quot;2b457a47-77a3-4ee9-8052-4055ca91460b&quot;,
+    &quot;responsavel&quot;: {
+      &quot;nome&quot;: &quot;Tutor QA&quot;,
+      &quot;email&quot;: &quot;tutor-20261103t193516z@example.test&quot;,
+      &quot;tipoUsuario&quot;: &quot;RESPONSAVEL&quot;,
+      &quot;petsResponsavel&quot;: [
+        null
+      ],
+      &quot;consultasVeterinario&quot;: [],
+      &quot;agendamentosVeterinario&quot;: [],
+      &quot;logsErro&quot;: [],
+      &quot;id&quot;: &quot;2b457a47-77a3-4ee9-8052-4055ca91460b&quot;,
+      &quot;createdAt&quot;: &quot;2026-11-03T16:35:21.4972037&quot;,
+      &quot;active&quot;: true
+    },
+    &quot;consultas&quot;: [],
+    &quot;agendamentos&quot;: [],
+    &quot;vacinas&quot;: [],
+    &quot;lembretes&quot;: [],
+    &quot;dobuCams&quot;: [],
+    &quot;informacoesCuidado&quot;: [],
+    &quot;id&quot;: &quot;5c0b4979-c221-44d9-be5b-18245546b3ed&quot;,
+    &quot;createdAt&quot;: &quot;2026-11-03T16:35:22.2015699-03:00&quot;,
+    &quot;active&quot;: true
+  }
+}</pre></details><details><summary><b>PASS — Caso 66</b> | Registrar V10 | HTTP 201</summary><p>2026-11-03T19:35:22.314391+00:00 · 60 ms</p><code>POST /api/vacinas</code><pre>{
+  &quot;entrada&quot;: {
+    &quot;nome&quot;: &quot;V10&quot;,
+    &quot;dataAplicacao&quot;: &quot;2026-10-19T10:00:00Z&quot;,
+    &quot;dataProximaDose&quot;: &quot;2026-10-25T10:00:00Z&quot;,
+    &quot;petId&quot;: &quot;5c0b4979-c221-44d9-be5b-18245546b3ed&quot;
+  },
+  &quot;saida&quot;: {
+    &quot;nome&quot;: &quot;V10&quot;,
+    &quot;dataAplicacao&quot;: &quot;2026-10-19T10:00:00Z&quot;,
+    &quot;dataProximaDose&quot;: &quot;2026-10-25T10:00:00Z&quot;,
+    &quot;petId&quot;: &quot;5c0b4979-c221-44d9-be5b-18245546b3ed&quot;,
+    &quot;pet&quot;: null,
+    &quot;id&quot;: &quot;eb08e268-481a-4836-b86d-7fe43be7ab74&quot;,
+    &quot;createdAt&quot;: &quot;2026-11-03T16:35:22.2856142-03:00&quot;,
+    &quot;active&quot;: true
+  }
+}</pre></details><details><summary><b>PASS — Caso 66</b> | Confirmar persistencia | HTTP 200</summary><p>2026-11-03T19:35:22.371685+00:00 · 55 ms</p><code>GET /api/vacinas/eb08e268-481a-4836-b86d-7fe43be7ab74</code><pre>{
+  &quot;entrada&quot;: null,
+  &quot;saida&quot;: {
+    &quot;nome&quot;: &quot;V10&quot;,
+    &quot;dataAplicacao&quot;: &quot;2026-10-19T10:00:00&quot;,
+    &quot;dataProximaDose&quot;: &quot;2026-10-25T10:00:00&quot;,
+    &quot;petId&quot;: &quot;5c0b4979-c221-44d9-be5b-18245546b3ed&quot;,
+    &quot;pet&quot;: null,
+    &quot;id&quot;: &quot;eb08e268-481a-4836-b86d-7fe43be7ab74&quot;,
+    &quot;createdAt&quot;: &quot;2026-11-03T16:35:22.2856142&quot;,
+    &quot;active&quot;: true
+  }
+}</pre></details><details><summary><b>PASS — Caso 66</b> | Consultar carteira de Thor | HTTP 200</summary><p>2026-11-03T19:35:22.400715+00:00 · 27 ms</p><code>GET /api/vacinas/pet/5c0b4979-c221-44d9-be5b-18245546b3ed</code><pre>{
+  &quot;entrada&quot;: null,
+  &quot;saida&quot;: [
+    {
+      &quot;nome&quot;: &quot;V10&quot;,
+      &quot;dataAplicacao&quot;: &quot;2026-10-19T10:00:00&quot;,
+      &quot;dataProximaDose&quot;: &quot;2026-10-25T10:00:00&quot;,
+      &quot;petId&quot;: &quot;5c0b4979-c221-44d9-be5b-18245546b3ed&quot;,
+      &quot;pet&quot;: null,
+      &quot;id&quot;: &quot;eb08e268-481a-4836-b86d-7fe43be7ab74&quot;,
+      &quot;createdAt&quot;: &quot;2026-11-03T16:35:22.2856142&quot;,
+      &quot;active&quot;: true
+    }
+  ]
+}</pre></details><details><summary><b>PASS — Caso 67</b> | Preparar vacina fora do limite | HTTP 201</summary><p>2026-11-03T19:35:22.412235+00:00 · 9 ms</p><code>POST /api/vacinas</code><pre>{
+  &quot;entrada&quot;: {
+    &quot;nome&quot;: &quot;Controle QA&quot;,
+    &quot;dataAplicacao&quot;: &quot;2026-10-19T10:00:00Z&quot;,
+    &quot;dataProximaDose&quot;: &quot;2026-11-15T10:00:00Z&quot;,
+    &quot;petId&quot;: &quot;5c0b4979-c221-44d9-be5b-18245546b3ed&quot;
+  },
+  &quot;saida&quot;: {
+    &quot;nome&quot;: &quot;Controle QA&quot;,
+    &quot;dataAplicacao&quot;: &quot;2026-10-19T10:00:00Z&quot;,
+    &quot;dataProximaDose&quot;: &quot;2026-11-15T10:00:00Z&quot;,
+    &quot;petId&quot;: &quot;5c0b4979-c221-44d9-be5b-18245546b3ed&quot;,
+    &quot;pet&quot;: null,
+    &quot;id&quot;: &quot;48f978b1-0cfe-472a-a70d-08cbc2a8b8e2&quot;,
+    &quot;createdAt&quot;: &quot;2026-11-03T16:35:22.4087037-03:00&quot;,
+    &quot;active&quot;: true
+  }
+}</pre></details><details><summary><b>PASS — Caso 67</b> | Aplicar limite controlado | HTTP 200</summary><p>2026-11-03T19:35:22.449539+00:00 · 36 ms</p><code>GET /api/vacinas/proxima-dose?ate=2026-10-30T23:59:59Z</code><pre>{
+  &quot;entrada&quot;: null,
+  &quot;saida&quot;: [
+    {
+      &quot;nome&quot;: &quot;V10&quot;,
+      &quot;dataAplicacao&quot;: &quot;2026-10-19T10:00:00&quot;,
+      &quot;dataProximaDose&quot;: &quot;2026-10-25T10:00:00&quot;,
+      &quot;petId&quot;: &quot;5c0b4979-c221-44d9-be5b-18245546b3ed&quot;,
+      &quot;pet&quot;: null,
+      &quot;id&quot;: &quot;eb08e268-481a-4836-b86d-7fe43be7ab74&quot;,
+      &quot;createdAt&quot;: &quot;2026-11-03T16:35:22.2856142&quot;,
+      &quot;active&quot;: true
+    }
+  ]
+}</pre></details><details><summary><b>PASS — Caso 67</b> | Incluir exatamente no limite | HTTP 200</summary><p>2026-11-03T19:35:22.459082+00:00 · 7 ms</p><code>GET /api/vacinas/proxima-dose?ate=2026-10-25T10:00:00Z</code><pre>{
+  &quot;entrada&quot;: null,
+  &quot;saida&quot;: [
+    {
+      &quot;nome&quot;: &quot;V10&quot;,
+      &quot;dataAplicacao&quot;: &quot;2026-10-19T10:00:00&quot;,
+      &quot;dataProximaDose&quot;: &quot;2026-10-25T10:00:00&quot;,
+      &quot;petId&quot;: &quot;5c0b4979-c221-44d9-be5b-18245546b3ed&quot;,
+      &quot;pet&quot;: null,
+      &quot;id&quot;: &quot;eb08e268-481a-4836-b86d-7fe43be7ab74&quot;,
+      &quot;createdAt&quot;: &quot;2026-11-03T16:35:22.2856142&quot;,
+      &quot;active&quot;: true
+    }
+  ]
+}</pre></details><details><summary><b>PASS — Caso 67</b> | Excluir um segundo antes | HTTP 200</summary><p>2026-11-03T19:35:22.467391+00:00 · 6 ms</p><code>GET /api/vacinas/proxima-dose?ate=2026-10-25T09:59:59Z</code><pre>{
+  &quot;entrada&quot;: null,
+  &quot;saida&quot;: []
+}</pre></details><details><summary><b>PASS — Caso 68</b> | Criar C-100 | HTTP 201</summary><p>2026-11-03T19:35:22.541862+00:00 · 73 ms</p><code>POST /api/consultas</code><pre>{
+  &quot;entrada&quot;: {
+    &quot;dataConsulta&quot;: &quot;2026-10-22T14:00:00Z&quot;,
+    &quot;descricao&quot;: &quot;C-100 consulta anual&quot;,
+    &quot;valor&quot;: 150,
+    &quot;petId&quot;: &quot;5c0b4979-c221-44d9-be5b-18245546b3ed&quot;,
+    &quot;veterinarioId&quot;: &quot;1124574f-8144-4aaf-9d5f-c08bf2a08eb8&quot;
+  },
+  &quot;saida&quot;: {
+    &quot;dataConsulta&quot;: &quot;2026-10-22T14:00:00Z&quot;,
+    &quot;descricao&quot;: &quot;C-100 consulta anual&quot;,
+    &quot;valor&quot;: 150,
+    &quot;petId&quot;: &quot;5c0b4979-c221-44d9-be5b-18245546b3ed&quot;,
+    &quot;pet&quot;: null,
+    &quot;veterinarioId&quot;: &quot;1124574f-8144-4aaf-9d5f-c08bf2a08eb8&quot;,
+    &quot;veterinario&quot;: {
+      &quot;nome&quot;: &quot;Veterinario QA&quot;,
+      &quot;email&quot;: &quot;vet-20261103t193516z@example.test&quot;,
+      &quot;tipoUsuario&quot;: &quot;VETERINARIO&quot;,
+      &quot;petsResponsavel&quot;: [],
+      &quot;consultasVeterinario&quot;: [
+        null
+      ],
+      &quot;agendamentosVeterinario&quot;: [],
+      &quot;logsErro&quot;: [],
+      &quot;id&quot;: &quot;1124574f-8144-4aaf-9d5f-c08bf2a08eb8&quot;,
+      &quot;createdAt&quot;: &quot;2026-11-03T16:35:21.9279016&quot;,
+      &quot;active&quot;: true
+    },
+    &quot;prontuario&quot;: null,
+    &quot;pagamento&quot;: null,
+    &quot;id&quot;: &quot;e835b121-be83-48b9-a6a1-7c80e1dba7f8&quot;,
+    &quot;createdAt&quot;: &quot;2026-11-03T16:35:22.4920684-03:00&quot;,
+    &quot;active&quot;: true
+  }
+}</pre></details><details><summary><b>PASS — Caso 68</b> | Reagendar | HTTP 200</summary><p>2026-11-03T19:35:22.586706+00:00 · 43 ms</p><code>PUT /api/consultas/e835b121-be83-48b9-a6a1-7c80e1dba7f8</code><pre>{
+  &quot;entrada&quot;: {
+    &quot;dataConsulta&quot;: &quot;2026-10-24T10:00:00Z&quot;,
+    &quot;descricao&quot;: &quot;C-100 reagendada&quot;,
+    &quot;valor&quot;: 150,
+    &quot;petId&quot;: &quot;5c0b4979-c221-44d9-be5b-18245546b3ed&quot;,
+    &quot;veterinarioId&quot;: &quot;1124574f-8144-4aaf-9d5f-c08bf2a08eb8&quot;
+  },
+  &quot;saida&quot;: {
+    &quot;dataConsulta&quot;: &quot;2026-10-24T10:00:00Z&quot;,
+    &quot;descricao&quot;: &quot;C-100 reagendada&quot;,
+    &quot;valor&quot;: 150,
+    &quot;petId&quot;: &quot;5c0b4979-c221-44d9-be5b-18245546b3ed&quot;,
+    &quot;pet&quot;: null,
+    &quot;veterinarioId&quot;: &quot;1124574f-8144-4aaf-9d5f-c08bf2a08eb8&quot;,
+    &quot;veterinario&quot;: {
+      &quot;nome&quot;: &quot;Veterinario QA&quot;,
+      &quot;email&quot;: &quot;vet-20261103t193516z@example.test&quot;,
+      &quot;tipoUsuario&quot;: &quot;VETERINARIO&quot;,
+      &quot;petsResponsavel&quot;: [],
+      &quot;consultasVeterinario&quot;: [
+        null
+      ],
+      &quot;agendamentosVeterinario&quot;: [],
+      &quot;logsErro&quot;: [],
+      &quot;id&quot;: &quot;1124574f-8144-4aaf-9d5f-c08bf2a08eb8&quot;,
+      &quot;createdAt&quot;: &quot;2026-11-03T16:35:21.9279016&quot;,
+      &quot;active&quot;: true
+    },
+    &quot;prontuario&quot;: null,
+    &quot;pagamento&quot;: null,
+    &quot;id&quot;: &quot;e835b121-be83-48b9-a6a1-7c80e1dba7f8&quot;,
+    &quot;createdAt&quot;: &quot;2026-11-03T16:35:22.4920684&quot;,
+    &quot;active&quot;: true
+  }
+}</pre></details><details><summary><b>PASS — Caso 68</b> | Confirmar nova data persistida | HTTP 200</summary><p>2026-11-03T19:35:22.662555+00:00 · 38 ms</p><code>GET /api/consultas/e835b121-be83-48b9-a6a1-7c80e1dba7f8</code><pre>{
+  &quot;entrada&quot;: null,
+  &quot;saida&quot;: {
+    &quot;dataConsulta&quot;: &quot;2026-10-24T10:00:00&quot;,
+    &quot;descricao&quot;: &quot;C-100 reagendada&quot;,
+    &quot;valor&quot;: 150,
+    &quot;petId&quot;: &quot;5c0b4979-c221-44d9-be5b-18245546b3ed&quot;,
+    &quot;pet&quot;: {
+      &quot;nome&quot;: &quot;Thor&quot;,
+      &quot;idade&quot;: 4,
+      &quot;racaId&quot;: &quot;28cbcf12-3518-47f0-b10c-fca595e577e3&quot;,
+      &quot;raca&quot;: null,
+      &quot;responsavelId&quot;: &quot;2b457a47-77a3-4ee9-8052-4055ca91460b&quot;,
+      &quot;responsavel&quot;: null,
+      &quot;consultas&quot;: [
+        null
+      ],
+      &quot;agendamentos&quot;: [],
+      &quot;vacinas&quot;: [],
+      &quot;lembretes&quot;: [],
+      &quot;dobuCams&quot;: [],
+      &quot;informacoesCuidado&quot;: [],
+      &quot;id&quot;: &quot;5c0b4979-c221-44d9-be5b-18245546b3ed&quot;,
+      &quot;createdAt&quot;: &quot;2026-11-03T16:35:22.2015699&quot;,
+      &quot;active&quot;: true
+    },
+    &quot;veterinarioId&quot;: &quot;1124574f-8144-4aaf-9d5f-c08bf2a08eb8&quot;,
+    &quot;veterinario&quot;: {
+      &quot;nome&quot;: &quot;Veterinario QA&quot;,
+      &quot;email&quot;: &quot;vet-20261103t193516z@example.test&quot;,
+      &quot;tipoUsuario&quot;: &quot;VETERINARIO&quot;,
+      &quot;petsResponsavel&quot;: [],
+      &quot;consultasVeterinario&quot;: [
+        null
+      ],
+      &quot;agendamentosVeterinario&quot;: [],
+      &quot;logsErro&quot;: [],
+      &quot;id&quot;: &quot;1124574f-8144-4aaf-9d5f-c08bf2a08eb8&quot;,
+      &quot;createdAt&quot;: &quot;2026-11-03T16:35:21.9279016&quot;,
+      &quot;active&quot;: true
+    },
+    &quot;prontuario&quot;: null,
+    &quot;pagamento&quot;: null,
+    &quot;id&quot;: &quot;e835b121-be83-48b9-a6a1-7c80e1dba7f8&quot;,
+    &quot;createdAt&quot;: &quot;2026-11-03T16:35:22.4920684&quot;,
+    &quot;active&quot;: true
+  }
+}</pre></details><details><summary><b>PASS — Caso 69</b> | Cadastrar lembrete | HTTP 201</summary><p>2026-11-03T19:35:22.706857+00:00 · 42 ms</p><code>POST /api/lembretes</code><pre>{
+  &quot;entrada&quot;: {
+    &quot;descricao&quot;: &quot;Lembrete controlado QA&quot;,
+    &quot;dataLembrete&quot;: &quot;2026-10-21T14:00:00Z&quot;,
+    &quot;status&quot;: &quot;PENDENTE&quot;,
+    &quot;petId&quot;: &quot;5c0b4979-c221-44d9-be5b-18245546b3ed&quot;
+  },
+  &quot;saida&quot;: {
+    &quot;descricao&quot;: &quot;Lembrete controlado QA&quot;,
+    &quot;dataLembrete&quot;: &quot;2026-10-21T14:00:00Z&quot;,
+    &quot;status&quot;: &quot;PENDENTE&quot;,
+    &quot;petId&quot;: &quot;5c0b4979-c221-44d9-be5b-18245546b3ed&quot;,
+    &quot;pet&quot;: null,
+    &quot;id&quot;: &quot;62a92029-39cc-40ad-b453-2fc4bad90208&quot;,
+    &quot;createdAt&quot;: &quot;2026-11-03T16:35:22.6818255-03:00&quot;,
+    &quot;active&quot;: true
+  }
+}</pre></details><details><summary><b>PASS — Caso 69</b> | Confirmar lembrete persistido | HTTP 200</summary><p>2026-11-03T19:35:22.730361+00:00 · 21 ms</p><code>GET /api/lembretes/62a92029-39cc-40ad-b453-2fc4bad90208</code><pre>{
+  &quot;entrada&quot;: null,
+  &quot;saida&quot;: {
+    &quot;descricao&quot;: &quot;Lembrete controlado QA&quot;,
+    &quot;dataLembrete&quot;: &quot;2026-10-21T14:00:00&quot;,
+    &quot;status&quot;: &quot;PENDENTE&quot;,
+    &quot;petId&quot;: &quot;5c0b4979-c221-44d9-be5b-18245546b3ed&quot;,
+    &quot;pet&quot;: null,
+    &quot;id&quot;: &quot;62a92029-39cc-40ad-b453-2fc4bad90208&quot;,
+    &quot;createdAt&quot;: &quot;2026-11-03T16:35:22.6818255&quot;,
+    &quot;active&quot;: true
+  }
+}</pre></details><details><summary><b>PASS — Caso 69</b> | Consultar lembretes do pet | HTTP 200</summary><p>2026-11-03T19:35:22.777049+00:00 · 44 ms</p><code>GET /api/lembretes/pet/5c0b4979-c221-44d9-be5b-18245546b3ed</code><pre>{
+  &quot;entrada&quot;: null,
+  &quot;saida&quot;: [
+    {
+      &quot;descricao&quot;: &quot;Lembrete controlado QA&quot;,
+      &quot;dataLembrete&quot;: &quot;2026-10-21T14:00:00&quot;,
+      &quot;status&quot;: &quot;PENDENTE&quot;,
+      &quot;petId&quot;: &quot;5c0b4979-c221-44d9-be5b-18245546b3ed&quot;,
+      &quot;pet&quot;: null,
+      &quot;id&quot;: &quot;62a92029-39cc-40ad-b453-2fc4bad90208&quot;,
+      &quot;createdAt&quot;: &quot;2026-11-03T16:35:22.6818255&quot;,
+      &quot;active&quot;: true
+    }
+  ]
+}</pre></details><details><summary><b>PASS — Caso 70</b> | Confirmar pet inexistente | HTTP 404</summary><p>2026-11-03T19:35:22.821340+00:00 · 42 ms</p><code>GET /api/pets/00000000-0000-0000-0000-000000000001</code><pre>{
+  &quot;entrada&quot;: null,
+  &quot;saida&quot;: {
+    &quot;type&quot;: &quot;https://tools.ietf.org/html/rfc9110#section-15.5.5&quot;,
+    &quot;title&quot;: &quot;Not Found&quot;,
+    &quot;status&quot;: 404,
+    &quot;traceId&quot;: &quot;00-788d7edfc750e57708355dd9e9088289-6ec8e78745f90071-01&quot;
+  }
+}</pre></details><details><summary><b>PASS — Caso 70</b> | Recusar vacina sem pet | HTTP 400</summary><p>2026-11-03T19:35:22.829568+00:00 · 6 ms</p><code>POST /api/vacinas</code><pre>{
+  &quot;entrada&quot;: {
+    &quot;nome&quot;: &quot;V10&quot;,
+    &quot;dataAplicacao&quot;: &quot;2026-10-19T10:00:00Z&quot;,
+    &quot;dataProximaDose&quot;: &quot;2026-10-25T10:00:00Z&quot;,
+    &quot;petId&quot;: &quot;00000000-0000-0000-0000-000000000001&quot;
+  },
+  &quot;saida&quot;: &quot;Pet informado nao existe.&quot;
+}</pre></details><details><summary><b>PASS — Caso 71</b> | Recusar descricao curta | HTTP 400</summary><p>2026-11-03T19:35:22.840096+00:00 · 8 ms</p><code>POST /api/lembretes</code><pre>{
+  &quot;entrada&quot;: {
+    &quot;descricao&quot;: &quot;abc&quot;,
+    &quot;dataLembrete&quot;: &quot;2026-10-21T14:00:00Z&quot;,
+    &quot;status&quot;: &quot;PENDENTE&quot;,
+    &quot;petId&quot;: &quot;5c0b4979-c221-44d9-be5b-18245546b3ed&quot;
+  },
+  &quot;saida&quot;: &quot;Descricao do lembrete invalida&quot;
+}</pre></details><details><summary><b>PASS — Caso 71</b> | Confirmar ausencia do lembrete invalido | HTTP 200</summary><p>2026-11-03T19:35:22.848315+00:00 · 6 ms</p><code>GET /api/lembretes/pet/5c0b4979-c221-44d9-be5b-18245546b3ed</code><pre>{
+  &quot;entrada&quot;: null,
+  &quot;saida&quot;: [
+    {
+      &quot;descricao&quot;: &quot;Lembrete controlado QA&quot;,
+      &quot;dataLembrete&quot;: &quot;2026-10-21T14:00:00&quot;,
+      &quot;status&quot;: &quot;PENDENTE&quot;,
+      &quot;petId&quot;: &quot;5c0b4979-c221-44d9-be5b-18245546b3ed&quot;,
+      &quot;pet&quot;: null,
+      &quot;id&quot;: &quot;62a92029-39cc-40ad-b453-2fc4bad90208&quot;,
+      &quot;createdAt&quot;: &quot;2026-11-03T16:35:22.6818255&quot;,
+      &quot;active&quot;: true
+    }
+  ]
+}</pre></details><details><summary><b>PASS — Caso PREP</b> | Cadastrar outro tutor | HTTP 200</summary><p>2026-11-03T19:35:22.927035+00:00 · 76 ms</p><code>POST /api/auth/register</code><pre>{
+  &quot;entrada&quot;: {
+    &quot;nome&quot;: &quot;Outro Tutor&quot;,
+    &quot;email&quot;: &quot;outro-20261103T193516Z@example.test&quot;,
+    &quot;senha&quot;: &quot;[REDACTED]&quot;,
+    &quot;tipoUsuario&quot;: &quot;Responsavel&quot;
+  },
+  &quot;saida&quot;: {
+    &quot;token&quot;: &quot;[REDACTED]&quot;,
+    &quot;usuarioId&quot;: &quot;a3d23d87-eab9-4e23-a6c6-5bf6c041d113&quot;,
+    &quot;nome&quot;: &quot;Outro Tutor&quot;,
+    &quot;email&quot;: &quot;outro-20261103t193516z@example.test&quot;,
+    &quot;tipoUsuario&quot;: &quot;RESPONSAVEL&quot;
+  }
+}</pre></details><details><summary><b>PASS — Caso 72</b> | Bloquear carteira de outro tutor | HTTP 404</summary><p>2026-11-03T19:35:22.934978+00:00 · 6 ms</p><code>GET /api/vacinas/pet/5c0b4979-c221-44d9-be5b-18245546b3ed</code><pre>{
+  &quot;entrada&quot;: null,
+  &quot;saida&quot;: {
+    &quot;type&quot;: &quot;https://tools.ietf.org/html/rfc9110#section-15.5.5&quot;,
+    &quot;title&quot;: &quot;Not Found&quot;,
+    &quot;status&quot;: 404,
+    &quot;traceId&quot;: &quot;00-d0bd91c357adc7791205ad794eb1cea5-7fa93ab4d7143bbb-01&quot;
+  }
+}</pre></details><details><summary><b>PASS — Caso 72</b> | Isolar listagem geral | HTTP 200</summary><p>2026-11-03T19:35:22.949786+00:00 · 12 ms</p><code>GET /api/vacinas</code><pre>{
+  &quot;entrada&quot;: null,
+  &quot;saida&quot;: []
+}</pre></details><details><summary><b>PASS — Caso 72</b> | Bloquear acesso anonimo | HTTP 401</summary><p>2026-11-03T19:35:22.960229+00:00 · 8 ms</p><code>GET /api/vacinas/pet/5c0b4979-c221-44d9-be5b-18245546b3ed</code><pre>{
+  &quot;entrada&quot;: null,
+  &quot;saida&quot;: &quot;&quot;
+}</pre></details><details><summary><b>PASS — Caso 73</b> | Gerar alertas no relogio controlado | HTTP 200</summary><p>2026-11-03T19:35:23.003305+00:00 · 41 ms</p><code>POST /api/alertas-vacina/gerar?referencia=2026-10-19T10:00:00Z</code><pre>{
+  &quot;entrada&quot;: null,
+  &quot;saida&quot;: {
+    &quot;criados&quot;: 1
+  }
+}</pre></details><details><summary><b>PASS — Caso 73</b> | Consultar alerta interno | HTTP 200</summary><p>2026-11-03T19:35:23.030915+00:00 · 25 ms</p><code>GET /api/alertas-vacina</code><pre>{
+  &quot;entrada&quot;: null,
+  &quot;saida&quot;: [
+    {
+      &quot;id&quot;: &quot;15692ef4-f559-4fe7-9e02-c0f32dd662da&quot;,
+      &quot;descricao&quot;: &quot;Vacina V10 de Thor: proxima dose em 2026-10-25.&quot;,
+      &quot;dataLembrete&quot;: &quot;2026-10-25T10:00:00&quot;,
+      &quot;status&quot;: &quot;PENDENTE&quot;,
+      &quot;petId&quot;: &quot;5c0b4979-c221-44d9-be5b-18245546b3ed&quot;
+    }
+  ]
+}</pre></details><details><summary><b>PASS — Caso 73</b> | Nao duplicar na reexecucao | HTTP 200</summary><p>2026-11-03T19:35:23.043301+00:00 · 10 ms</p><code>POST /api/alertas-vacina/gerar?referencia=2026-10-19T10:00:00Z</code><pre>{
+  &quot;entrada&quot;: null,
+  &quot;saida&quot;: {
+    &quot;criados&quot;: 0
+  }
+}</pre></details><details><summary><b>PASS — Caso 73</b> | Nao expor alerta a outro tutor | HTTP 200</summary><p>2026-11-03T19:35:23.052156+00:00 · 7 ms</p><code>GET /api/alertas-vacina</code><pre>{
+  &quot;entrada&quot;: null,
+  &quot;saida&quot;: []
+}</pre></details><details><summary><b>PASS — Caso 74</b> | Reservar horario com C-200 | HTTP 201</summary><p>2026-11-03T19:35:23.063829+00:00 · 9 ms</p><code>POST /api/consultas</code><pre>{
+  &quot;entrada&quot;: {
+    &quot;dataConsulta&quot;: &quot;2026-10-25T10:00:00Z&quot;,
+    &quot;descricao&quot;: &quot;C-200 ocupada&quot;,
+    &quot;valor&quot;: 150,
+    &quot;petId&quot;: &quot;5c0b4979-c221-44d9-be5b-18245546b3ed&quot;,
+    &quot;veterinarioId&quot;: &quot;1124574f-8144-4aaf-9d5f-c08bf2a08eb8&quot;
+  },
+  &quot;saida&quot;: {
+    &quot;dataConsulta&quot;: &quot;2026-10-25T10:00:00Z&quot;,
+    &quot;descricao&quot;: &quot;C-200 ocupada&quot;,
+    &quot;valor&quot;: 150,
+    &quot;petId&quot;: &quot;5c0b4979-c221-44d9-be5b-18245546b3ed&quot;,
+    &quot;pet&quot;: null,
+    &quot;veterinarioId&quot;: &quot;1124574f-8144-4aaf-9d5f-c08bf2a08eb8&quot;,
+    &quot;veterinario&quot;: {
+      &quot;nome&quot;: &quot;Veterinario QA&quot;,
+      &quot;email&quot;: &quot;vet-20261103t193516z@example.test&quot;,
+      &quot;tipoUsuario&quot;: &quot;VETERINARIO&quot;,
+      &quot;petsResponsavel&quot;: [],
+      &quot;consultasVeterinario&quot;: [
+        null
+      ],
+      &quot;agendamentosVeterinario&quot;: [],
+      &quot;logsErro&quot;: [],
+      &quot;id&quot;: &quot;1124574f-8144-4aaf-9d5f-c08bf2a08eb8&quot;,
+      &quot;createdAt&quot;: &quot;2026-11-03T16:35:21.9279016&quot;,
+      &quot;active&quot;: true
+    },
+    &quot;prontuario&quot;: null,
+    &quot;pagamento&quot;: null,
+    &quot;id&quot;: &quot;659d88dd-5c0e-468c-bf98-994a2516865d&quot;,
+    &quot;createdAt&quot;: &quot;2026-11-03T16:35:23.0608023-03:00&quot;,
+    &quot;active&quot;: true
+  }
+}</pre></details><details><summary><b>PASS — Caso 74</b> | Recusar reagendamento ocupado | HTTP 409</summary><p>2026-11-03T19:35:23.078534+00:00 · 12 ms</p><code>PUT /api/consultas/e835b121-be83-48b9-a6a1-7c80e1dba7f8</code><pre>{
+  &quot;entrada&quot;: {
+    &quot;dataConsulta&quot;: &quot;2026-10-25T10:00:00Z&quot;,
+    &quot;descricao&quot;: &quot;C-100 reagendada&quot;,
+    &quot;valor&quot;: 150,
+    &quot;petId&quot;: &quot;5c0b4979-c221-44d9-be5b-18245546b3ed&quot;,
+    &quot;veterinarioId&quot;: &quot;1124574f-8144-4aaf-9d5f-c08bf2a08eb8&quot;
+  },
+  &quot;saida&quot;: &quot;Horario indisponivel para o veterinario informado.&quot;
+}</pre></details><details><summary><b>PASS — Caso 74</b> | Preservar C-100 apos conflito | HTTP 200</summary><p>2026-11-03T19:35:23.088405+00:00 · 7 ms</p><code>GET /api/consultas/e835b121-be83-48b9-a6a1-7c80e1dba7f8</code><pre>{
+  &quot;entrada&quot;: null,
+  &quot;saida&quot;: {
+    &quot;dataConsulta&quot;: &quot;2026-10-24T10:00:00&quot;,
+    &quot;descricao&quot;: &quot;C-100 reagendada&quot;,
+    &quot;valor&quot;: 150,
+    &quot;petId&quot;: &quot;5c0b4979-c221-44d9-be5b-18245546b3ed&quot;,
+    &quot;pet&quot;: {
+      &quot;nome&quot;: &quot;Thor&quot;,
+      &quot;idade&quot;: 4,
+      &quot;racaId&quot;: &quot;28cbcf12-3518-47f0-b10c-fca595e577e3&quot;,
+      &quot;raca&quot;: null,
+      &quot;responsavelId&quot;: &quot;2b457a47-77a3-4ee9-8052-4055ca91460b&quot;,
+      &quot;responsavel&quot;: null,
+      &quot;consultas&quot;: [
+        null
+      ],
+      &quot;agendamentos&quot;: [],
+      &quot;vacinas&quot;: [],
+      &quot;lembretes&quot;: [],
+      &quot;dobuCams&quot;: [],
+      &quot;informacoesCuidado&quot;: [],
+      &quot;id&quot;: &quot;5c0b4979-c221-44d9-be5b-18245546b3ed&quot;,
+      &quot;createdAt&quot;: &quot;2026-11-03T16:35:22.2015699&quot;,
+      &quot;active&quot;: true
+    },
+    &quot;veterinarioId&quot;: &quot;1124574f-8144-4aaf-9d5f-c08bf2a08eb8&quot;,
+    &quot;veterinario&quot;: {
+      &quot;nome&quot;: &quot;Veterinario QA&quot;,
+      &quot;email&quot;: &quot;vet-20261103t193516z@example.test&quot;,
+      &quot;tipoUsuario&quot;: &quot;VETERINARIO&quot;,
+      &quot;petsResponsavel&quot;: [],
+      &quot;consultasVeterinario&quot;: [
+        null
+      ],
+      &quot;agendamentosVeterinario&quot;: [],
+      &quot;logsErro&quot;: [],
+      &quot;id&quot;: &quot;1124574f-8144-4aaf-9d5f-c08bf2a08eb8&quot;,
+      &quot;createdAt&quot;: &quot;2026-11-03T16:35:21.9279016&quot;,
+      &quot;active&quot;: true
+    },
+    &quot;prontuario&quot;: null,
+    &quot;pagamento&quot;: null,
+    &quot;id&quot;: &quot;e835b121-be83-48b9-a6a1-7c80e1dba7f8&quot;,
+    &quot;createdAt&quot;: &quot;2026-11-03T16:35:22.4920684&quot;,
+    &quot;active&quot;: true
+  }
+}</pre></details></html>

@@ -1,0 +1,75 @@
+[
+  {
+    "case": 66,
+    "label": "Registrar V10",
+    "timestamp": "2026-11-03T19:35:22.314391+00:00",
+    "method": "POST",
+    "url": "/api/vacinas",
+    "request": {
+      "nome": "V10",
+      "dataAplicacao": "2026-10-19T10:00:00Z",
+      "dataProximaDose": "2026-10-25T10:00:00Z",
+      "petId": "5c0b4979-c221-44d9-be5b-18245546b3ed"
+    },
+    "status": 201,
+    "expectedStatus": 201,
+    "response": {
+      "nome": "V10",
+      "dataAplicacao": "2026-10-19T10:00:00Z",
+      "dataProximaDose": "2026-10-25T10:00:00Z",
+      "petId": "5c0b4979-c221-44d9-be5b-18245546b3ed",
+      "pet": null,
+      "id": "eb08e268-481a-4836-b86d-7fe43be7ab74",
+      "createdAt": "2026-11-03T16:35:22.2856142-03:00",
+      "active": true
+    },
+    "passed": true,
+    "durationMs": 60
+  },
+  {
+    "case": 66,
+    "label": "Confirmar persistencia",
+    "timestamp": "2026-11-03T19:35:22.371685+00:00",
+    "method": "GET",
+    "url": "/api/vacinas/eb08e268-481a-4836-b86d-7fe43be7ab74",
+    "request": null,
+    "status": 200,
+    "expectedStatus": 200,
+    "response": {
+      "nome": "V10",
+      "dataAplicacao": "2026-10-19T10:00:00",
+      "dataProximaDose": "2026-10-25T10:00:00",
+      "petId": "5c0b4979-c221-44d9-be5b-18245546b3ed",
+      "pet": null,
+      "id": "eb08e268-481a-4836-b86d-7fe43be7ab74",
+      "createdAt": "2026-11-03T16:35:22.2856142",
+      "active": true
+    },
+    "passed": true,
+    "durationMs": 55
+  },
+  {
+    "case": 66,
+    "label": "Consultar carteira de Thor",
+    "timestamp": "2026-11-03T19:35:22.400715+00:00",
+    "method": "GET",
+    "url": "/api/vacinas/pet/5c0b4979-c221-44d9-be5b-18245546b3ed",
+    "request": null,
+    "status": 200,
+    "expectedStatus": 200,
+    "response": [
+      {
+        "nome": "V10",
+        "dataAplicacao": "2026-10-19T10:00:00",
+        "dataProximaDose": "2026-10-25T10:00:00",
+        "petId": "5c0b4979-c221-44d9-be5b-18245546b3ed",
+        "pet": null,
+        "id": "eb08e268-481a-4836-b86d-7fe43be7ab74",
+        "createdAt": "2026-11-03T16:35:22.2856142",
+        "active": true
+      }
+    ],
+    "passed": true,
+    "durationMs": 27
+  }
+]

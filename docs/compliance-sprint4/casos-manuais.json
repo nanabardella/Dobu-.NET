@@ -1,214 +1,222 @@
 [
-    {
-        "id":  66,
-        "pbi":  22,
-        "title":  "Consultar carteira digital com vacinação registrada",
-        "steps":  [
-                      [
-                          "Preparar tutor, espécie, raça e Thor; registrar os UUIDs retornados.",
-                          "Recursos criados; Thor associado ao tutor de teste."
-                      ],
-                      [
-                          "POST /api/vacinas com nome V10, datas informadas e petId de Thor.",
-                          "HTTP 201; id UUID, nome V10 e petId de Thor; guardar vacinaId."
-                      ],
-                      [
-                          "GET /api/vacinas/{vacinaId}.",
-                          "HTTP 200; nome V10, mesmas datas e petId; comprova persistência."
-                      ],
-                      [
-                          "GET /api/vacinas/pet/{petId}.",
-                          "HTTP 200; lista contém vacinaId com V10 e as datas controladas."
-                      ]
-                  ],
-        "input":  "Tutor QA autenticado; pet Thor com UUID petId; vacina V10; aplicação 2026-10-19T10:00:00Z; próxima dose 2026-10-25T10:00:00Z.",
-        "objective":  "Validar cadastro, persistência e consulta da carteira do pet correto.",
-        "note":  "Consulta da carteira implementada. Autorização por tutor será verificada em caso separado."
-    },
-    {
-        "id":  67,
-        "pbi":  23,
-        "title":  "Consultar próximas doses com data limite controlada",
-        "steps":  [
-                      [
-                          "Cadastrar as duas vacinas para Thor e guardar seus IDs.",
-                          "HTTP 201 em cada cadastro; datas persistidas conforme entrada."
-                      ],
-                      [
-                          "GET /api/vacinas/proxima-dose?ate=2026-10-30T23:59:59Z.",
-                          "HTTP 200; contém ID da V10 e não contém ID da Controle QA."
-                      ],
-                      [
-                          "Consultar com ate=2026-10-25T10:00:00Z.",
-                          "HTTP 200; contém ID da V10, incluindo exatamente o limite."
-                      ],
-                      [
-                          "Consultar com ate=2026-10-25T09:59:59Z.",
-                          "HTTP 200; não contém ID da V10."
-                      ]
-                  ],
-        "input":  "Thor; V10 com próxima dose 2026-10-25T10:00:00Z; vacina Controle QA com próxima dose 2026-11-15T10:00:00Z; ate=2026-10-30T23:59:59Z.",
-        "objective":  "Validar inclusão no limite e exclusão fora do filtro de próximas doses.",
-        "note":  "Cobertura parcial do PBI: endpoint retorna lista filtrada; geração e entrega de alertas automáticos não implementadas no código inspecionado."
-    },
-    {
-        "id":  68,
-        "pbi":  25,
-        "title":  "Reagendar consulta e confirmar persistência",
-        "steps":  [
-                      [
-                          "POST /api/consultas com os dados originais e UUIDs válidos.",
-                          "HTTP 201; guardar consultaId. C-100 é descrição controlada, não o UUID."
-                      ],
-                      [
-                          "PUT /api/consultas/{consultaId}, dataConsulta=2026-10-24T10:00:00Z, descricao=C-100 reagendada, valor=150 e mesmos petId/veterinarioId.",
-                          "HTTP 200; mesmo id, data nova, valor 150 e vínculos preservados."
-                      ],
-                      [
-                          "GET /api/consultas/{consultaId}.",
-                          "HTTP 200; data 2026-10-24T10:00:00, descrição C-100 reagendada e valor 150 persistidos."
-                      ]
-                  ],
-        "input":  "Thor; veterinário QA com perfil VETERINARIO; descrição C-100 consulta anual; valor 150; data original 2026-10-22T14:00:00Z; nova data 2026-10-24T10:00:00Z.",
-        "objective":  "Validar alteração de data e hora preservando os vínculos da consulta.",
-        "note":  "Atualização implementada; validação de conflito de horário será verificada em caso separado. Datas fixas de fixture; não dependem do relógio atual."
-    },
-    {
-        "id":  69,
-        "pbi":  29,
-        "title":  "Cadastrar lembrete de cuidado e confirmar persistência",
-        "steps":  [
-                      [
-                          "POST /api/lembretes com a entrada controlada.",
-                          "HTTP 201; guardar lembreteId; descrição, status PENDENTE e petId corretos."
-                      ],
-                      [
-                          "GET /api/lembretes/{lembreteId}.",
-                          "HTTP 200; mesmo id, descrição Lembrete controlado QA, data controlada e status PENDENTE."
-                      ],
-                      [
-                          "GET /api/lembretes/pet/{petId}.",
-                          "HTTP 200; lista contém lembreteId do Thor."
-                      ]
-                  ],
-        "input":  "Thor; descricao=Lembrete controlado QA; dataLembrete=2026-10-21T14:00:00Z; status=PENDENTE; petId válido.",
-        "objective":  "Validar cadastro e consulta do lembrete vinculado ao pet.",
-        "note":  "Cobertura parcial do PBI: cadastro de lembrete não comprova envio por WhatsApp ou consentimento."
-    },
-    {
-        "id":  70,
-        "pbi":  22,
-        "title":  "Rejeitar vacina para pet inexistente",
-        "steps":  [
-                      [
-                          "Confirmar que GET /api/pets/00000000-0000-0000-0000-000000000001 retorna 404, com autenticação.",
-                          "Fixture inexistente confirmada."
-                      ],
-                      [
-                          "POST /api/vacinas com entrada controlada.",
-                          "HTTP 400; mensagem Pet informado nao existe.; nenhum registro criado."
-                      ]
-                  ],
-        "input":  "petId=00000000-0000-0000-0000-000000000001 inexistente; nome V10; aplicação 2026-10-19T10:00:00Z; próxima dose 2026-10-25T10:00:00Z.",
-        "objective":  "Validar integridade referencial sem gravar vacina inválida.",
-        "note":  "Cenário negativo da carteira."
-    },
-    {
-        "id":  71,
-        "pbi":  29,
-        "title":  "Rejeitar lembrete com descrição inválida",
-        "steps":  [
-                      [
-                          "POST /api/lembretes com descrição abc e petId de Thor.",
-                          "HTTP 400; mensagem Descricao do lembrete invalida."
-                      ],
-                      [
-                          "GET /api/lembretes/pet/{petId}.",
-                          "Não existe novo lembrete com descrição abc."
-                      ]
-                  ],
-        "input":  "Thor existente; descricao=abc; dataLembrete=2026-10-21T14:00:00Z; status=PENDENTE.",
-        "objective":  "Validar descrição mínima sem persistir lembrete inválido.",
-        "note":  "Cenário negativo do cadastro de lembretes."
-    },
-    {
-        "id":  72,
-        "pbi":  22,
-        "title":  "Impedir acesso à carteira de outro tutor",
-        "steps":  [
-                      [
-                          "Autenticar como B e GET /api/vacinas/pet/{petIdThor}.",
-                          "HTTP 403 ou 404; nenhum dado de Thor retornado."
-                      ],
-                      [
-                          "Repetir sem Authorization.",
-                          "HTTP 401; nenhum dado de Thor retornado."
-                      ]
-                  ],
-        "input":  "Tutor A dono de Thor; tutor B sem vínculo; vacina V10 de Thor; token de B.",
-        "objective":  "Validar isolamento exigido nos critérios de aceite.",
-        "note":  "LACUNA identificada por inspeção: VacinasController não possui autorização. Expectativa é a regra do PBI, não o comportamento atual. Executar e abrir Bug se confirmado."
-    },
-    {
-        "id":  73,
-        "pbi":  23,
-        "title":  "Gerar alerta automático de vencimento",
-        "steps":  [
-                      [
-                          "Configurar relógio e janela no ambiente de testes; executar rotina automática de alertas.",
-                          "Um alerta para Thor/V10 com vencimento 2026-10-25; nenhum para controle."
-                      ],
-                      [
-                          "Consultar notificações do tutor A e do tutor B.",
-                          "Somente A recebe o alerta de Thor."
-                      ]
-                  ],
-        "input":  "Relógio de teste 2026-10-19T10:00:00Z; janela 7 dias como fixture a validar com a regra do produto; V10 vence 2026-10-25; controle vence 2026-11-15.",
-        "objective":  "Validar notificação automática prevista no PBI-11.",
-        "note":  "BLOQUEADO por funcionalidade ausente: código atual só consulta próximas doses. Janela precisa de confirmação do produto antes da execução."
-    },
-    {
-        "id":  74,
-        "pbi":  25,
-        "title":  "Impedir reagendamento para horário ocupado",
-        "steps":  [
-                      [
-                          "Criar as consultas A e B para o mesmo veterinário com pets válidos.",
-                          "Consultas persistidas; guardar UUIDs."
-                      ],
-                      [
-                          "PUT da consulta A para 2026-10-24T10:00:00Z.",
-                          "Operação recusada com mensagem de indisponibilidade; sem HTTP 2xx."
-                      ],
-                      [
-                          "GET da consulta A.",
-                          "Data original 2026-10-22T14:00:00 preservada."
-                      ]
-                  ],
-        "input":  "Consulta A em 2026-10-22T14:00:00Z e consulta B do mesmo veterinário em 2026-10-24T10:00:00Z; tentar mover A para horário de B.",
-        "objective":  "Validar conflito de agenda previsto nos critérios do PBI-13.",
-        "note":  "LACUNA por inspeção: Update não consulta conflitos. Executar e abrir Bug se confirmado."
-    },
-    {
-        "id":  75,
-        "pbi":  29,
-        "title":  "Respeitar consentimento no envio por WhatsApp",
-        "steps":  [
-                      [
-                          "Sem consentimento, executar rotina de lembretes no sandbox.",
-                          "Nenhuma mensagem enviada; tentativa bloqueada registrada."
-                      ],
-                      [
-                          "Habilitar consentimento e executar no sandbox.",
-                          "Mensagem ao tutor correto com data e hora; resultado registrado com identificador do provedor."
-                      ],
-                      [
-                          "Cancelar consulta e executar rotina novamente.",
-                          "Nenhuma mensagem enviada para consulta cancelada."
-                      ]
-                  ],
-        "input":  "Consulta ativa de Thor em 2026-10-22T14:00:00Z; relógio 2026-10-21T14:00:00Z; destinatário de sandbox do provedor; consentimento=false e depois true.",
-        "objective":  "Validar envio e bloqueio exigidos pelo PBI-16.",
-        "note":  "BLOQUEADO: não há integração WhatsApp nem campos de consentimento na versão inspecionada. Não enviar mensagens reais."
-    }
+  {
+    "id": 66,
+    "pbi": 22,
+    "title": "Consultar carteira digital com vacinação registrada",
+    "steps": [
+      [
+        "Preparar tutor, espécie, raça e Thor; registrar os UUIDs retornados.",
+        "Recursos criados; Thor associado ao tutor de teste."
+      ],
+      [
+        "POST /api/vacinas com nome V10, datas informadas e petId de Thor.",
+        "HTTP 201; id UUID, nome V10 e petId de Thor; guardar vacinaId."
+      ],
+      [
+        "GET /api/vacinas/{vacinaId}.",
+        "HTTP 200; nome V10, mesmas datas e petId; comprova persistência."
+      ],
+      [
+        "GET /api/vacinas/pet/{petId}.",
+        "HTTP 200; lista contém vacinaId com V10 e as datas controladas."
+      ]
+    ],
+    "input": "Tutor QA autenticado; pet Thor com UUID petId; vacina V10; aplicação 2026-10-19T10:00:00Z; próxima dose 2026-10-25T10:00:00Z.",
+    "objective": "Validar cadastro, persistência e consulta da carteira do pet correto.",
+    "note": "Validado por execucao assistida HTTP em 03/11/2026; evidencias anexadas. Requer revisao humana para declarar execucao manual. Consulta da carteira implementada. Autorização por tutor será verificada em caso separado."
+  },
+  {
+    "id": 67,
+    "pbi": 23,
+    "title": "Consultar próximas doses com data limite controlada",
+    "steps": [
+      [
+        "Cadastrar as duas vacinas para Thor e guardar seus IDs.",
+        "HTTP 201 em cada cadastro; datas persistidas conforme entrada."
+      ],
+      [
+        "GET /api/vacinas/proxima-dose?ate=2026-10-30T23:59:59Z.",
+        "HTTP 200; contém ID da V10 e não contém ID da Controle QA."
+      ],
+      [
+        "Consultar com ate=2026-10-25T10:00:00Z.",
+        "HTTP 200; contém ID da V10, incluindo exatamente o limite."
+      ],
+      [
+        "Consultar com ate=2026-10-25T09:59:59Z.",
+        "HTTP 200; não contém ID da V10."
+      ]
+    ],
+    "input": "Thor; V10 com próxima dose 2026-10-25T10:00:00Z; vacina Controle QA com próxima dose 2026-11-15T10:00:00Z; ate=2026-10-30T23:59:59Z.",
+    "objective": "Validar inclusão no limite e exclusão fora do filtro de próximas doses.",
+    "note": "Filtro de proximas doses validado; geracao de alertas internos implementada e verificada no caso 73. Execucao assistida HTTP; revisao humana pendente."
+  },
+  {
+    "id": 68,
+    "pbi": 25,
+    "title": "Reagendar consulta e confirmar persistência",
+    "steps": [
+      [
+        "POST /api/consultas com os dados originais e UUIDs válidos.",
+        "HTTP 201; guardar consultaId. C-100 é descrição controlada, não o UUID."
+      ],
+      [
+        "PUT /api/consultas/{consultaId}, dataConsulta=2026-10-24T10:00:00Z, descricao=C-100 reagendada, valor=150 e mesmos petId/veterinarioId.",
+        "HTTP 200; mesmo id, data nova, valor 150 e vínculos preservados."
+      ],
+      [
+        "GET /api/consultas/{consultaId}.",
+        "HTTP 200; data 2026-10-24T10:00:00, descrição C-100 reagendada e valor 150 persistidos."
+      ]
+    ],
+    "input": "Thor; veterinário QA com perfil VETERINARIO; descrição C-100 consulta anual; valor 150; data original 2026-10-22T14:00:00Z; nova data 2026-10-24T10:00:00Z.",
+    "objective": "Validar alteração de data e hora preservando os vínculos da consulta.",
+    "note": "Reagendamento e persistencia validados; conflito de horario verificado no caso 74. Execucao assistida HTTP; revisao humana pendente."
+  },
+  {
+    "id": 69,
+    "pbi": 29,
+    "title": "Cadastrar lembrete de cuidado e confirmar persistência",
+    "steps": [
+      [
+        "POST /api/lembretes com a entrada controlada.",
+        "HTTP 201; guardar lembreteId; descrição, status PENDENTE e petId corretos."
+      ],
+      [
+        "GET /api/lembretes/{lembreteId}.",
+        "HTTP 200; mesmo id, descrição Lembrete controlado QA, data controlada e status PENDENTE."
+      ],
+      [
+        "GET /api/lembretes/pet/{petId}.",
+        "HTTP 200; lista contém lembreteId do Thor."
+      ]
+    ],
+    "input": "Thor; descricao=Lembrete controlado QA; dataLembrete=2026-10-21T14:00:00Z; status=PENDENTE; petId válido.",
+    "objective": "Validar cadastro e consulta do lembrete vinculado ao pet.",
+    "note": "Cadastro e persistencia de lembrete validados por HTTP e integracao. Cobertura parcial do PBI-16: envio e consentimento por WhatsApp permanecem bloqueados no caso 75. Revisao humana pendente."
+  },
+  {
+    "id": 70,
+    "pbi": 22,
+    "title": "Rejeitar vacina para pet inexistente",
+    "steps": [
+      [
+        "Confirmar que GET /api/pets/00000000-0000-0000-0000-000000000001 retorna 404, com autenticação.",
+        "Fixture inexistente confirmada."
+      ],
+      [
+        "POST /api/vacinas com entrada controlada.",
+        "HTTP 400; mensagem Pet informado nao existe.; nenhum registro criado."
+      ]
+    ],
+    "input": "petId=00000000-0000-0000-0000-000000000001 inexistente; nome V10; aplicação 2026-10-19T10:00:00Z; próxima dose 2026-10-25T10:00:00Z.",
+    "objective": "Validar integridade referencial sem gravar vacina inválida.",
+    "note": "Validado por execucao assistida HTTP em 03/11/2026; evidencias anexadas. Requer revisao humana para declarar execucao manual. Cenário negativo da carteira."
+  },
+  {
+    "id": 71,
+    "pbi": 29,
+    "title": "Rejeitar lembrete com descrição inválida",
+    "steps": [
+      [
+        "POST /api/lembretes com descrição abc e petId de Thor.",
+        "HTTP 400; mensagem Descricao do lembrete invalida."
+      ],
+      [
+        "GET /api/lembretes/pet/{petId}.",
+        "Não existe novo lembrete com descrição abc."
+      ]
+    ],
+    "input": "Thor existente; descricao=abc; dataLembrete=2026-10-21T14:00:00Z; status=PENDENTE.",
+    "objective": "Validar descrição mínima sem persistir lembrete inválido.",
+    "note": "Validado por execucao assistida HTTP em 03/11/2026; evidencias anexadas. Requer revisao humana para declarar execucao manual. Cenário negativo do cadastro de lembretes."
+  },
+  {
+    "id": 72,
+    "pbi": 22,
+    "title": "Impedir acesso à carteira de outro tutor",
+    "steps": [
+      [
+        "Autenticar como B e GET /api/vacinas/pet/{petIdThor}.",
+        "HTTP 403 ou 404; nenhum dado de Thor retornado."
+      ],
+      [
+        "Repetir sem Authorization.",
+        "HTTP 401; nenhum dado de Thor retornado."
+      ]
+    ],
+    "input": "Tutor A dono de Thor; tutor B sem vínculo; vacina V10 de Thor; token de B.",
+    "objective": "Validar isolamento exigido nos critérios de aceite.",
+    "note": "Autorizacao corrigida. Outro tutor recebe 404 e anonimo recebe 401. Verificado em execucao assistida HTTP e teste de integracao; revisao humana pendente."
+  },
+  {
+    "id": 73,
+    "pbi": 23,
+    "title": "Gerar alerta automático de vencimento",
+    "steps": [
+      [
+        "Com token do tutor de Thor, POST /api/alertas-vacina/gerar?referencia=2026-10-19T10:00:00Z em Development.",
+        "HTTP 200; criados=1. Usa a mesma rotina do worker, com relogio controlado."
+      ],
+      [
+        "GET /api/alertas-vacina.",
+        "HTTP 200; alerta interno PENDENTE do Thor/V10 com vencimento 2026-10-25; nenhum para Controle QA."
+      ],
+      [
+        "Repetir POST com a mesma referencia.",
+        "HTTP 200; criados=0, sem duplicar."
+      ],
+      [
+        "Autenticar outro tutor e GET /api/alertas-vacina.",
+        "HTTP 200 com lista vazia; nenhum alerta do Thor."
+      ]
+    ],
+    "input": "Thor; V10 vence em 2026-10-25T10:00:00Z; Controle QA vence em 2026-11-15T10:00:00Z; referencia de QA=2026-10-19T10:00:00Z; janela configurada 7 dias inclusivos, em UTC.",
+    "objective": "Validar notificação automática prevista no PBI-11.",
+    "note": "Implementado: worker executa automaticamente a cada minuto usando UTC; criacao verificada com worker real e TimeProvider fixo no teste Alertas_RotinaEmSegundoPlano_GeraSemRequisicaoManual. No replay HTTP o worker fica desativado para isolamento e usa-se o hook Development. Em Production o hook retorna 404. Revisao humana pendente."
+  },
+  {
+    "id": 74,
+    "pbi": 25,
+    "title": "Impedir reagendamento para horário ocupado",
+    "steps": [
+      [
+        "POST /api/consultas para C-200 em 2026-10-25T10:00:00Z, com mesmo veterinario da C-100.",
+        "HTTP 201; horario reservado."
+      ],
+      [
+        "PUT da C-100 para o horario da C-200.",
+        "HTTP 409; mensagem Horario indisponivel para o veterinario informado."
+      ],
+      [
+        "GET da C-100.",
+        "HTTP 200; data 2026-10-24T10:00:00 preservada."
+      ]
+    ],
+    "input": "C-100 ja reagendada no caso 68 para 2026-10-24T10:00:00Z; C-200 ocupa 2026-10-25T10:00:00Z para o mesmo veterinario; valor 150; petId e veterinarioId controlados.",
+    "objective": "Validar conflito de agenda previsto nos critérios do PBI-13.",
+    "note": "Conflito corrigido e validado em execucao assistida HTTP e integracao. Regra: mesmo instante e mesmo veterinario. Duracao de consultas e concorrencia entre processos nao validadas. Revisao humana pendente."
+  },
+  {
+    "id": 75,
+    "pbi": 29,
+    "title": "Respeitar consentimento no envio por WhatsApp",
+    "steps": [
+      [
+        "Sem consentimento, executar rotina de lembretes no sandbox.",
+        "Nenhuma mensagem enviada; tentativa bloqueada registrada."
+      ],
+      [
+        "Habilitar consentimento e executar no sandbox.",
+        "Mensagem ao tutor correto com data e hora; resultado registrado com identificador do provedor."
+      ],
+      [
+        "Cancelar consulta e executar rotina novamente.",
+        "Nenhuma mensagem enviada para consulta cancelada."
+      ]
+    ],
+    "input": "Consulta ativa de Thor em 2026-10-22T14:00:00Z; relógio 2026-10-21T14:00:00Z; destinatário de sandbox do provedor; consentimento=false e depois true.",
+    "objective": "Validar envio e bloqueio exigidos pelo PBI-16.",
+    "note": "BLOQUEADO. Usuario confirmou nao possuir conta de teste WhatsApp. Integracao e consentimento ainda nao implementados; nenhuma mensagem enviada; nenhum resultado de envio foi inventado."
+  }
 ]

@@ -1,0 +1,90 @@
+[
+  {
+    "case": 67,
+    "label": "Preparar vacina fora do limite",
+    "timestamp": "2026-11-03T19:35:22.412235+00:00",
+    "method": "POST",
+    "url": "/api/vacinas",
+    "request": {
+      "nome": "Controle QA",
+      "dataAplicacao": "2026-10-19T10:00:00Z",
+      "dataProximaDose": "2026-11-15T10:00:00Z",
+      "petId": "5c0b4979-c221-44d9-be5b-18245546b3ed"
+    },
+    "status": 201,
+    "expectedStatus": 201,
+    "response": {
+      "nome": "Controle QA",
+      "dataAplicacao": "2026-10-19T10:00:00Z",
+      "dataProximaDose": "2026-11-15T10:00:00Z",
+      "petId": "5c0b4979-c221-44d9-be5b-18245546b3ed",
+      "pet": null,
+      "id": "48f978b1-0cfe-472a-a70d-08cbc2a8b8e2",
+      "createdAt": "2026-11-03T16:35:22.4087037-03:00",
+      "active": true
+    },
+    "passed": true,
+    "durationMs": 9
+  },
+  {
+    "case": 67,
+    "label": "Aplicar limite controlado",
+    "timestamp": "2026-11-03T19:35:22.449539+00:00",
+    "method": "GET",
+    "url": "/api/vacinas/proxima-dose?ate=2026-10-30T23:59:59Z",
+    "request": null,
+    "status": 200,
+    "expectedStatus": 200,
+    "response": [
+      {
+        "nome": "V10",
+        "dataAplicacao": "2026-10-19T10:00:00",
+        "dataProximaDose": "2026-10-25T10:00:00",
+        "petId": "5c0b4979-c221-44d9-be5b-18245546b3ed",
+        "pet": null,
+        "id": "eb08e268-481a-4836-b86d-7fe43be7ab74",
+        "createdAt": "2026-11-03T16:35:22.2856142",
+        "active": true
+      }
+    ],
+    "passed": true,
+    "durationMs": 36
+  },
+  {
+    "case": 67,
+    "label": "Incluir exatamente no limite",
+    "timestamp": "2026-11-03T19:35:22.459082+00:00",
+    "method": "GET",
+    "url": "/api/vacinas/proxima-dose?ate=2026-10-25T10:00:00Z",
+    "request": null,
+    "status": 200,
+    "expectedStatus": 200,
+    "response": [
+      {
+        "nome": "V10",
+        "dataAplicacao": "2026-10-19T10:00:00",
+        "dataProximaDose": "2026-10-25T10:00:00",
+        "petId": "5c0b4979-c221-44d9-be5b-18245546b3ed",
+        "pet": null,
+        "id": "eb08e268-481a-4836-b86d-7fe43be7ab74",
+        "createdAt": "2026-11-03T16:35:22.2856142",
+        "active": true
+      }
+    ],
+    "passed": true,
+    "durationMs": 7
+  },
+  {
+    "case": 67,
+    "label": "Excluir um segundo antes",
+    "timestamp": "2026-11-03T19:35:22.467391+00:00",
+    "method": "GET",
+    "url": "/api/vacinas/proxima-dose?ate=2026-10-25T09:59:59Z",
+    "request": null,
+    "status": 200,
+    "expectedStatus": 200,
+    "response": [],
+    "passed": true,
+    "durationMs": 6
+  }
+]

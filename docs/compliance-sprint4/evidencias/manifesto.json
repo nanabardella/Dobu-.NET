@@ -1,0 +1,84 @@
+{
+  "run": "20261103T193516Z",
+  "reports": [
+    {
+      "file": "sprint4-validacao_net9.0_20261103163402.trx",
+      "counters": {
+        "total": "7",
+        "executed": "7",
+        "passed": "7",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    {
+      "file": "sprint4-validacao_net9.0_20261103163415.trx",
+      "counters": {
+        "total": "24",
+        "executed": "24",
+        "passed": "24",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    }
+  ],
+  "evidence": {
+    "compliance.trx": "b0cb4c46ed01cde7c005f406da4645272f01d3a82915cc3dbf4e65e5610d0f43",
+    "exemplo-requisicao.png": "539fc3b3f36ae3c6477f6f988f6f3f91cb1fba7d30f82e1f7e03a62f311bd115",
+    "relatorio.html": "5b0ee1b8305d65095d290526148c9c54b86bdfde9bcf47fa12f20b03f8e6774e",
+    "sprint4-evidencias-legendado.mp4": "8454f76e06ca5f7d818f02a0dc01ad502939f4fc9879f088070b96948e2a5d3c",
+    "sprint4-validacao_net9.0_20261103163402.trx": "eeb66500c63994d762bed6f905f938c373c562ff1e5a299609fe56ba1ad8e51c",
+    "sprint4-validacao_net9.0_20261103163415.trx": "4c7ab5965006652b210b9e2fdda8402d6c742ae655e187a28fb2cb6335400ce3",
+    "http/caso-66.json": "8ac1a6c4da51d95832cf66a5a11fcc4a93ee981470503ae81b0fe0c3cce1e561",
+    "http/caso-66.png": "01f993002f31f33c12e828e109bbedd9679054e5c5a99e23e6af4428fb9fdd53",
+    "http/caso-67.json": "bb6c7219821e76e6a899fe0dbe029bfdb555f0c9f9db946daac1c61263cea36a",
+    "http/caso-67.png": "1d0d6df3102e1277a5fe4d5b2824a90f3075c23dde25c81e8dfeefef478d0f91",
+    "http/caso-68.json": "abe0135df99efe5c8f8d928bf846021ac488ba9b9b9c67ec8366e4ace93d8529",
+    "http/caso-68.png": "42a49f3c6f45cfa370529cff56b4f05589983916c01fbe93f2c77bcefcc884f9",
+    "http/caso-69.json": "f0d3289c6a370aefd3489253a568fc10b2e137e73af80791f3a3e92612def21a",
+    "http/caso-69.png": "01f9e4ba08ca4b6c35d2765f123b90178b97df5e1ed3506426f03ec9eccb3773",
+    "http/caso-70.json": "e554ff9e916f735b60ee5da37c444937dd29d08b1d4ee5aa82399c84acab87c9",
+    "http/caso-70.png": "8f140f9118e23c7b335fd40cfdad69f59be69715b105fbcae955aafd199708e3",
+    "http/caso-71.json": "130701f433b85921ee7dd425dbd946afe2d9301398501dcd39f620b2db41cb5d",
+    "http/caso-71.png": "ab63c43624876a2284e9bd300c3741e726d82de3b71ab1083ad206900116628c",
+    "http/caso-72.json": "a73ef194a052941144c7d26d881323d1f72d4b8adedb8d35d0d76c42f320da1b",
+    "http/caso-72.png": "05d7f7bd0e45736c466f97a02eafce99ca1cceeef6c1cfa34c9f7fac5eaf3a3d",
+    "http/caso-73.json": "2017e7036688a12d1c642133cd8fbd0e3aa962c67c5ddb6c026c3772a819fd0d",
+    "http/caso-73.png": "3e00fa21d4c88095a60d37ae6c04026aecb7c73e4ec11f3627ab7689b0b788a8",
+    "http/caso-74.json": "127c9fabd350caed89a03401ad87a9a578c2ab3e5d06a17e11370a52c37c8f00",
+    "http/caso-74.png": "db6e609eb9d6541290d542b6fa2b07a4e1371fbce6ca6afec4ef16693aac7652",
+    "http/requisicoes.json": "944379cca29e96bc14e49dfbf92a2045c73bb5528ae7f10f9a9b0df9fc062482",
+    "http/resumo.json": "fda605f9a3900fc789d346fb9c5b1a06f115954d49b493937af885c178dc2f0a"
+  },
+  "sources": {
+    "DOBU/Dobu.Api/Program.cs": "dcedfeefc33d4f2c9e669d721e2f00e129b09f4b0fdfe04e25161b08e0c9db5c",
+    "DOBU/Dobu.Api/Services/VaccineAlerts.cs": "8fc8cdc110406427936ba0a69b4aa4aec1d1be4a5cd182b0548cef0434349f3d",
+    "DOBU/Dobu.Api/Controllers/VacinasController.cs": "e9eecac78fcbd0846603911a856973f8e4dc0a1d2ffa983fa0294c03a312abf8",
+    "DOBU/Dobu.Api/Controllers/LembretesController.cs": "a3ed4fc284a32169dd008deff3a2eba107b46158a527b8606aff4634579cb2a6",
+    "DOBU/Dobu.Api/Controllers/ConsultasController.cs": "5e7cc49f0ef250749c78e1cc0eb0f1cc540e1c63bc04cb9138b12a168b139dcc",
+    "DOBU/Dobu.Api/Controllers/AlertasVacinaController.cs": "05fea7b341370d7df6cead878d05f83c6619c46129c0a5d4ed65d4fdb532154d",
+    "DOBU/tests/Dobu.IntegrationTests/Sprint4ComplianceTests.cs": "195a2c14b4f11a2ff29ed9c89faf70321055eb44bb9b4728fbe91d820c63ed7b"
+  }
+}

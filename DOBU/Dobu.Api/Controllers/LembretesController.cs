@@ -2,19 +2,24 @@ using Dobu.Domain.Entities;
 using Dobu.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace Dobu.Api.Controllers;
 
 [Produces("application/json")]
 [ApiController]
 [Route("api/lembretes")]
+[Authorize]
 public class LembretesController(DobuDbContext context) : ControllerBase
 {
+    private Guid UsuarioId => Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+    private IQueryable<Lembrete> MeusLembretes => context.Lembretes.Where(x => x.Pet.ResponsavelId == UsuarioId);
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<Lembrete>>> GetAll()
     {
-        return Ok(await context.Lembretes.AsNoTracking().Include(x => x.Pet).ToListAsync());
+        return Ok(await MeusLembretes.AsNoTracking().ToListAsync());
     }
 
     [HttpGet("{id:guid}")]
@@ -22,7 +27,7 @@ public class LembretesController(DobuDbContext context) : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<Lembrete>> GetById(Guid id)
     {
-        var lembrete = await context.Lembretes.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+        var lembrete = await MeusLembretes.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         return lembrete is null ? NotFound() : Ok(lembrete);
     }
 
@@ -30,14 +35,15 @@ public class LembretesController(DobuDbContext context) : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<Lembrete>>> GetByPet(Guid petId)
     {
-        return Ok(await context.Lembretes.AsNoTracking().Where(x => x.PetId == petId).ToListAsync());
+        if (!await context.Pets.AnyAsync(x => x.Id == petId && x.ResponsavelId == UsuarioId)) return NotFound();
+        return Ok(await MeusLembretes.AsNoTracking().Where(x => x.PetId == petId).ToListAsync());
     }
 
     [HttpGet("status/{status}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<Lembrete>>> GetByStatus(string status)
     {
-        return Ok(await context.Lembretes.AsNoTracking().Where(x => x.Status == status).ToListAsync());
+        return Ok(await MeusLembretes.AsNoTracking().Where(x => x.Status == status).ToListAsync());
     }
 
     [HttpPost]
@@ -47,6 +53,8 @@ public class LembretesController(DobuDbContext context) : ControllerBase
     {
         if (await context.Pets.CountAsync(x => x.Id == request.PetId) == 0)
             return BadRequest("Pet informado nao existe.");
+
+        if (!await context.Pets.AnyAsync(x => x.Id == request.PetId && x.ResponsavelId == UsuarioId)) return Forbid();
 
         try
         {
@@ -67,12 +75,14 @@ public class LembretesController(DobuDbContext context) : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<Lembrete>> Update(Guid id, LembreteRequest request)
     {
-        var lembrete = await context.Lembretes.FirstOrDefaultAsync(x => x.Id == id);
+        var lembrete = await MeusLembretes.FirstOrDefaultAsync(x => x.Id == id);
         if (lembrete is null)
             return NotFound();
 
         if (await context.Pets.CountAsync(x => x.Id == request.PetId) == 0)
             return BadRequest("Pet informado nao existe.");
+
+        if (!await context.Pets.AnyAsync(x => x.Id == request.PetId && x.ResponsavelId == UsuarioId)) return Forbid();
 
         try
         {
@@ -91,7 +101,7 @@ public class LembretesController(DobuDbContext context) : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(Guid id)
     {
-        var lembrete = await context.Lembretes.FirstOrDefaultAsync(x => x.Id == id);
+        var lembrete = await MeusLembretes.FirstOrDefaultAsync(x => x.Id == id);
         if (lembrete is null)
             return NotFound();
 

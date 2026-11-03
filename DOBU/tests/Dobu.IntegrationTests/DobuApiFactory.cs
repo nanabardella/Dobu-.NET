@@ -20,6 +20,7 @@ public sealed class DobuApiFactory : WebApplicationFactory<Program>
             configuration.AddInMemoryCollection(new Dictionary<string, string?>
             {
                 ["Database:Provider"] = "Sqlite",
+                ["VaccineAlerts:Enabled"] = "false",
                 ["ConnectionStrings:DobuSqlite"] = $"Data Source={_databasePath}",
                 ["Observability:ExternalServiceUrl"] = "https://external-service.test/health"
             });

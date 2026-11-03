@@ -1,7 +1,7 @@
 {
   "info": {
     "name": "DOBU - Sprint 4 - Automação QA",
-    "description": "Automação alinhada aos testes manuais da Sprint 4: vacina, alerta de próxima dose, reagendamento e lembrete.",
+    "description": "Fluxos QA reais: carteira, filtro de doses, reagendamento, lembrete e alertas internos. Endpoints protegidos usam token do tutor. Nao realiza envio WhatsApp. Roteiro HTTP independente executado com evidencias em docs/compliance-sprint4.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
@@ -410,5 +410,15 @@
         }
       ]
     }
-  ]
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  }
 }
